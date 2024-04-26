@@ -13,11 +13,11 @@
 <body>
 <div id="wrap">
     <div>
-        <div>
+        <div class="logo_div">
             <img id="logo" alt="로고" src="/resources/images/mblogo.png"/>
         </div>
-        <div>
-            <form>
+        <div id="login_wrap">
+            <form class="form_wrap">
                 <div>
                     <input id="id_input" type="text" placeholder="id"/>
                 </div>

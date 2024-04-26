@@ -1,6 +1,32 @@
+input{
+    width: 300px;
+    padding: 10px;
+}
+
+.logo_div{
+    display: flex;
+    justify-content: center;
+}
+
+
+#login_wrap{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.form_wrap{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
 #logo{
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
+    margin: 50px 0;
 }
 
 #id_input:focus{
