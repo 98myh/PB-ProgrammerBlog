@@ -1,0 +1,16 @@
+a{
+    text-decoration: none;
+    color: black;
+}
+input{
+    border:none;
+    outline: none;
+}
+#wrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 100vh;
+    min-height: 40vh;
+}

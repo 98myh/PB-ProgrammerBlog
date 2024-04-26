@@ -1,0 +1,13 @@
+#logo{
+    width: 100px;
+    height: 100px;
+}
+
+#id_input:focus{
+    transition-duration: 0.5s;
+    border-bottom: 1px solid #ccc;
+}
+#pass_input:focus{
+    transition-duration: 0.5s;
+    border-bottom: 1px solid #ccc;
+}
