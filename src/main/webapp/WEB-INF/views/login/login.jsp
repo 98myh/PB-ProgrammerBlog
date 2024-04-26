@@ -27,8 +27,8 @@
                 <button>Login</button>
             </form>
             <button>회원가입</button>
-            <div>
-                <p>아이디/비밀번호 찾기</p>
+            <div id="find_wrap">
+                <p id="find_idpw">아이디/비밀번호 찾기</p>
             </div>
         </div>
     </div>
