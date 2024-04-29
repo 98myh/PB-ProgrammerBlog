@@ -14,7 +14,7 @@
 <div id="wrap">
     <div>
         <div class="logo_div">
-            <img id="logo" alt="로고" src="/resources/images/mblogo.png"/>
+            <img id="logo" alt="로고" src="/resources/images/mblogo.png" onclick="location.href='/'"/>
         </div>
         <div id="login_wrap">
             <form class="form_wrap">

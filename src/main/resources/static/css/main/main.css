@@ -4,9 +4,35 @@
 }
 
 #header{
-    padding: 30px 300px;
+    margin-top: 10px;
     min-width: 100vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+}
+
+.head_inner_wrap{
+    flex-basis: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+#head_right{
+    font-size: 18px;
+}
+
+.search_wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+.search_wrap input{
+    font-size: 18px;
+    padding: 5px 5px;
+    min-width: 300px;
 }
