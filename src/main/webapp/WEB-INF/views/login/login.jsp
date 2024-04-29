@@ -8,13 +8,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/resources/css/login/login.css">
     <link rel="stylesheet" href="/resources/css/style.css">
-    <title>MBlog-Login</title>
+    <title>PBlog-Login</title>
 </head>
 <body>
 <div id="wrap">
     <div>
         <div class="logo_div">
-            <img id="logo" alt="로고" src="/resources/images/mblogo.png" onclick="location.href='/'"/>
+            <img id="logo" alt="로고" src="/resources/images/pblogo.png" onclick="location.href='/'"/>
         </div>
         <div id="login_wrap">
             <form class="form_wrap">

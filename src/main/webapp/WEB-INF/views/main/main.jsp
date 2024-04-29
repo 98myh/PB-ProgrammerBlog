@@ -8,13 +8,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/resources/css/main/main.css">
     <link rel="stylesheet" href="/resources/css/style.css">
-    <title>MBlog</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>PBlog</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 <div>
     <header id="header">
         <div class="head_inner_wrap">
-            <img id="logo" alt="로고" src="/resources/images/mblogo.png" onclick="location.href='/'"/>
+            <img id="logo" alt="로고" src="/resources/images/pblogo.png" onclick="location.href='/'"/>
         </div>
         <div id="head_right" class="head_inner_wrap">
             <div class="search_wrap">
