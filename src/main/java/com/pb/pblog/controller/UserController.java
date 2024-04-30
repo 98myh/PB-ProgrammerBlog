@@ -19,5 +19,9 @@ public class UserController {
         return "/login/loginCheck";
     }
 
+    //회원가입 페이지 이동
+    @GetMapping("/signup")
+    public String signupPage(){return "/login/signup";}
+
 
 }

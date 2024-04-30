@@ -8,25 +8,25 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/resources/css/login/login.css">
     <link rel="stylesheet" href="/resources/css/style.css">
-    <title>PBlog-Login</title>
+    <title>ProgrammerBlog-Login</title>
 </head>
 <body>
 <div id="wrap">
     <div>
         <div class="logo_div">
-            <img id="logo" alt="로고" src="/resources/images/pblogo.png" onclick="location.href='/'"/>
+            <img id="login_logo" alt="로고" src="/resources/images/pblogo.png" onclick="location.href='/'"/>
         </div>
         <div id="login_wrap">
             <form class="form_wrap">
                 <div>
-                    <input id="id_input" type="text" placeholder="id"/>
+                    <input class="form_input" type="text" placeholder="id"/>
                 </div>
                 <div>
-                    <input id="pass_input" type="password" placeholder="password"/>
+                    <input class="form_input" type="password" placeholder="password"/>
                 </div>
                 <button>Login</button>
             </form>
-            <button>회원가입</button>
+            <button onclick="location.href='/signup'">회원가입</button>
             <div id="find_wrap">
                 <p id="find_idpw">아이디/비밀번호 찾기</p>
             </div>

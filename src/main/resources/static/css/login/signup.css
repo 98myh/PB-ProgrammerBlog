@@ -1,0 +1,9 @@
+.signup_id_wrap{
+    position: relative;
+    display: flex;
+}
+
+.confirm_btn{
+    position: absolute;
+    right: 0;
+}
