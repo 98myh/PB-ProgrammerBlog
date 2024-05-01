@@ -8,10 +8,9 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequiredArgsConstructor
@@ -27,19 +26,18 @@ public class UserController {
 
     //로그인 요청
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequestDTO loginRequestDTO, HttpSession httpSession){
-
+    public String login(@ModelAttribute LoginRequestDTO loginRequestDTO, HttpSession httpSession){
+        System.out.println("요청 들어옴"+loginRequestDTO.getId());
         if(userService.loginRequest(loginRequestDTO)==1){
             return "redirect:/";
         }
-
         return "/login/login";
     }
 
 
     //회원가입 페이지 이동
     @GetMapping("/signup")
-    public String signupPage(SignupRequestDTO signupRequestDTO){return "/login/signup";}
+    public String signupPage(@ModelAttribute SignupRequestDTO signupRequestDTO){return "/login/signup";}
 
     //중복확인
     @PostMapping("/check-id")
@@ -50,7 +48,7 @@ public class UserController {
 
     //회원가입 요청
     @PostMapping("/signup")
-    public int signupRequest(SignupRequestDTO signupRequestDTO){
+    public int signupRequest(@ModelAttribute SignupRequestDTO signupRequestDTO){
         return userService.signupRequest(signupRequestDTO);
     }
 

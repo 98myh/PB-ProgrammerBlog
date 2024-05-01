@@ -17,12 +17,12 @@
             <img id="login_logo" alt="로고" src="/resources/images/pblogo.png" onclick="location.href='/'"/>
         </div>
         <div id="login_wrap">
-            <form class="form_wrap">
+            <form class="form_wrap" action="/login" method="post">
                 <div>
-                    <input class="form_input" type="text" placeholder="id"/>
+                    <input class="form_input" name="id" type="text" placeholder="id"/>
                 </div>
                 <div>
-                    <input class="form_input" type="password" placeholder="password"/>
+                    <input class="form_input" name="password" type="password" placeholder="password"/>
                 </div>
                 <button>Login</button>
             </form>
