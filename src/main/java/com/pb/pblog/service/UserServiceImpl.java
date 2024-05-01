@@ -33,9 +33,15 @@ public class UserServiceImpl implements UserService{
     //    회원가입
     @Override
     public int signupRequest(SignupRequestDTO signupRequestDTO) {
-        int signup=userMapper.signup(signupRequestDTO);
 
-        return signup;
+        try {
+            int signup=userMapper.signup(signupRequestDTO);
+            return signup;
+        }
+        //예외 발생 -ex id 중복이거나 등등 -1 반환
+        catch (Exception e){
+            return -1;
+        }
     }
 
 }

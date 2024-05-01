@@ -43,16 +43,15 @@ public class UserController {
 
     //중복확인
     @PostMapping("/check-id")
-    public ModelAndView checkId(@RequestBody IdDTO idDTO){
-        ModelAndView mv = new ModelAndView();
-        return mv;
+    public int checkId(@RequestBody IdDTO idDTO){
+
+        return userService.checkId(idDTO.getId());
     }
 
-    //회원가입
+    //회원가입 요청
     @PostMapping("/signup")
-    public ModelAndView signupRequest(){
-        ModelAndView mv=new ModelAndView();
-
-        return mv;
+    public int signupRequest(SignupRequestDTO signupRequestDTO){
+        return userService.signupRequest(signupRequestDTO);
     }
+
 }
