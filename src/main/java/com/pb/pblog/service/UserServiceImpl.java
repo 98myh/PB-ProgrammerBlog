@@ -25,11 +25,8 @@ public class UserServiceImpl implements UserService{
     @Override
     public int checkId(String id) {
         int check=userMapper.checkId(id);
-        //check가 있는경우 0리턴
-        if(check!=0){
-            return 0;
-        }
-        return 1;
+
+        return check;
     }
 
 
@@ -37,10 +34,8 @@ public class UserServiceImpl implements UserService{
     @Override
     public int signupRequest(SignupRequestDTO signupRequestDTO) {
         int signup=userMapper.signup(signupRequestDTO);
-        if(signup==0){
-            return 0;
-        }
-        return 1;
+
+        return signup;
     }
 
 }

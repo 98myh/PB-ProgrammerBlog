@@ -27,13 +27,13 @@ public class UserController {
 
     //로그인 요청
     @PostMapping("/login")
-    public ModelAndView login(@RequestBody LoginRequestDTO loginRequestDTO, HttpSession httpSession){
-        ModelAndView mv=new ModelAndView();
-        if(userService.loginRequest(loginRequestDTO)==1){
+    public String login(@RequestBody LoginRequestDTO loginRequestDTO, HttpSession httpSession){
 
+        if(userService.loginRequest(loginRequestDTO)==1){
+            return "redirect:/";
         }
 
-        return mv;
+        return "/login/login";
     }
 
 
