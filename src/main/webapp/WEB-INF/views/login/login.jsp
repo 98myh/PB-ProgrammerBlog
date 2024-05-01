@@ -33,5 +33,11 @@
         </div>
     </div>
 </div>
+
+<% if (request.getAttribute("login false") != null) { %>
+<script>
+    alert('<%= request.getAttribute("login false") %>');
+</script>
+<% } %>
 </body>
 </html>

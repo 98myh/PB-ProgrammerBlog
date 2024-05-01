@@ -35,6 +35,7 @@ input{
     flex-basis: 50%;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 #head_right{
@@ -55,4 +56,13 @@ input{
     padding: 5px 5px;
     min-width: 300px;
 }
+
+#header_user_name{
+    margin: 0 10px;
+}
+
+#logout{
+    cursor: pointer;
+}
+
 /**/

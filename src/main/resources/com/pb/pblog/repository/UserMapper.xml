@@ -4,8 +4,8 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pb.pblog.repository.UserMapper">
 <!--    로그인-->
-    <select id="login" parameterType="com.pb.pblog.dto.LoginRequestDTO"  resultType="int">
-        select count(*)
+    <select id="login" parameterType="com.pb.pblog.dto.LoginRequestDTO"  resultType="com.pb.pblog.dto.LoginResposeDTO">
+        select id,role,nickname
         from user
         where id=#{id} and password=#{password}
     </select>

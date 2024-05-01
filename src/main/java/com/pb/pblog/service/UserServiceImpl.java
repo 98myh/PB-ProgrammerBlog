@@ -1,6 +1,7 @@
 package com.pb.pblog.service;
 
 import com.pb.pblog.dto.LoginRequestDTO;
+import com.pb.pblog.dto.LoginResposeDTO;
 import com.pb.pblog.dto.SignupRequestDTO;
 import com.pb.pblog.repository.UserMapper;
 import lombok.RequiredArgsConstructor;
@@ -14,12 +15,12 @@ public class UserServiceImpl implements UserService{
 
 //    로그인
     @Override
-    public int loginRequest(LoginRequestDTO loginRequestDTO) {
-        int login=userMapper.login(loginRequestDTO.getId(),loginRequestDTO.getPassword());
-        if(login==0){
-            return 0;
+    public LoginResposeDTO loginRequest(LoginRequestDTO loginRequestDTO) {
+        LoginResposeDTO loginResponeDTO=userMapper.login(loginRequestDTO.getId(),loginRequestDTO.getPassword());
+        if(loginResponeDTO==null){
+            return null;
         }
-        return 1;
+        return loginResponeDTO;
     }
 
     @Override

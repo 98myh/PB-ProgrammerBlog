@@ -21,7 +21,13 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input placeholder="검색하기"/>
             </div>
-            <button onclick="location.href='login'">로그인</button>
+            <% if(session.getAttribute("user")==null){ %>
+                <button onclick="location.href='login'">로그인</button>
+            <% } else { %>
+                <p id="header_user_name"><%= session.getAttribute("nickname") %>님</p>
+<%--                <button class="logout_btn" onclick="location.href='logout'">로그아웃</button>--%>
+                <i id="logout" onclick="location.href='logout'" class="fa-solid fa-arrow-right-from-bracket"></i>
+            <% } %>
         </div>
     </header>
     <div id="wrap">

@@ -16,6 +16,7 @@ class UserMapperTest {
     @Test
     public void loginTest(){
         System.out.println("로그인 테스트 : "+userMapper.login("abcd","zxcv"));
+        System.out.println("로그인 테스트 2: "+userMapper.login("abcd","1234"));
     }
 
     //중복 테스트
