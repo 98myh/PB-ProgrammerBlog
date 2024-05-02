@@ -17,7 +17,7 @@
             <img id="login_logo" alt="로고" src="/resources/images/pblogo.png" onclick="location.href='/'"/>
         </div>
         <div id="login_wrap">
-            <form class="form_wrap" action="/login" method="post">
+            <form class="form_wrap" action="/loginProc" method="post">
                 <div>
                     <input class="form_input" name="id" type="text" placeholder="id"/>
                 </div>

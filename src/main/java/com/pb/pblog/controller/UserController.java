@@ -27,11 +27,11 @@ public class UserController {
         if(httpSession.getAttribute("user")!=null){
             return "redirect:/";
         }
-        return "/login/login";
+        return "login/login";
     }
 
     //로그인 요청
-    @PostMapping("/login")
+    @PostMapping("/loginProc")
     public String login(@ModelAttribute LoginRequestDTO loginRequestDTO, Model model, HttpSession httpSession){
         System.out.println("요청 들어옴"+loginRequestDTO.getId());
         LoginResposeDTO loginResposeDTO=userService.loginRequest(loginRequestDTO);
@@ -42,7 +42,7 @@ public class UserController {
             return "redirect:/";
         }
         model.addAttribute("login false","로그인 실패");
-        return "/login/login";
+        return "login/login";
     }
 
     //로그아웃
@@ -65,9 +65,8 @@ public class UserController {
     }
 
     //회원가입 요청
-    @PostMapping("/signup")
+    @PostMapping("/signupProc")
     public int signupRequest(@ModelAttribute SignupRequestDTO signupRequestDTO){
         return userService.signupRequest(signupRequestDTO);
     }
-
 }
