@@ -9,8 +9,36 @@
     <link rel="stylesheet" href="/resources/css/login/login.css">
     <link rel="stylesheet" href="/resources/css/login/signup.css">
     <link rel="stylesheet" href="/resources/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>ProgrammerBlog-Sign Up</title>
+    <script>
+<%--        중복 체크 js --%>
+        function checkId() {
+            const id = document.getElementById('id').value;
+            if (id) {
+                fetch(`/check-id`,{
+                    method:'POST',
+                    headers:{
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({id:id})
+                })
+                    .then(response =>response.json())  // 서버로부터 텍스트로 응답 받기
+                    .then(data => {
+                        if (data===0) {
+                            alert('사용 가능한 아이디입니다.');
+                        } else {
+                            alert('이미 사용중인 아이디입니다.');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            } else {
+                alert('아이디를 입력하세요.');
+            }
+        }
+    </script>
 </head>
+
 <body>
 <div id="wrap">
     <div>
@@ -18,21 +46,21 @@
             <img id="login_logo" alt="로고" src="/resources/images/pblogo.png" onclick="location.href='/'"/>
         </div>
         <div id="login_wrap">
-            <form class="form_wrap">
+            <form class="form_wrap" action="/signupProc" method="post">
                 <div class="signup_id_wrap">
-                    <input class="form_input" type="text" placeholder="id" />
-                    <button class="confirm_btn">중복 확인</button>
+                    <input class="form_input" id="id" type="text" placeholder="id" />
+                    <button type="button" class="confirm_btn" onclick="checkId()">중복 확인</button>
                 </div>
                 <div>
-                    <input class="form_input" type="password" placeholder="password"/>
+                    <input class="form_input" id="password" type="password" placeholder="password"/>
                 </div>
                 <div>
-                    <input class="form_input" type="password" placeholder="re-password"/>
+                    <input class="form_input" id="re-password" type="password" placeholder="re-password"/>
                 </div>
                 <div>
-                    <input class="form_input" type="text" placeholder="Nickname"/>
+                    <input class="form_input" id="nickname" type="text" placeholder="Nickname"/>
                 </div>
-                <button>회원가입</button>
+                <button type="submit" value="signup">회원가입</button>
             </form>
         </div>
     </div>

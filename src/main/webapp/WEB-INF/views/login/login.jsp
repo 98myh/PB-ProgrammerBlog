@@ -19,12 +19,12 @@
         <div id="login_wrap">
             <form class="form_wrap" action="/loginProc" method="post">
                 <div>
-                    <input class="form_input" name="id" type="text" placeholder="id"/>
+                    <input class="form_input" name="username" type="text" placeholder="id"/>
                 </div>
                 <div>
                     <input class="form_input" name="password" type="password" placeholder="password"/>
                 </div>
-                <button>Login</button>
+                <button type="submit" value="login">Login</button>
             </form>
             <button onclick="location.href='/signup'">회원가입</button>
             <div id="find_wrap">

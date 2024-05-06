@@ -15,20 +15,6 @@ class UserServiceTest {
     @Autowired
     private UserService userService;
 
-
-    //로그인 테스트
-    @Test
-    public void loginTest(){
-        System.out.println("로그인 서비스 테스트 : "+userService.loginRequest(LoginRequestDTO.builder()
-                        .id("abcd")
-                        .password("1234")
-                .build()));
-        System.out.println("로그인 서비스 테스트2 : "+userService.loginRequest(LoginRequestDTO.builder()
-                .id("abcd")
-                .password("123456")
-                .build()));
-    }
-
     //중복확인 테스트
     @Test
     public void checkIdTest(){

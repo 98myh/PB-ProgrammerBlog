@@ -2,11 +2,13 @@ package com.pb.pblog.controller;
 
 import com.pb.pblog.dto.IdDTO;
 import com.pb.pblog.dto.LoginRequestDTO;
-import com.pb.pblog.dto.LoginResposeDTO;
+import com.pb.pblog.dto.UserDetailsDTO;
 import com.pb.pblog.dto.SignupRequestDTO;
 import com.pb.pblog.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,21 +32,6 @@ public class UserController {
         return "login/login";
     }
 
-    //로그인 요청
-    @PostMapping("/loginProc")
-    public String login(@ModelAttribute LoginRequestDTO loginRequestDTO, Model model, HttpSession httpSession){
-        System.out.println("요청 들어옴"+loginRequestDTO.getId());
-        LoginResposeDTO loginResposeDTO=userService.loginRequest(loginRequestDTO);
-        if(loginResposeDTO!=null){
-            httpSession.setAttribute("user",loginResposeDTO.getId());
-            httpSession.setAttribute("role",loginResposeDTO.getRole());
-            httpSession.setAttribute("nickname",loginResposeDTO.getNickname());
-            return "redirect:/";
-        }
-        model.addAttribute("login false","로그인 실패");
-        return "login/login";
-    }
-
     //로그아웃
     @GetMapping("/logout")
     public String logout(HttpSession httpSession){
@@ -52,21 +39,28 @@ public class UserController {
         return "redirect:/login";
     }
 
+    //중복확인
+    @PostMapping("/check-id")
+    public ResponseEntity<Integer> checkId(@ModelAttribute IdDTO idDTO){
+        return new ResponseEntity<>(userService.checkId(idDTO.getId()),HttpStatus.OK);
+    }
+
 
     //회원가입 페이지 이동
     @GetMapping("/signup")
-    public String signupPage(@ModelAttribute SignupRequestDTO signupRequestDTO){return "/login/signup";}
+    public String signupPage(@ModelAttribute SignupRequestDTO signupRequestDTO){return "login/signup";}
 
-    //중복확인
-    @PostMapping("/check-id")
-    public int checkId(@RequestBody IdDTO idDTO){
-
-        return userService.checkId(idDTO.getId());
-    }
 
     //회원가입 요청
     @PostMapping("/signupProc")
-    public int signupRequest(@ModelAttribute SignupRequestDTO signupRequestDTO){
-        return userService.signupRequest(signupRequestDTO);
+    public String signupRequest(@ModelAttribute SignupRequestDTO signupRequestDTO){
+
+        try {
+            userService.signupRequest(signupRequestDTO);
+        }catch (Exception exception){
+            return "login/signup";
+        }
+
+        return "redirect:/";
     }
 }
