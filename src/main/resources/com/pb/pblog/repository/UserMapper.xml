@@ -13,13 +13,13 @@
 
 <!--    유저 정보 조회-->
     <select id="userDetails" parameterType="com.pb.pblog.dto.UserDTO">
-        select id,password,role
+        select id,password,role,nickname
         from user
-        where id=#{id}
+        where id=#{username}
     </select>
 
 <!--    회원가입-->
-    <insert id="signup" parameterType="com.pb.pblog.dto.SignupRequestDTO" >
+    <insert id="signup" parameterType="com.pb.pblog.dto.SignupDTO" >
         insert into user(id,password,nickname,role)
         values(
         #{id},

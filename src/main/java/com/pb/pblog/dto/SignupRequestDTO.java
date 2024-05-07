@@ -16,6 +16,9 @@ public class SignupRequestDTO {
 //    비밀번호
     private String password;
 
+//    비밀번호 재입력
+    private String repassword;
+
 //    닉네임
     private String nickname;
 }

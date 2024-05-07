@@ -19,7 +19,7 @@
         <div id="login_wrap">
             <form class="form_wrap" action="/loginProc" method="post">
                 <div>
-                    <input class="form_input" name="username" type="text" placeholder="id"/>
+                    <input class="form_input" name="id" type="text" placeholder="id"/>
                 </div>
                 <div>
                     <input class="form_input" name="password" type="password" placeholder="password"/>
@@ -33,11 +33,5 @@
         </div>
     </div>
 </div>
-
-<% if (request.getAttribute("login false") != null) { %>
-<script>
-    alert('<%= request.getAttribute("login false") %>');
-</script>
-<% } %>
 </body>
 </html>

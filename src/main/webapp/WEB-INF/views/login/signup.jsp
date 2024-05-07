@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/resources/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>ProgrammerBlog-Sign Up</title>
-    <script>
+    <script type="text/javascript">
 <%--        중복 체크 js --%>
         function checkId() {
             const id = document.getElementById('id').value;
@@ -36,6 +36,41 @@
                 alert('아이디를 입력하세요.');
             }
         }
+
+<%--        회원가입 js --%>
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            const id = document.getElementById('id').value;
+            const password = document.getElementById('password').value;
+            const rePassword = document.getElementById('re-password').value;
+            const nickname = document.getElementById('nickname').value;
+            if(!(id&&password&&rePassword&&nickname)){
+                alert("모두 입력해주세요.")
+                event.preventDefault();
+            }
+            else if (password !== rePassword) {
+                alert("비밀번호가 같지 않습니다.");
+                event.preventDefault();
+            }
+        })
+
+        function signUp(){
+            const signupForm=document.getElementById('signupForm')
+
+            const id = document.getElementById('id').value;
+            const password = document.getElementById('password').value;
+            const repassword = document.getElementById('repassword').value;
+            const nickname = document.getElementById('nickname').value;
+
+            if(!(id && password && repassword && nickname)){
+                alert("모두 입력해주세요.")
+            }
+            else if (password !== repassword) {
+                alert("비밀번호가 같지 않습니다.")
+            }else{
+                alert("회원가입 완료")
+                signupForm.submit()
+            }
+        }
     </script>
 </head>
 
@@ -46,21 +81,21 @@
             <img id="login_logo" alt="로고" src="/resources/images/pblogo.png" onclick="location.href='/'"/>
         </div>
         <div id="login_wrap">
-            <form class="form_wrap" action="/signupProc" method="post">
+            <form id="signupForm" class="form_wrap" action="/signupProc" method="post">
                 <div class="signup_id_wrap">
-                    <input class="form_input" id="id" type="text" placeholder="id" />
+                    <input class="form_input" id="id" type="text" name="id" placeholder="id" required />
                     <button type="button" class="confirm_btn" onclick="checkId()">중복 확인</button>
                 </div>
                 <div>
-                    <input class="form_input" id="password" type="password" placeholder="password"/>
+                    <input class="form_input" id="password" type="password" name="password" placeholder="password" required/>
                 </div>
                 <div>
-                    <input class="form_input" id="re-password" type="password" placeholder="re-password"/>
+                    <input class="form_input" id="repassword" type="password" name="repassword" placeholder="re-password" required/>
                 </div>
                 <div>
-                    <input class="form_input" id="nickname" type="text" placeholder="Nickname"/>
+                    <input class="form_input" id="nickname" type="text" name="nickname" placeholder="Nickname" required/>
                 </div>
-                <button type="submit" value="signup">회원가입</button>
+                <button type="button" value="signup" onclick="signUp()">회원가입</button>
             </form>
         </div>
     </div>

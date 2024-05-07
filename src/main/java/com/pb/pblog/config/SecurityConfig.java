@@ -35,7 +35,9 @@ public class SecurityConfig {
             );
         http.formLogin((auth) ->
                 auth.loginPage("/login")
-                        .loginProcessingUrl("/loginProc").permitAll().defaultSuccessUrl("/"));
+                        .usernameParameter("id")
+                        .passwordParameter("password")
+                        .loginProcessingUrl("/loginProc").permitAll());
 
         //테스트 환경에서는 disable 추후 enable
         http.csrf((auth)->auth.disable());    //RestAPI일때 사용
@@ -50,7 +52,7 @@ public class SecurityConfig {
                 .requestMatchers(PathRequest
                         .toStaticResources()
                         .atCommonLocations())
-                .requestMatchers("/resources/**");
+                .requestMatchers("/resources/**","/favicon.ico");
     }
 
 

@@ -1,8 +1,6 @@
 package com.pb.pblog.controller;
 
 import com.pb.pblog.dto.IdDTO;
-import com.pb.pblog.dto.LoginRequestDTO;
-import com.pb.pblog.dto.UserDetailsDTO;
 import com.pb.pblog.dto.SignupRequestDTO;
 import com.pb.pblog.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -10,11 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequiredArgsConstructor
@@ -54,13 +50,12 @@ public class UserController {
     //회원가입 요청
     @PostMapping("/signupProc")
     public String signupRequest(@ModelAttribute SignupRequestDTO signupRequestDTO){
-
         try {
+            System.out.println(signupRequestDTO.getId());
             userService.signupRequest(signupRequestDTO);
+            return "redirect:/login";
         }catch (Exception exception){
             return "login/signup";
         }
-
-        return "redirect:/";
     }
 }

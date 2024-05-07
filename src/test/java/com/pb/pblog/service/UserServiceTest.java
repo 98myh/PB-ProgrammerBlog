@@ -27,16 +27,19 @@ class UserServiceTest {
     public void signupTest() {
         try {
             System.out.println("회원가입 테스트 : " + userService.signupRequest(SignupRequestDTO.builder()
-                    .id("aaaaa")
-                    .password("1234")
-                    .nickname("aaaa")
+                            .id("qqqq")
+                            .password("1234")
+                            .repassword("1234")
+                            .nickname("abcd")
                     .build()));
 
             System.out.println("회원가입 테스트 2: " + userService.signupRequest(SignupRequestDTO.builder()
-                    .id("abcd")
+                    .id("wwww")
                     .password("1234")
-                    .nickname("aaaa")
+                    .repassword("1234")
+                    .nickname("abcd2")
                     .build()));
+
         }catch (Exception exception){
             System.out.println("예외 : "+exception);
         }

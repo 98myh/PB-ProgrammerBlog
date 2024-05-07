@@ -1,11 +1,9 @@
-package com.pb.pblog.dto;
+package com.pb.pblog.config.auth;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.pb.pblog.dto.UserDTO;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
@@ -15,36 +13,31 @@ import java.util.Collection;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDetailsDTO implements UserDetails {
+public class CustomUserDetails implements UserDetails {
+
 
     private UserDTO userDTO;
 
-    //권한 반환
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> collection=new ArrayList<>();
-
-        collection.add(new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                return userDTO.getRole();
-            }
-        });
-
-        return collection;
+        ArrayList<GrantedAuthority> auth=new ArrayList<GrantedAuthority>();
+        auth.add(new SimpleGrantedAuthority(userDTO.getRole()));
+        return auth;
     }
 
+    //비밀번호
     @Override
     public String getPassword() {
         return userDTO.getPassword();
     }
 
+    //아이디
     @Override
     public String getUsername() {
-        return userDTO.getNickname();
+        return userDTO.getId();
     }
 
-    // 아래는 사용하지 않음 - 만료여부, 사용가능 등 확인
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -60,8 +53,18 @@ public class UserDetailsDTO implements UserDetails {
         return true;
     }
 
+
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    //닉네임 설정
+    public String getNickname(){
+        return userDTO.getNickname();
+    }
+
+    public void setNickname(String nickname){
+        userDTO.setNickname(nickname);
     }
 }
