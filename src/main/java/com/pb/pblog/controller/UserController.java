@@ -51,7 +51,6 @@ public class UserController {
     @PostMapping("/signupProc")
     public String signupRequest(@ModelAttribute SignupRequestDTO signupRequestDTO){
         try {
-            System.out.println(signupRequestDTO.getId());
             userService.signupRequest(signupRequestDTO);
             return "redirect:/login";
         }catch (Exception exception){

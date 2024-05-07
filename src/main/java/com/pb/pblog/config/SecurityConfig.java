@@ -19,7 +19,6 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws  Exception{
 
@@ -38,9 +37,21 @@ public class SecurityConfig {
                         .usernameParameter("id")
                         .passwordParameter("password")
                         .loginProcessingUrl("/loginProc").permitAll());
-
         //테스트 환경에서는 disable 추후 enable
         http.csrf((auth)->auth.disable());    //RestAPI일때 사용
+
+        //다중 로그인 설정
+        //maximunSession에 인자로 int값을 받도 몇개의 세션에서 로그인을 허용할 것인가?
+        //maxSessionPreventsLogin은 다중 로그인 개수를 초과하였을 경우 처리방볍
+        // -> true 초과시 새로운 로그인 차단, false 초과시 기존 세션 하나 삭제
+        http.sessionManagement((auth)->auth.maximumSessions(1)
+                .maxSessionsPreventsLogin(true));
+
+        //세션 고정 공격 보호
+        //.none 로그인 시 세션 정보 변경 안함
+        //.newSession 로그인 시 세션 새로 생성
+        //.changeSessionId 로그인 시 동일한 세션에 대한 id 변경 -> 주로 사용
+        http.sessionManagement((auth)->auth.sessionFixation().changeSessionId());
 
         return http.build();
     }
@@ -54,6 +65,4 @@ public class SecurityConfig {
                         .atCommonLocations())
                 .requestMatchers("/resources/**","/favicon.ico");
     }
-
-
 }
