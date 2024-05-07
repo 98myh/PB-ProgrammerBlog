@@ -1,6 +1,7 @@
 package com.pb.pblog.config;
 
 import jakarta.servlet.DispatcherType;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +27,7 @@ public class SecurityConfig {
         http.httpBasic((auth)->auth.disable());
 
         http.authorizeHttpRequests((auth)->auth
-                .requestMatchers("/","/WEB-INF/views/**","/login","/loginProc","/signup","/signupProc","/check-id").permitAll() //모든 사용자 접근가능
+                .requestMatchers("/","/WEB-INF/views/**","/login","/loginProc","/logout","/signup","/signupProc","/check-id").permitAll() //모든 사용자 접근가능
                 .requestMatchers("/admin/**").hasRole("ADMIN") //어드민만 접근 가능
                 .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                 .dispatcherTypeMatchers(DispatcherType.INCLUDE).permitAll()
@@ -37,6 +38,11 @@ public class SecurityConfig {
                         .usernameParameter("id")
                         .passwordParameter("password")
                         .loginProcessingUrl("/loginProc").permitAll());
+        http.logout(log->log.logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true));//세션 삭제
+
+
         //테스트 환경에서는 disable 추후 enable
         http.csrf((auth)->auth.disable());    //RestAPI일때 사용
 

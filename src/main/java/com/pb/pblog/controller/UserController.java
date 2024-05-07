@@ -29,11 +29,11 @@ public class UserController {
     }
 
     //로그아웃
-    @GetMapping("/logout")
-    public String logout(HttpSession httpSession){
-        httpSession.invalidate(); //session 초기화
-        return "redirect:/login";
-    }
+//    @GetMapping("/logout")
+//    public String logout(HttpSession httpSession){
+//        httpSession.invalidate(); //session 초기화
+//        return "redirect:/login";
+//    }
 
     //중복확인
     @PostMapping("/check-id")

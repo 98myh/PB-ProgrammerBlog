@@ -37,7 +37,7 @@
                 <!-- 사용자가 인증되었을 때 -->
                 <sec:authentication property="principal.nickname" var="nickname"/>
                 <p id="header_user_name">${nickname}님</p>
-                <i id="logout" onclick="location.href='logout'" class="fa-solid fa-arrow-right-from-bracket"></i>
+                <i id="logout" class="fa-solid fa-arrow-right-from-bracket"></i>
             </sec:authorize>
             <sec:authorize access="!isAuthenticated()">
                 <!-- 사용자가 비인증 상태일 때 -->
