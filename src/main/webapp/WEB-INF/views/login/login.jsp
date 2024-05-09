@@ -6,6 +6,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="_csrf" content="${csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
     <link rel="stylesheet" href="/resources/css/login/login.css">
     <link rel="stylesheet" href="/resources/css/style.css">
     <title>ProgrammerBlog-Login</title>
@@ -24,6 +26,7 @@
                 <div>
                     <input class="form_input" name="password" type="password" placeholder="password"/>
                 </div>
+                <input type="hidden" name="_csrf" value="${_csrf.token}">
                 <button type="submit" value="login">Login</button>
             </form>
             <button onclick="location.href='/signup'">회원가입</button>

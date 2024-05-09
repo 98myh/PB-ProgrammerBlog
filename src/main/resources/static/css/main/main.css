@@ -1,0 +1,8 @@
+.main_wrap{
+    display: flex;
+}
+
+.card{
+    cursor: pointer;
+    margin: 10px;
+}
