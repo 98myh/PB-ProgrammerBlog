@@ -27,7 +27,6 @@ public class SecurityConfig {
         //테스트 환경에서는 disable 해도 됨
         //http.csrf((auth)->auth.disable());
 
-        http.csrf((auth)->auth.disable());
 
         //httpBasic로그인 방식 추가
         //http.httpBasic(Customizer.withDefaults());
@@ -60,10 +59,6 @@ public class SecurityConfig {
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/login")
                 .permitAll());//세션 삭제
-
-
-
-
 
 
         //다중 로그인 설정

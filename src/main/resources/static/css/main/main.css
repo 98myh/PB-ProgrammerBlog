@@ -1,8 +1,36 @@
 .main_wrap{
     display: flex;
+    flex-direction: column;
 }
 
 .card{
     cursor: pointer;
-    margin: 10px;
+    margin: 20px 10px;
+}
+
+.card:hover{
+    box-shadow: 3px 3px 3px 3px #ccc;
+    transform: translateY(-5px);
+    transition-duration: 100ms;
+}
+
+.card img{
+    overflow: hidden;
+}
+
+.oneline_wrap{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 8px 8px 8px 8px #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 40px 20px;
+}
+
+.sub_title{
+    margin: 15px;
+}
+
+.line_inner_wrap{
+    display: flex;
 }
