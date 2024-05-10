@@ -34,7 +34,7 @@
             <sec:authorize access="isAuthenticated()">
                 <!-- 사용자가 인증되었을 때 -->
                 <sec:authentication property="principal.nickname" var="nickname"/>
-                <button type="button">글 작성</button>
+                <button type="button" onclick="location.href='board/write'">글 작성</button>
                 <p id="header_user_name">${nickname}님</p>
                 <form action="/logout" method="post">
                     <input type="hidden" name="_csrf" value="${_csrf.token}">
@@ -51,6 +51,12 @@
     <%--메인 컨텐츠--%>
     <div id="wrap">
         <div class="main_wrap">
+            <div class="main_title_wrap">
+                <div class="main_title">
+                    <h1 class="">Programmer Blog</h1>
+                    <p>다양한 개발자들의 지식 나눔터</p>
+                </div>
+            </div>
             <%--    인기 게시글        --%>
             <div class="oneline_wrap">
                 <h2 class="sub_title">인기 게시글</h2>
@@ -129,6 +135,13 @@
             </div>
         </div>
     </div>
+
+    <%--footer--%>
+    <footer>
+        <div>
+            <p>&copy;2024 YoungHyun Moon</p>
+        </div>
+    </footer>
 </div>
 </body>
 </html>

@@ -34,8 +34,10 @@ public class SecurityConfig {
 
 
         http.authorizeHttpRequests((auth)->auth
-                .requestMatchers("/","/WEB-INF/views/**","/login","/loginProc","/logout","/signup","/signupProc","/check-id").permitAll() //모든 사용자 접근가능
-                .requestMatchers("/admin").hasRole("ADMIN") //어드민만 접근 가능
+                .requestMatchers("/board/write").hasAnyRole("user","admin")
+                .requestMatchers("/admin").hasRole("admin") //어드민만 접근 가능
+                .requestMatchers("/","/WEB-INF/views/**","/login","/loginProc","/logout","/signup","/signupProc","/check-id",
+                        "/board/**").permitAll() //모든 사용자 접근가능
                 .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                 .dispatcherTypeMatchers(DispatcherType.INCLUDE).permitAll()
                 .anyRequest().authenticated()//나머지 요청은 로그인 한 유저들만 접근 가능

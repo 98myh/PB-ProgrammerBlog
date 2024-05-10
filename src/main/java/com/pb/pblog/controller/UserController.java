@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,18 +23,13 @@ public class UserController {
     @GetMapping("/login")
     public String loginPage(HttpSession httpSession){
         //로그인 한 경우 login페이지로 이동못하게 main페이지로 이동
-        if(httpSession.getAttribute("user")!=null){
+        String id= SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println(id);
+        if(id!="anonymousUser"){
             return "redirect:/";
         }
         return "login/login";
     }
-
-    //로그아웃
-//    @GetMapping("/logout")
-//    public String logout(HttpSession httpSession){
-//        httpSession.invalidate(); //session 초기화
-//        return "redirect:/login";
-//    }
 
     //중복확인
     @PostMapping("/check-id")
