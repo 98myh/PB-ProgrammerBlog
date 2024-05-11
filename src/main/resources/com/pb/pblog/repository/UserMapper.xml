@@ -12,8 +12,8 @@
     </select>
 
 <!--    유저 정보 조회-->
-    <select id="userDetails" parameterType="com.pb.pblog.dto.UserDTO">
-        select id,password,role,nickname
+    <select id="userDetails" parameterType="com.pb.pblog.entity.User">
+        select *
         from user
         where id=#{username}
     </select>

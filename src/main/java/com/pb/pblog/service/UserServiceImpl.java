@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
 
+    //유저 db 접근
     private final UserMapper userMapper;
 
+    //비밀번호 암호화
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 

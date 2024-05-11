@@ -1,6 +1,6 @@
 package com.pb.pblog.config.auth;
 
-import com.pb.pblog.dto.UserDTO;
+import com.pb.pblog.entity.User;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,26 +16,26 @@ import java.util.Collection;
 public class CustomUserDetails implements UserDetails {
 
 
-    private UserDTO userDTO;
+    private User user;
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         ArrayList<GrantedAuthority> auth=new ArrayList<GrantedAuthority>();
-        auth.add(new SimpleGrantedAuthority("ROLE_" + userDTO.getRole().toUpperCase()));
+        auth.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().toUpperCase()));
         return auth;
     }
 
     //비밀번호
     @Override
     public String getPassword() {
-        return userDTO.getPassword();
+        return user.getPassword();
     }
 
     //아이디
     @Override
     public String getUsername() {
-        return userDTO.getId();
+        return user.getId();
     }
 
     @Override
@@ -61,10 +61,10 @@ public class CustomUserDetails implements UserDetails {
 
     //닉네임 설정
     public String getNickname(){
-        return userDTO.getNickname();
+        return user.getNickname();
     }
 
     public void setNickname(String nickname){
-        userDTO.setNickname(nickname);
+        user.setNickname(nickname);
     }
 }

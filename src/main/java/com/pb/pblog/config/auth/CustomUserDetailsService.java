@@ -1,6 +1,7 @@
 package com.pb.pblog.config.auth;
 
 import com.pb.pblog.dto.UserDTO;
+import com.pb.pblog.entity.User;
 import com.pb.pblog.repository.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +17,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDTO user=userMapper.userDetails(username);
+        User user=userMapper.userDetails(username);
 
         if(user !=null){
             return new CustomUserDetails(user);
