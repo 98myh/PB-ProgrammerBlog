@@ -26,6 +26,10 @@
     padding: 20px;
     margin: 40px 20px;
 }
+.sub_title_wrap{
+    display: flex;
+    justify-content: space-between;
+}
 
 .sub_title{
     margin: 15px;

@@ -20,34 +20,7 @@
 <body>
 <div>
     <%-- 헤더  --%>
-    <header id="header">
-        <div class="head_inner_wrap">
-            <img id="logo" alt="로고" src="/resources/images/pblogo.png" onclick="location.href='/'"/>
-        </div>
-        <div id="head_right" class="head_inner_wrap">
-            <div class="search_wrap">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input placeholder="검색하기"/>
-            </div>
-
-            <%-- 사용자 정보 부분 로그인 or 사용자 명 --%>
-            <sec:authorize access="isAuthenticated()">
-                <!-- 사용자가 인증되었을 때 -->
-                <sec:authentication property="principal.nickname" var="nickname"/>
-                <button type="button" onclick="location.href='board/write'">글 작성</button>
-                <p id="header_user_name">${nickname}님</p>
-                <form action="/logout" method="post">
-                    <input type="hidden" name="_csrf" value="${_csrf.token}">
-                    <button type="submit" class="fa-solid fa-arrow-right-from-bracket" />
-                </form>
-            </sec:authorize>
-            <sec:authorize access="!isAuthenticated()">
-                <!-- 사용자가 비인증 상태일 때 -->
-                <button onclick="location.href='login'">로그인</button>
-            </sec:authorize>
-        </div>
-    </header>
-
+    <jsp:include page="../common/header.jsp"/>
     <%--메인 컨텐츠--%>
     <div id="wrap">
         <div class="main_wrap">
@@ -57,9 +30,12 @@
                     <p>다양한 개발자들의 지식 나눔터</p>
                 </div>
             </div>
-            <%--    인기 게시글        --%>
+            <%--    최근 게시글        --%>
             <div class="oneline_wrap">
-                <h2 class="sub_title">인기 게시글</h2>
+                <div class="sub_title_wrap">
+                    <h2 class="sub_title">최근 게시글</h2>
+                    <button onclick="location.href='/board/recently'">더보기</button>
+                </div>
                 <div class="line_inner_wrap">
                     <%--나중에 for문 사용해서 출력되도록 수정해야함--%>
                     <div class="card" style="width: 18rem;">
@@ -99,7 +75,10 @@
 
             <%--인기 게시글--%>
             <div class="oneline_wrap">
-                <h2 class="sub_title">최근 게시글</h2>
+                <div class="sub_title_wrap">
+                    <h2 class="sub_title">인기 게시글</h2>
+                    <button onclick="location.href='/board/popular'">더보기</button>
+                </div>
                 <div class="line_inner_wrap">
                     <div class="card" style="width: 18rem;">
                         <img src="/resources/images/pblogo.png" class="card-img-top" alt="...">
@@ -137,11 +116,7 @@
     </div>
 
     <%--footer--%>
-    <footer>
-        <div>
-            <p>&copy;2024 YoungHyun Moon</p>
-        </div>
-    </footer>
+    <jsp:include page="../common/footer.jsp"/>
 </div>
 </body>
 </html>

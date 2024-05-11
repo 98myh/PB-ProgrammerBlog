@@ -24,7 +24,7 @@ public class UserController {
     public String loginPage(HttpSession httpSession){
         //로그인 한 경우 login페이지로 이동못하게 main페이지로 이동
         String id= SecurityContextHolder.getContext().getAuthentication().getName();
-        System.out.println(id);
+
         if(id!="anonymousUser"){
             return "redirect:/";
         }

@@ -11,6 +11,6 @@
     <title>Document</title>
 </head>
 <body>
-최근 페이지
+최근 페이지 , 인기 페이지
 </body>
 </html>
