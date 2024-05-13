@@ -21,7 +21,7 @@ public class UserController {
 
     //로그인 페이지 이동
     @GetMapping("/login")
-    public String loginPage(HttpSession httpSession){
+    public String loginPage(){
         //로그인 한 경우 login페이지로 이동못하게 main페이지로 이동
         String id= SecurityContextHolder.getContext().getAuthentication().getName();
 
@@ -40,7 +40,7 @@ public class UserController {
 
     //회원가입 페이지 이동
     @GetMapping("/signup")
-    public String signupPage(@ModelAttribute SignupRequestDTO signupRequestDTO){return "login/signup";}
+    public String signupPage(){return "login/signup";}
 
 
     //회원가입 요청

@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService{
     //아이디 중복 확인
     @Override
     public int checkId(String id) {
-        int check=userMapper.checkId(id);
+        int check= userMapper.checkId(id);
         return check;
     }
 
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService{
                     .nickname(signupRequestDTO.getNickname())
                     .build();
 
-            int signup=userMapper.signup(singupDTO);
+            int signup= userMapper.signup(singupDTO);
             return signup;
         }
         //예외 발생 - ex) id 중복이거나 등등 -1 반환

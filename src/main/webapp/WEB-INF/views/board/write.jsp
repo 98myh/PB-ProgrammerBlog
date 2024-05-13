@@ -36,7 +36,7 @@
                 내용을 입력해주세요.
             </div>
             <div>
-                <button>저장</button>
+                <button id="write_save">저장</button>
                 <button>취소</button>
             </div>
         </div>
@@ -66,6 +66,42 @@
             reader.readAsDataURL(file);
         }
     });
+
+    //글 저장
+    document.getElementById('write_save').addEventListener('click', function() {
+    const editableDiv = document.getElementById('editable')
+    const images = editableDiv.getElementsByTagName('img')
+
+    Array.from(images).forEach(img => {
+        const file = img.src
+        if (file.startsWith('data:')) {
+            let formData = new FormData();
+            formData.append('image', file);
+
+            fetch('/board/img-upload', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    img.src = data; // 업데이트된 이미지 경로로 src 설정
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    });
+
+    setTimeout(() => {
+        const updatedHTML = editableDiv.innerHTML;
+        fetch('/board/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content: updatedHTML })
+        });
+    }, 3000);
+});
+
+
 </script>
 </body>
 </html>

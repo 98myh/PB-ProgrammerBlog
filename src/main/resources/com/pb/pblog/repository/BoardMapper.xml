@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pb.pblog.repository.BoardMapper">
+    <!--글 저장-->
+    <insert id="boardSave" parameterType="com.pb.pblog.dto.BoardSaveDTO">
+        insert into board(uid,title,content,category)
+        values(
+        #{uid},
+        #{title},
+        #{content},
+        #{category}
+        }
+    </insert>
+</mapper>

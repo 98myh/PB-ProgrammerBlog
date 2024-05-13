@@ -1,8 +1,6 @@
 package com.pb.pblog.repository;
 
-import com.pb.pblog.config.auth.CustomUserDetails;
 import com.pb.pblog.dto.SignupDTO;
-import com.pb.pblog.dto.UserDTO;
 import com.pb.pblog.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
