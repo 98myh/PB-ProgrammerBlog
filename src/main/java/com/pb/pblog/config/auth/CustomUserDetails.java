@@ -35,7 +35,7 @@ public class CustomUserDetails implements UserDetails {
     //아이디
     @Override
     public String getUsername() {
-        return String.valueOf(user.getUid());
+        return user.getId();
     }
 
     @Override
@@ -67,4 +67,9 @@ public class CustomUserDetails implements UserDetails {
     public void setNickname(String nickname){
         user.setNickname(nickname);
     }
+
+    //uid 설정
+    public Long getUid(){return user.getUid();};
+
+    public void setUid(Long uid){user.setUid(uid);};
 }

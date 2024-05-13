@@ -19,26 +19,30 @@
     <div id="wrap">
         <%--제목,카테고리 입력--%>
         <div id="write_wrap">
+            <form id="boardForm" action="/board/save" method="post">
             <div class="write_title">
-                <select class="category">
-                    <option>카테고리</option>
-                    <option>개발동향</option>
-                    <option>개발스킬</option>
-                    <option>알고리즘</option>
-                    <option>etc</option>
+                <select class="category" name="category">
+                    <option value="etc">카테고리</option>
+                    <option value="trend">개발동향</option>
+                    <option value="skill">개발스킬</option>
+                    <option value="algorithm">알고리즘</option>
+                    <option value="etc">etc</option>
                 </select>
                 <div>
-                    <input id="title" placeholder="제목을 입력하세요" />
+                    <input id="title" name="title" placeholder="제목을 입력하세요" />
                 </div>
             </div>
             <%--내용 입력--%>
-            <div id="editable" contentEditable="true">
+            <div id="editable"  contentEditable="true">
                 내용을 입력해주세요.
             </div>
+            <textarea name="content" style="display:none;"></textarea>
             <div>
-                <button id="write_save">저장</button>
-                <button>취소</button>
+                <button id="write_save" type="button">저장</button>
+                <button type="reset">취소</button>
             </div>
+            <input type="hidden" name="_csrf" value="${_csrf.token}">
+            </form>
         </div>
 
     </div>
@@ -68,37 +72,60 @@
     });
 
     //글 저장
+    const csrfToken = document.querySelector('meta[name="_csrf"]').content;
+    const csrfHeader = document.querySelector('meta[name="_csrf_header"]').content;
+
+    console.log("CSRF Token:", csrfToken);
+    console.log("CSRF Header:", csrfHeader);
     document.getElementById('write_save').addEventListener('click', function() {
-    const editableDiv = document.getElementById('editable')
-    const images = editableDiv.getElementsByTagName('img')
+    const editableDiv = document.getElementById('editable');
+    const images = editableDiv.getElementsByTagName('img');
 
-    Array.from(images).forEach(img => {
-        const file = img.src
-        if (file.startsWith('data:')) {
-            let formData = new FormData();
-            formData.append('image', file);
+    let imagePromises = Array.from(images).map(img => {
+        if (img.src.startsWith('data:')) {
+            return fetch(img.src)
+                .then(res => res.blob())
+                .then(blob => {
+                    let formData = new FormData();
+                    formData.append('image', blob, 'upload.jpg');
 
-            fetch('/board/img-upload', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data)
-                    img.src = data; // 업데이트된 이미지 경로로 src 설정
-                })
-                .catch(error => console.error('Error:', error));
+                    return fetch('/board/img-upload', {
+                        method: 'POST',
+                        headers: {
+                            [csrfHeader]: csrfToken
+                        },
+                        body: formData
+                    }).then(response => {
+                        if (response.ok){
+                            return response.text()
+                        }
+                    })
+                        .then(data => {
+                            img.src = data;
+                        });
+                });
+        } else {
+            return Promise.resolve();  // 이미 `data:`로 시작하지 않는 이미지에 대한 처리
         }
     });
 
-    setTimeout(() => {
-        const updatedHTML = editableDiv.innerHTML;
+    Promise.all(imagePromises).then(() => {
+        const form = document.getElementById('boardForm');
+        form.content.value = editableDiv.innerHTML;  // 이미지 업로드가 완료된 후 내용 업데이트
+        const formData = new FormData(form);
+
         fetch('/board/save', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ content: updatedHTML })
+            body: formData
+        }).then(response => {
+            console.log(response);
+            if (response.ok) {
+                window.location.href = '/board/recently';
+            } else {
+                alert('저장 실패');
+            }
         });
-    }, 3000);
+    });
 });
 
 

@@ -11,6 +11,6 @@
         #{title},
         #{content},
         #{category}
-        }
+        );
     </insert>
 </mapper>

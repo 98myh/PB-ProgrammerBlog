@@ -1,11 +1,13 @@
 package com.pb.pblog.controller;
 
+import com.pb.pblog.config.auth.CustomUserDetails;
 import com.pb.pblog.dto.BoardDTO;
 import com.pb.pblog.dto.BoardSaveDTO;
 import com.pb.pblog.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -50,6 +52,7 @@ public class BordController {
     //이미지 저장 - 추후 로직 분리해야함
     @PostMapping("/img-upload")
     public ResponseEntity<?> imgUpload(@RequestParam("image") MultipartFile file){
+        System.out.println("파일"+file);
         try {
             if (file.isEmpty()) {
                 return ResponseEntity.badRequest().body("No file uploaded.");
@@ -83,9 +86,10 @@ public class BordController {
     //글 저장
     @PostMapping("/save")
     public String boardSave(@ModelAttribute BoardSaveDTO boardSaveDTO){
-        String id= SecurityContextHolder.getContext().getAuthentication().getName();
-        boardSaveDTO.setUid(Long.parseLong(id));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        boardSaveDTO.setUid(userDetails.getUid());
         boardService.boardSave(boardSaveDTO);
-        return "board/recently";
+        return "redirect:/board/recently";
     }
 }

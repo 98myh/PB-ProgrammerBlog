@@ -31,7 +31,7 @@
         <sec:authorize access="isAuthenticated()">
             <!-- 사용자가 인증되었을 때 -->
             <sec:authentication property="principal.nickname" var="nickname"/>
-            <button type="button" onclick="location.href='board/write'">글 작성</button>
+            <button type="button" onclick="location.href='/board/write'">글 작성</button>
             <p id="header_user_name">${nickname}님</p>
             <form action="/logout" method="post">
                 <input type="hidden" name="_csrf" value="${_csrf.token}">
