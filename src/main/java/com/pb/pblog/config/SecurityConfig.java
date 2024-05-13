@@ -34,7 +34,7 @@ public class SecurityConfig {
 
 
         http.authorizeHttpRequests((auth)->auth
-                .requestMatchers("/board/write").hasAnyRole("USER", "ADMIN")
+                .requestMatchers("/board/write","/board/save","/board/img-upload").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/admin").hasRole("admin") //어드민만 접근 가능
                 .requestMatchers("/","/WEB-INF/views/**","/login","/loginProc","/logout","/signup","/signupProc","/check-id",
                         "/board/**").permitAll() //모든 사용자 접근가능
