@@ -36,7 +36,9 @@
 }
 
 .line_inner_wrap{
-    display: flex;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
 }
 
 .main_title_wrap{

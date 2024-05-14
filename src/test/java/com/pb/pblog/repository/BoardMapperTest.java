@@ -23,4 +23,10 @@ class BoardMapperTest {
                         .title("test~")
                 .build()));
     }
+
+    //글 조회 테스트
+    @Test
+    public void boardSearchTest(){
+        System.out.println("글 조회 테스트 : "+boardMapper.boardSearch("recently",null));
+    }
 }

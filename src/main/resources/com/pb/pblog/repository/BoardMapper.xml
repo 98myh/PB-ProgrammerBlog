@@ -3,6 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pb.pblog.repository.BoardMapper">
+
+    <resultMap id="boardMap" type="com.pb.pblog.dto.BoardAndUserDTO">
+        <result property="bid" column="bid"/>
+        <result property="title" column="title"/>
+        <result property="category" column="category"/>
+        <result property="content" column="content"/>
+        <result property="create_date" column="create_date"/>
+        <result property="update_date" column="update_date"/>
+        <result property="uid" column="uid"/>
+        <result property="nickname" column="nickname"/>
+    </resultMap>
+
     <!--글 저장-->
     <insert id="boardSave" parameterType="com.pb.pblog.dto.BoardSaveDTO">
         insert into board(uid,title,content,category)
@@ -13,4 +25,34 @@
         #{category}
         );
     </insert>
+
+    <!--게시글 조회 category를 받아서 조회 ,limit이 있으면 해당 개수만 조회-->
+    <select id="boardSearch" parameterType="map" resultMap="boardMap">
+        select
+            b.bid,
+            b.title,
+            b.category,
+            b.content,
+            b.create_date,
+            b.update_date,
+            u.uid,
+            u.nickname
+        from
+            board b left outer join user u on u.uid=b.uid
+        <choose>
+            <!--최근 글이 아닌경우 category별로 조회-->
+            <when test="category!='recently'">
+                where
+                    category=#{category}
+            </when>
+        </choose>
+        order by
+            create_date desc
+        <choose>
+            <!-- limit 파라미터가 제공되었을 때 처리 - 메인페이지 -->
+            <when test="limit != null">
+                limit #{limit}
+            </when>
+        </choose>
+    </select>
 </mapper>

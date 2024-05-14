@@ -1,0 +1,21 @@
+.board_list_wrap{
+    width: 80%;
+}
+
+.card-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card_bottom{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-text{
+    font-family: bold;
+    font-weight: bold;
+}

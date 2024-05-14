@@ -1,5 +1,4 @@
 <%@ page  language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!doctype html>
 <html lang="ko">
 <script type="text/javascript">
@@ -73,11 +72,11 @@
             </div>
             <%--최근 게시글 끝--%>
 
-            <%--인기 게시글--%>
+            <%--개발동향 게시글--%>
             <div class="oneline_wrap">
                 <div class="sub_title_wrap">
-                    <h2 class="sub_title">인기 게시글</h2>
-                    <button onclick="location.href='/board/popular'">더보기</button>
+                    <h2 class="sub_title">개발동향</h2>
+                    <button onclick="location.href='/board/trend'">더보기</button>
                 </div>
                 <div class="line_inner_wrap">
                     <div class="card" style="width: 18rem;">

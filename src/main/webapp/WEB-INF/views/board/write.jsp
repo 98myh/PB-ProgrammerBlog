@@ -34,7 +34,6 @@
             </div>
             <%--내용 입력--%>
             <div id="editable"  contentEditable="true">
-                내용을 입력해주세요.
             </div>
             <textarea name="content" style="display:none;"></textarea>
             <div>
@@ -71,16 +70,17 @@
         }
     });
 
-    //글 저장
+    //글 저장 로직
     const csrfToken = document.querySelector('meta[name="_csrf"]').content;
     const csrfHeader = document.querySelector('meta[name="_csrf_header"]').content;
 
-    console.log("CSRF Token:", csrfToken);
-    console.log("CSRF Header:", csrfHeader);
+    // console.log("CSRF Token:", csrfToken);
+    // console.log("CSRF Header:", csrfHeader);
     document.getElementById('write_save').addEventListener('click', function() {
     const editableDiv = document.getElementById('editable');
     const images = editableDiv.getElementsByTagName('img');
 
+    //먼저 이미지 저장
     let imagePromises = Array.from(images).map(img => {
         if (img.src.startsWith('data:')) {
             return fetch(img.src)
@@ -109,6 +109,7 @@
         }
     });
 
+    //글저장
     Promise.all(imagePromises).then(() => {
         const form = document.getElementById('boardForm');
         form.content.value = editableDiv.innerHTML;  // 이미지 업로드가 완료된 후 내용 업데이트
