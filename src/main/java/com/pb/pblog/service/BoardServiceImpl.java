@@ -3,12 +3,8 @@ package com.pb.pblog.service;
 import com.pb.pblog.config.auth.CustomUserDetails;
 import com.pb.pblog.dto.BoardAndUserDTO;
 import com.pb.pblog.dto.BoardSaveDTO;
-import com.pb.pblog.entity.Board;
 import com.pb.pblog.repository.BoardMapper;
-import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -56,7 +52,6 @@ public class BoardServiceImpl implements BoardService{
             byte[] bytes = file.getBytes();
             Files.write(filePath, bytes);  // 파일 저장
 
-//            String fileDownloadUri = filePath.toString();
 
             String fileDownloadUri = "/images/" + dateFolder + "/" + newFileName;  // 웹 접근 경로 반환
 

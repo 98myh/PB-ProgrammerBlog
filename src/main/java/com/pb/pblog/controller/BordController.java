@@ -2,7 +2,6 @@ package com.pb.pblog.controller;
 
 import com.pb.pblog.dto.BoardAndUserDTO;
 import com.pb.pblog.dto.BoardSaveDTO;
-import com.pb.pblog.entity.Board;
 import com.pb.pblog.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
