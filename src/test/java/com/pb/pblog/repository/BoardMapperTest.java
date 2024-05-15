@@ -1,6 +1,8 @@
 package com.pb.pblog.repository;
 
 import com.pb.pblog.dto.BoardSaveDTO;
+import com.pb.pblog.entity.Board;
+import com.pb.pblog.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,8 +18,10 @@ class BoardMapperTest {
     @Test
     @Transactional
     public void saveTest(){
-        System.out.println("게시글 저장 테스트 : "+boardMapper.boardSave(BoardSaveDTO.builder()
-                        .uid(21l)
+        System.out.println("게시글 저장 테스트 : "+boardMapper.boardSave(Board.builder()
+                        .user(User.builder()
+                                .uid(21l)
+                                .build())
                         .category("etc")
                         .content("test")
                         .title("test~")
@@ -29,4 +33,13 @@ class BoardMapperTest {
     public void boardSearchTest(){
         System.out.println("글 조회 테스트 : "+boardMapper.boardSearch("recently",null));
     }
+
+    //게시글 상세 조회 테스트
+    @Test
+    public void boardDetailTest(){
+        System.out.println("게시글 상세 조회 테스트 : "+boardMapper.boardDetail(29l));
+    }
+
+    //댓글 조회 테스트
+
 }

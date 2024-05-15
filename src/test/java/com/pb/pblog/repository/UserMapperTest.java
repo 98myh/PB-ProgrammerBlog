@@ -1,6 +1,7 @@
 package com.pb.pblog.repository;
 
 import com.pb.pblog.dto.SignupDTO;
+import com.pb.pblog.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +23,7 @@ class UserMapperTest {
     @Test
     @Transactional
     public void signupTest(){
-        System.out.println("회원가입 테스트 : "+ userMapper.signup(SignupDTO.builder()
+        System.out.println("회원가입 테스트 : "+ userMapper.signup(User.builder()
                         .id("abcd1")
                         .password("1234")
                         .nickname("abcd1")

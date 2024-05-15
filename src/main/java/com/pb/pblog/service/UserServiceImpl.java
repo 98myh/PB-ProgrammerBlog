@@ -2,10 +2,13 @@ package com.pb.pblog.service;
 
 import com.pb.pblog.dto.SignupRequestDTO;
 import com.pb.pblog.dto.SignupDTO;
+import com.pb.pblog.entity.User;
 import com.pb.pblog.repository.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -38,14 +41,16 @@ public class UserServiceImpl implements UserService{
 
         try {
 
-            //회원가입에 필요한 DTO로 변환
-            SignupDTO singupDTO= SignupDTO.builder()
+            User user=User.builder()
                     .id(signupRequestDTO.getId())
                     .password(bCryptPasswordEncoder.encode(signupRequestDTO.getPassword()))
                     .nickname(signupRequestDTO.getNickname())
+                    .create_date(LocalDateTime.now())
+                    .update_date(LocalDateTime.now())
+                    .role("user")
                     .build();
 
-            int signup= userMapper.signup(singupDTO);
+            int signup= userMapper.signup(user);
             return signup;
         }
         //예외 발생 - ex) id 중복이거나 등등 -1 반환

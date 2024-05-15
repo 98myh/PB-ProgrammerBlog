@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pb.pblog.repository.CommentMapper">
+    <!--게시글 댓글 resultMap-->
+    <resultMap id="boardCommentMap" type="com.pb.pblog.entity.Comment">
+        <id column="cid" property="cid"/>
+        <result column="parent_cid" property="parent_cid"/>
+        <result column="comment" property="comment"/>
+        <result column="create_date" property="create_date"/>
+        <result column="update_date" property="update_date"/>
+        <result column="bid" property="bid"/>
+        <association property="user" column="com.pb.pblog.entity.User">
+            <result column="uid" property="uid"/>
+            <result column="nickname" property="nickname"/>
+        </association>
+    </resultMap>
+
+    <!--게시글의 댓글 불러오기-->
+    <select id="boardComment" parameterType="Long" resultMap="boardCommentMap">
+        select
+            c.cid,
+            c.parent_cid,
+            c.comment,
+            c.create_date,
+            c.update_date,
+            c.bid,
+            u.uid,
+            u.nickname
+        from
+            comment c left outer join user u on c.uid=u.uid
+        where
+            c.bid=#{bid}
+    </select>
+</mapper>

@@ -73,4 +73,10 @@ public class BordController {
         return "redirect:/board/recently";
     }
 
+    //상세보기
+//    @GetMapping("/detail/{bid}")
+//    public String boardDetail(@RequestParam("bid")Long bid){
+//        return "board/detail";
+//    }
+
 }

@@ -1,4 +1,4 @@
-package com.pb.pblog.entity;
+package com.pb.pblog.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,13 +11,14 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Board {
-    private Long bid; //게시판 고유 아이디
-    private String title; //제목
-    private String category; //카테고리
-    private String content; //내용
+public class CommentAndUserDTO {
+    private Long cid;
+    private Long parent_cid;
+    private String comment;
     private LocalDateTime create_date;
     private LocalDateTime update_date;
+    private Long bid;
 
-    private User user;
+    private Long uid;
+    private String nickname;
 }

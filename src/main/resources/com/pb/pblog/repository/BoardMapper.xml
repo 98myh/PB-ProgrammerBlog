@@ -4,22 +4,26 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pb.pblog.repository.BoardMapper">
 
-    <resultMap id="boardMap" type="com.pb.pblog.dto.BoardAndUserDTO">
+    <!--게시글 정보 + 유저 정보-->
+    <resultMap id="boardMap" type="com.pb.pblog.entity.Board">
         <result property="bid" column="bid"/>
         <result property="title" column="title"/>
         <result property="category" column="category"/>
         <result property="content" column="content"/>
         <result property="create_date" column="create_date"/>
         <result property="update_date" column="update_date"/>
-        <result property="uid" column="uid"/>
-        <result property="nickname" column="nickname"/>
+        <association property="user" column="com.pb.pblog.entity.User">
+            <id property="uid" column="uid"/>
+            <result property="nickname" column="nickname"/>
+        </association>
     </resultMap>
 
+    <!--DTO가 아니라 entity로 수정해야함-->
     <!--글 저장-->
-    <insert id="boardSave" parameterType="com.pb.pblog.dto.BoardSaveDTO">
+    <insert id="boardSave" parameterType="com.pb.pblog.entity.Board">
         insert into board(uid,title,content,category)
         values(
-        #{uid},
+        #{user.uid},
         #{title},
         #{content},
         #{category}
@@ -55,4 +59,22 @@
             </when>
         </choose>
     </select>
+
+    <!--게시글 상세 - 게시글 내용, 작성자-->
+    <select id="boardDetail" parameterType="Long" resultMap="boardMap">
+        select
+            b.bid,
+            b.title,
+            b.content,
+            b.create_date,
+            b.update_date,
+            b.category,
+            u.uid,
+            u.nickname
+        from
+            board b left outer join user u on u.uid=b.uid
+        where
+            b.bid=#{bid}
+    </select>
+
 </mapper>

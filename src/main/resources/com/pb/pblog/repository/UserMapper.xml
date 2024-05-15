@@ -19,13 +19,15 @@
     </select>
 
 <!--    회원가입-->
-    <insert id="signup" parameterType="com.pb.pblog.dto.SignupDTO" >
-        insert into user(id,password,nickname,role)
+    <insert id="signup" parameterType="com.pb.pblog.entity.User" >
+        insert into user(id,password,nickname,create_date,update_date,role)
         values(
         #{id},
         #{password},
         #{nickname},
-        "user"
+        #{create_date},
+        #{update_date},
+        #{role}
         )
     </insert>
 </mapper>

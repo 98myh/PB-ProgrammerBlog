@@ -14,6 +14,6 @@ public interface UserMapper {
     User userDetails(String id);
 
 //    회원가입
-    int signup(SignupDTO singupDTO);
+    int signup(User user);
 
 }

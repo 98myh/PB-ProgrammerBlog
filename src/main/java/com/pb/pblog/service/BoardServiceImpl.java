@@ -2,8 +2,14 @@ package com.pb.pblog.service;
 
 import com.pb.pblog.config.auth.CustomUserDetails;
 import com.pb.pblog.dto.BoardAndUserDTO;
+import com.pb.pblog.dto.BoardResponseDTO;
 import com.pb.pblog.dto.BoardSaveDTO;
+import com.pb.pblog.dto.CommentAndUserDTO;
+import com.pb.pblog.entity.Board;
+import com.pb.pblog.entity.Comment;
+import com.pb.pblog.entity.User;
 import com.pb.pblog.repository.BoardMapper;
+import com.pb.pblog.repository.CommentMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,12 +23,16 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService{
     //게시판 mapper
     private final BoardMapper boardMapper;
+
+    //댓글 mapper
+    private final CommentMapper commentMapper;
 
     //이미지 저장 경로
     private static final String BASE_UPLOAD_FOLDER = "D:/image/";
@@ -67,8 +77,17 @@ public class BoardServiceImpl implements BoardService{
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-            boardSaveDTO.setUid(userDetails.getUid());
-            boardMapper.boardSave(boardSaveDTO);
+
+            Board board=Board.builder()
+                    .user(User.builder()
+                            .uid(userDetails.getUid())
+                            .build())
+                    .title(boardSaveDTO.getTitle())
+                    .category(boardSaveDTO.getCategory())
+                    .content(boardSaveDTO.getContent())
+                    .build();
+
+            boardMapper.boardSave(board);
         }catch (Exception e){
             return 0;
         }
@@ -78,8 +97,46 @@ public class BoardServiceImpl implements BoardService{
     //게시글 조회
     @Override
     public List<BoardAndUserDTO> boardSearch(String category) {
-        List<BoardAndUserDTO>boards=boardMapper.boardSearch(category,null);
-        return boards;
+        List<Board>boards=boardMapper.boardSearch(category,null);
+
+        //DTO로 형변환
+        List<BoardAndUserDTO> boardAndUserDTOS = boards.stream()
+                .map(board -> boardAndUserEntityToDTO(board))
+                .collect(Collectors.toList());
+
+        return boardAndUserDTOS;
+    }
+
+    //게시글 상세 조회
+    @Override
+    public BoardResponseDTO boardDetails(Long bid) {
+        //게시글 정보
+        Board board=boardMapper.boardDetail(bid);
+        BoardAndUserDTO boardAndUserDTO=boardAndUserEntityToDTO(board);
+
+
+        //댓글 정보
+        List<Comment> comments=commentMapper.boardComment(bid);
+
+        //DTO로 형변환
+        List<CommentAndUserDTO> commentAndUserDTOS = comments.stream()
+                .map(comment -> CommentAndUserDTO.builder()
+                        .bid(comment.getBid())
+                        .cid(comment.getCid())
+                        .parent_cid(comment.getParent_cid())
+                        .uid(comment.getUser().getUid())
+                        .nickname(comment.getUser().getNickname())
+                        .comment(comment.getComment())
+                        .create_date(comment.getCreate_date())
+                        .update_date(comment.getUpdate_date())
+                        .build())
+                .collect(Collectors.toList());
+        BoardResponseDTO boardResponseDTO=BoardResponseDTO.builder()
+                .boardAndUserDTO(boardAndUserDTO)
+                .commentAndUserDTOS(commentAndUserDTOS)
+                .build();
+
+        return boardResponseDTO;
     }
 
 
