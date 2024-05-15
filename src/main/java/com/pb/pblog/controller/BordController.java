@@ -1,6 +1,7 @@
 package com.pb.pblog.controller;
 
 import com.pb.pblog.dto.BoardAndUserDTO;
+import com.pb.pblog.dto.BoardResponseDTO;
 import com.pb.pblog.dto.BoardSaveDTO;
 import com.pb.pblog.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -43,12 +44,6 @@ public class BordController {
         return "board/board";
     }
 
-    //게시글 상세 조회
-    @GetMapping("/detail/{bid}")
-    public String boardDetail(){
-        return "board/detail/{bid}";
-    }
-
     //게시글 쓰기
     @GetMapping("/write")
     public String write(){
@@ -73,10 +68,12 @@ public class BordController {
         return "redirect:/board/recently";
     }
 
-    //상세보기
-//    @GetMapping("/detail/{bid}")
-//    public String boardDetail(@RequestParam("bid")Long bid){
-//        return "board/detail";
-//    }
+    //게시글 상세보기
+    @RequestMapping("/detail/{bid}")
+    public String boardDetail(@PathVariable Long bid,Model model){
+        BoardResponseDTO boardResponseDTO= boardService.boardDetails(bid);
+        model.addAttribute("board_detail",boardResponseDTO);
+        return "board/boardDetail";
+    }
 
 }
