@@ -24,11 +24,12 @@
             <div class="line_inner_wrap">
                 <c:forEach var="board" items="${board}">
                     <div class="card" style="width: 18rem;">
-                        <img src="${board.content}" class="card-img-top" alt="...">
+                        <div class="image-wrap">
+                            <img src="${board.content}" class="card-img-top" alt="...">
+                        </div>
                         <div class="card-body">
                             <!--제목-->
                             <h4 class="card-text">${board.title}</h4>
-
                             <div class="card_bottom">
                                 <!--닉네임-->
                                 <p class="card-writer">${board.nickname}</p>

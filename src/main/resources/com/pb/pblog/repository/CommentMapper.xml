@@ -33,4 +33,16 @@
         where
             c.bid=#{bid}
     </select>
+
+    <!--댓글 작성-->
+    <insert id="commentInsert" parameterType="com.pb.pblog.entity.Comment">
+        insert into comment values(
+            #{user.uid},
+            #{board.bid},
+            #{parent_cid},
+            #{comment},
+            #{create_date},
+            #{update_date}
+        )
+    </insert>
 </mapper>

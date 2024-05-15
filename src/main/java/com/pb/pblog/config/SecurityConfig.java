@@ -26,7 +26,7 @@ public class SecurityConfig {
 
         //테스트 환경에서는 disable 해도 됨
         //http.csrf((auth)->auth.disable());
-        http.csrf((auth)->auth.ignoringRequestMatchers("/board/img-upload"));
+        http.csrf((auth)->auth.ignoringRequestMatchers("/board/img-upload","/check-id"));
 
 
         //httpBasic로그인 방식 추가

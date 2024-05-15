@@ -63,7 +63,8 @@
             reader.onload = function(e) {
                 const img = document.createElement('img');
                 img.src = e.target.result;
-                img.style.maxWidth = '100%'; // 이미지의 최대 너비 설정
+                img.style.maxWidth = '500px'; // 이미지의 최대 너비 설정
+                img.style.maxHeight= "500px";
                 editableDiv.appendChild(img); // 이미지를 편집 영역에 삽입합니다.
             }
             reader.readAsDataURL(file);

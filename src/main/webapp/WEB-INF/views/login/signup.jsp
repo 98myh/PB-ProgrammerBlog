@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="/resources/css/login/login.css">
     <link rel="stylesheet" href="/resources/css/login/signup.css">
     <link rel="stylesheet" href="/resources/css/style.css">
+    <meta name="_csrf" content="${csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>ProgrammerBlog-Sign Up</title>
     <script type="text/javascript">
@@ -95,6 +97,7 @@
                 <div>
                     <input class="form_input" id="nickname" type="text" name="nickname" placeholder="Nickname" required/>
                 </div>
+                <input type="hidden" name="_csrf" value="${_csrf.token}">
                 <button type="button" value="signup" onclick="signUp()">회원가입</button>
             </form>
         </div>
