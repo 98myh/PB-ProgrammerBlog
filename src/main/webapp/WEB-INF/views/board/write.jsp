@@ -123,7 +123,6 @@
             method: 'POST',
             body: formData
         }).then(response => {
-            console.log(response);
             if (response.ok) {
                 window.location.href = '/board/recently';
             } else {
