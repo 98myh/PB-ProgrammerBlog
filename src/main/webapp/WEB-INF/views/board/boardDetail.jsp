@@ -39,9 +39,9 @@
             <div class="comments_wrap">
                 <!--댓글 입력-->
                 <sec:authorize access="isAuthenticated()">
-                    <form action="" method="post">
+                    <form action="/comment/sava/${board_detail.board.bid}" method="post">
                         <div class="comment_write_wrap">
-                            <textarea class="comment_input" placeholder="댓글을 입력하세요"></textarea>
+                            <textarea name="comment" class="comment_input" placeholder="댓글을 입력하세요"></textarea>
                             <button>댓글 작성</button>
                         </div>
                     </form>
