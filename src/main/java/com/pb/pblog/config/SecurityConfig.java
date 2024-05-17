@@ -52,6 +52,7 @@ public class SecurityConfig {
                         .passwordParameter("password")
                         .loginProcessingUrl("/loginProc")
                         .defaultSuccessUrl("/")
+                        .successForwardUrl("/")
                         .failureUrl("/login")
                         .permitAll());
 

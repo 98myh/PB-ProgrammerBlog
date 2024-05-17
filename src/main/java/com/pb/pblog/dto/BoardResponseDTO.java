@@ -12,6 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BoardResponseDTO {
-    private BoardAndUserDTO boardAndUserDTO; //게시글 + 작성자
-    private List<CommentAndUserDTO> commentAndUserDTOS; //댓글들
+    private BoardAndUserDTO board; //게시글 + 작성자
+    private List<CommentAndUserDTO> comments; //댓글들
 }

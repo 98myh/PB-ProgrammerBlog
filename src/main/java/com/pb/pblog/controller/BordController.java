@@ -69,7 +69,7 @@ public class BordController {
     }
 
     //게시글 상세보기
-    @RequestMapping("/detail/{bid}")
+    @GetMapping("/detail/{bid}")
     public String boardDetail(@PathVariable Long bid,Model model){
         BoardResponseDTO boardResponseDTO= boardService.boardDetails(bid);
         model.addAttribute("board_detail",boardResponseDTO);

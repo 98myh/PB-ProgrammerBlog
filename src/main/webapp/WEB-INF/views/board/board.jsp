@@ -23,7 +23,7 @@
         <div class="board_list_wrap">
             <div class="line_inner_wrap">
                 <c:forEach var="board" items="${board}">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card" style="width: 18rem;" onclick="location.href='/board/detail/${board.bid}'">
                         <div class="image-wrap">
                             <img src="${board.content}" class="card-img-top" alt="...">
                         </div>

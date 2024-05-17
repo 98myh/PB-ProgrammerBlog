@@ -33,9 +33,12 @@
                 </div>
             </div>
             <%--내용 입력--%>
-            <div id="editable"  contentEditable="true">
+            <div id="editable" contentEditable="true" >
+
             </div>
-            <textarea name="content" style="display:none;"></textarea>
+<%--            <textarea name="content" style="display:none;">--%>
+<%--                --%>
+<%--            </textarea>--%>
             <div>
                 <button id="write_save" type="button">저장</button>
                 <button type="reset">취소</button>
@@ -63,8 +66,8 @@
             reader.onload = function(e) {
                 const img = document.createElement('img');
                 img.src = e.target.result;
-                img.style.maxWidth = '500px'; // 이미지의 최대 너비 설정
-                img.style.maxHeight= "500px";
+                img.style.maxWidth = '500px !import'; // 이미지의 최대 너비 설정
+                img.style.maxHeight= "500px !import";
                 editableDiv.appendChild(img); // 이미지를 편집 영역에 삽입합니다.
             }
             reader.readAsDataURL(file);

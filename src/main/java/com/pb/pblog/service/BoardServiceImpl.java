@@ -132,8 +132,8 @@ public class BoardServiceImpl implements BoardService{
                         .build())
                 .collect(Collectors.toList());
         BoardResponseDTO boardResponseDTO=BoardResponseDTO.builder()
-                .boardAndUserDTO(boardAndUserDTO)
-                .commentAndUserDTOS(commentAndUserDTOS)
+                .board(boardAndUserDTO)
+                .comments(commentAndUserDTOS)
                 .build();
 
         return boardResponseDTO;
