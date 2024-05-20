@@ -14,6 +14,12 @@ class BoardMapperTest {
     @Autowired
     private BoardMapper boardMapper;
 
+    //메인 테스트
+    @Test
+    public void mainListTest(){
+        System.out.println(boardMapper.mainBoard());
+    }
+
     //저장 테스트
     @Test
     @Transactional

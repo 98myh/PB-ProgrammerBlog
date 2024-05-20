@@ -8,6 +8,10 @@ import java.util.List;
 
 @Mapper
 public interface BoardMapper {
+    //메인 페이지
+    List<Board> mainBoard();
+
+
     //글 저장
     int boardSave(Board board);
 

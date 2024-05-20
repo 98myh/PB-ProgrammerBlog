@@ -1,10 +1,7 @@
 package com.pb.pblog.service;
 
 import com.pb.pblog.config.auth.CustomUserDetails;
-import com.pb.pblog.dto.BoardAndUserDTO;
-import com.pb.pblog.dto.BoardResponseDTO;
-import com.pb.pblog.dto.BoardSaveDTO;
-import com.pb.pblog.dto.CommentAndUserDTO;
+import com.pb.pblog.dto.*;
 import com.pb.pblog.entity.Board;
 import com.pb.pblog.entity.Comment;
 import com.pb.pblog.entity.User;
@@ -22,6 +19,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,6 +34,60 @@ public class BoardServiceImpl implements BoardService{
 
     //이미지 저장 경로
     private static final String BASE_UPLOAD_FOLDER = "D:/image/";
+
+    //메인
+    @Override
+    public MainResponseDTO main() {
+        List<Board> boards=boardMapper.mainBoard();
+
+        //Entity를 DTO로 형변환
+        List<BoardAndUserDTO> boardAndUserDTOS = boards.stream()
+                .map(board -> boardAndUserEntityToDTO(board))
+                .collect(Collectors.toList());
+
+        //최근 게시글
+        boolean nullCheck=false;
+
+        //최근 게시글 5개
+        List<BoardAndUserDTO> listRecently=new ArrayList<>();
+        //개발동향 게시글 5개
+        List<BoardAndUserDTO> listTrend=new ArrayList<>();
+        //개발스킬 게시글 5개
+        List<BoardAndUserDTO> listSkill=new ArrayList<>();
+        //알고리즘 게시글 5개
+        List<BoardAndUserDTO> listAlgorithm=new ArrayList<>();
+
+        for (BoardAndUserDTO board:boardAndUserDTOS){
+            //null 이면 최근 게시글에 추가 멈춤, 해당하는 카테고리에 추가
+            if(board.getBid()==null){
+                nullCheck=true;
+            }
+            //null 이전의 데이터는 최근 게시글에 추가
+            if(!nullCheck){
+                listRecently.add(board);
+            }
+            //개발동향 추가
+            if(nullCheck && board.getCategory().equals("trend")){
+                listTrend.add(board);
+            }
+            //개발스킬 추가
+            else if(nullCheck && board.getCategory().equals("skill")){
+                listSkill.add(board);
+            }
+            //알고리즘 추가
+            else if(nullCheck && board.getCategory().equals("algorithm")){
+                listAlgorithm.add(board);
+            }
+        }
+        //반환할 DTO로 변환
+        MainResponseDTO mainResponseDTO= MainResponseDTO.builder()
+                .listRecently(listRecently)
+                .listTrend(listTrend)
+                .listSkill(listSkill)
+                .listAlgorithm(listAlgorithm)
+                .build();
+        return mainResponseDTO;
+    }
 
     //이미지 저장
     @Override

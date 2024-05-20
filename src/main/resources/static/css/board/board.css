@@ -2,6 +2,13 @@
     width: 80%;
 }
 
+.category{
+    margin: 20px;
+}
+.category h2{
+    font-weight: bold;
+}
+
 .image-wrap{
     height: 80%;
 }

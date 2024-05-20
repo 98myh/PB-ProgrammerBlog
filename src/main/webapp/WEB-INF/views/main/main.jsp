@@ -1,4 +1,5 @@
 <%@ page  language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="ko">
 <script type="text/javascript">
@@ -37,37 +38,17 @@
                 </div>
                 <div class="line_inner_wrap">
                     <%--나중에 for문 사용해서 출력되도록 수정해야함--%>
-                    <div class="card" style="width: 18rem;">
-                        <img src="/resources/images/pblogo.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+                    <c:forEach items="${main.listRecently}" var="recently">
+                        <div class="card" style="width: 18rem;">
+                            <img src="${recently.content}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h3>${recently.title}</h3>
+                                <p class="card-text">${recently.nickname}</p>
+                                <p class="card-text">${recently.create_date}</p>
+                            </div>
                         </div>
-                    </div>
-                    <%-- --%>
-                    <div class="card" style="width: 18rem;">
-                        <img src="/resources/images/pblogo.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <img src="/resources/images/pblogo.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <img src="/resources/images/pblogo.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <img src="/resources/images/pblogo.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
             <%--최근 게시글 끝--%>

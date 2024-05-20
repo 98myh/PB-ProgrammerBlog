@@ -25,11 +25,10 @@ public class BordController {
 
     private final BoardService boardService;
 
-
     //model 넣어서 보내서 거기서 model에 따라 쿼리문 다르게 사용하여 불러와서 조회
     //게시글 페이지
     @GetMapping("/{category}")
-    public String recently(@PathVariable String category,Model model){
+    public String boardList(@PathVariable String category,Model model){
         List<BoardAndUserDTO> boardList=boardService.boardSearch(category);
         for (BoardAndUserDTO board : boardList) {
             String content = board.getContent();
@@ -38,7 +37,22 @@ public class BordController {
             String firstImgSrc = images.size() > 0 ? images.get(0).attr("src") : "default.jpg";
             board.setContent(firstImgSrc);
         }
+        String midTitle="";
+        if(category.equals("recently")){
+            midTitle="최근 게시글";
+        }else if(category.equals("trend")){
+            midTitle="개발동향";
+        }else if(category.equals("skill")){
+            midTitle="개발스킬";
+        } else if (category.equals("algorithm")) {
+            midTitle="알고리즘";
+        }else{
+            midTitle="기타";
+        }
+
+
         model.addAttribute("board",boardList);
+        model.addAttribute("category",midTitle);
 
 
         return "board/board";
