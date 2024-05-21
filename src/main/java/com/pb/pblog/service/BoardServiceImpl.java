@@ -59,15 +59,6 @@ public class BoardServiceImpl implements BoardService{
             }
         }
 
-//        List<BoardAndUserDTO> boardAndUserDTOS = boards.stream()
-//                .map(
-//                        board -> board!=null ? boardAndUserEntityToDTO(board)
-//                        :BoardAndUserDTO.builder().build()
-//
-//                )
-//                .collect(Collectors.toList());
-
-
         //최근 게시글 체크
         boolean nullCheck=false;
 
