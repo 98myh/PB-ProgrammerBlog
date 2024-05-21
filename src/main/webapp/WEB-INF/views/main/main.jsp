@@ -1,5 +1,7 @@
 <%@ page  language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!doctype html>
 <html lang="ko">
 <script type="text/javascript">
@@ -31,67 +33,95 @@
                 </div>
             </div>
             <%--    최근 게시글        --%>
-            <div class="oneline_wrap">
-                <div class="sub_title_wrap">
-                    <h2 class="sub_title">최근 게시글</h2>
-                    <button onclick="location.href='/board/recently'">더보기</button>
-                </div>
-                <div class="line_inner_wrap">
-                    <%--나중에 for문 사용해서 출력되도록 수정해야함--%>
-
-                    <c:forEach items="${main.listRecently}" var="recently">
-                        <div class="card" style="width: 18rem;">
-                            <img src="${recently.content}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h3>${recently.title}</h3>
-                                <p class="card-text">${recently.nickname}</p>
-                                <p class="card-text">${recently.create_date}</p>
+            <c:if test="${fn:length(main.listRecently)>0}">
+                <div class="oneline_wrap">
+                    <div class="sub_title_wrap">
+                        <h2 class="sub_title">최근 게시글</h2>
+                        <button onclick="location.href='/board/recently'">더보기</button>
+                    </div>
+                    <div class="line_inner_wrap">
+                        <%--나중에 for문 사용해서 출력되도록 수정해야함--%>
+                        <c:forEach items="${main.listRecently}" var="recently">
+                            <div class="card" style="width: 18rem;"  onclick="location.href='/board/detail/${recently.bid}'">
+                                <img src="${recently.content}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h3>${recently.title}</h3>
+                                    <p class="card-text">${recently.nickname}</p>
+                                    <p class="card-text">${recently.create_date}</p>
+                                </div>
                             </div>
-                        </div>
-                    </c:forEach>
+                        </c:forEach>
+                    </div>
                 </div>
-            </div>
+            </c:if>
             <%--최근 게시글 끝--%>
 
             <%--개발동향 게시글--%>
-            <div class="oneline_wrap">
-                <div class="sub_title_wrap">
-                    <h2 class="sub_title">개발동향</h2>
-                    <button onclick="location.href='/board/trend'">더보기</button>
-                </div>
-                <div class="line_inner_wrap">
-                    <div class="card" style="width: 18rem;">
-                        <img src="/resources/images/pblogo.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
+            <c:if test="${fn:length(main.listTrend)>0}">
+                <div class="oneline_wrap">
+                    <div class="sub_title_wrap">
+                        <h2 class="sub_title">개발동향</h2>
+                        <button onclick="location.href='/board/trend'">더보기</button>
                     </div>
-                    <div class="card" style="width: 18rem;">
-                        <img src="/resources/images/pblogo.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <img src="/resources/images/pblogo.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <img src="/resources/images/pblogo.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <img src="/resources/images/pblogo.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
+                    <div class="line_inner_wrap">
+                        <c:forEach items="${main.listTrend}" var="trend">
+                            <div class="card" style="width: 18rem;"  onclick="location.href='/board/detail/${trend.bid}'">
+                                <img src="${trend.content}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h3>${trend.title}</h3>
+                                    <p class="card-text">${trend.nickname}</p>
+                                    <p class="card-text">${trend.create_date}</p>
+                                </div>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
-            </div>
+            </c:if>
+
+            <!--개발스킬-->
+            <c:if test="${fn:length(main.listSkill)>0}">
+                <div class="oneline_wrap">
+                    <div class="sub_title_wrap">
+                        <h2 class="sub_title">개발스킬</h2>
+                        <button onclick="location.href='/board/skill'">더보기</button>
+                    </div>
+                    <div class="line_inner_wrap">
+                        <c:forEach items="${main.listSkill}" var="skill">
+                            <div class="card" style="width: 18rem;"  onclick="location.href='/board/detail/${skill.bid}'">
+                                <img src="${skill.content}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h3>${skill.title}</h3>
+                                    <p class="card-text">${skill.nickname}</p>
+                                    <p class="card-text">${skill.create_date}</p>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </c:if>
+
+            <!--알고리즘-->
+            <c:if test="${fn:length(main.listAlgorithm)>0}">
+                <div class="oneline_wrap">
+                    <div class="sub_title_wrap">
+                        <h2 class="sub_title">알고리즘</h2>
+                        <button onclick="location.href='/board/algorithm'">더보기</button>
+                    </div>
+                    <div class="line_inner_wrap">
+                        <c:forEach items="${main.listAlgorithm}" var="algorithm">
+                            <div class="card" style="width: 18rem;" onclick="location.href='/board/detail/${algorithm.bid}'">
+                                <img src="${algorithm.content}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h3>${algorithm.title}</h3>
+                                    <p class="card-text">${algorithm.nickname}</p>
+                                    <p class="card-text">${algorithm.create_date}</p>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </c:if>
+
         </div>
     </div>
 

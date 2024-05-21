@@ -8,6 +8,9 @@ import com.pb.pblog.entity.User;
 import com.pb.pblog.repository.BoardMapper;
 import com.pb.pblog.repository.CommentMapper;
 import lombok.RequiredArgsConstructor;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -41,11 +44,31 @@ public class BoardServiceImpl implements BoardService{
         List<Board> boards=boardMapper.mainBoard();
 
         //Entity를 DTO로 형변환
-        List<BoardAndUserDTO> boardAndUserDTOS = boards.stream()
-                .map(board -> boardAndUserEntityToDTO(board))
-                .collect(Collectors.toList());
+        List<BoardAndUserDTO> boardAndUserDTOS=new ArrayList<>();
+        for(Board board:boards){
+            if(board!=null) {
+                String content = board.getContent();
+                Document doc = Jsoup.parse(content);
+                Elements images = doc.select("img");
+                String firstImgSrc = images.size() > 0 ? images.get(0).attr("src") : "default.jpg";
+                board.setContent(firstImgSrc);
 
-        //최근 게시글
+                boardAndUserDTOS.add(boardAndUserEntityToDTO(board));
+            }else{
+                boardAndUserDTOS.add(BoardAndUserDTO.builder().build());
+            }
+        }
+
+//        List<BoardAndUserDTO> boardAndUserDTOS = boards.stream()
+//                .map(
+//                        board -> board!=null ? boardAndUserEntityToDTO(board)
+//                        :BoardAndUserDTO.builder().build()
+//
+//                )
+//                .collect(Collectors.toList());
+
+
+        //최근 게시글 체크
         boolean nullCheck=false;
 
         //최근 게시글 5개
@@ -66,17 +89,19 @@ public class BoardServiceImpl implements BoardService{
             if(!nullCheck){
                 listRecently.add(board);
             }
-            //개발동향 추가
-            if(nullCheck && board.getCategory().equals("trend")){
-                listTrend.add(board);
-            }
-            //개발스킬 추가
-            else if(nullCheck && board.getCategory().equals("skill")){
-                listSkill.add(board);
-            }
-            //알고리즘 추가
-            else if(nullCheck && board.getCategory().equals("algorithm")){
-                listAlgorithm.add(board);
+            if(board.getBid()!=null) {
+                //개발동향 추가
+                if(board.getCategory().equals("trend")){
+                    listTrend.add(board);
+                }
+                //개발스킬 추가
+                else if(board.getCategory().equals("skill")){
+                    listSkill.add(board);
+                }
+                //알고리즘 추가
+                else if(board.getCategory().equals("algorithm")){
+                    listAlgorithm.add(board);
+                }
             }
         }
         //반환할 DTO로 변환

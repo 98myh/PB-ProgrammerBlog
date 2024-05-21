@@ -13,7 +13,7 @@
         <result property="create_date" column="create_date"/>
         <result property="update_date" column="update_date"/>
         <association property="user" column="com.pb.pblog.entity.User">
-            <id property="uid" column="uid"/>
+            <result property="uid" column="uid"/>
             <result property="nickname" column="nickname"/>
         </association>
     </resultMap>
@@ -22,21 +22,22 @@
     <!--데이터가 5개 미만일 경우 분리하기 어려워서 중간에 null 값을 임의로 넣음-->
     <select id="mainBoard" resultMap="boardMap">
         (select
-            b2.bid AS bid,
-            b2.title AS title,
-            b2.category AS category,
-            b2.content AS content,
-            b2.create_date AS create_date,
-            b2.update_date AS update_date,
-            u2.uid AS uid,
-            u2.nickname AS nickname
+            b.bid AS bid,
+            b.title AS title,
+            b.category AS category,
+            b.content AS content,
+            b.create_date AS create_date,
+            b.update_date AS update_date,
+            u.uid AS uid,
+            u.nickname AS nickname
         from
-            board b2 left outer join user u2 ON b2.bid=u2.uid
+            board b left outer join user u ON b.uid=u.uid
         ORDER BY
             create_date DESC
         LIMIT 5)
 
-        UNION ALL
+        union all
+
         (select
             null AS bid,
             null AS title,
@@ -47,10 +48,11 @@
             null AS uid,
             null AS nickname
         from
-            board b
-        LIMIT 1
-        )
+            board b left outer join user u on b.uid=u.uid
+        LIMIT 1)
+
         union all
+
         (select
             bb.bid AS bid,
             bb.title AS title,
@@ -62,19 +64,20 @@
             bb.nickname AS nickname
         from
             (select
-                b.bid,
-                b.title,
-                b.category,
-                b.content,
-                b.create_date,
-                b.update_date,
-                u.uid,
-                u.nickname,
-                rank() over(order by b.category) as rn
+                b2.bid,
+                b2.title,
+                b2.category,
+                b2.content,
+                b2.create_date,
+                b2.update_date,
+                u2.uid,
+                u2.nickname,
+                row_number() over(order by b2.category) as rn
             from
-                board b left outer join user u on b.bid=u.uid
+                board b2 left outer join user u2 on b2.uid=u2.uid
             ) bb
-        where bb.rn<=5);
+        where
+            bb.rn <![CDATA[<=]]> 5)
     </select>
 
     <!--글 저장-->

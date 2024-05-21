@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class BoardMapperTest {
@@ -17,7 +19,12 @@ class BoardMapperTest {
     //메인 테스트
     @Test
     public void mainListTest(){
-        System.out.println(boardMapper.mainBoard());
+        List<Board> boards=boardMapper.mainBoard();
+        System.out.println("메인 테스트");
+        int i=0;
+        for(Board board:boards){
+            System.out.println(++i+" "+board);
+        }
     }
 
     //저장 테스트
