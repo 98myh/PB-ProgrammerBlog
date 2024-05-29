@@ -50,7 +50,7 @@ public class BoardServiceImpl implements BoardService{
                 String content = board.getContent();
                 Document doc = Jsoup.parse(content);
                 Elements images = doc.select("img");
-                String firstImgSrc = images.size() > 0 ? images.get(0).attr("src") : "default.jpg";
+                String firstImgSrc = images.size() > 0 ? images.get(0).attr("src") : "/resources/images/pblogo.png";
                 board.setContent(firstImgSrc);
 
                 boardAndUserDTOS.add(boardAndUserEntityToDTO(board));
@@ -189,7 +189,7 @@ public class BoardServiceImpl implements BoardService{
         //DTO로 형변환
         List<CommentAndUserDTO> commentAndUserDTOS = comments.stream()
                 .map(comment -> CommentAndUserDTO.builder()
-                        .bid(comment.getBid())
+                        .bid(comment.getBoard().getBid())
                         .cid(comment.getCid())
                         .parent_cid(comment.getParent_cid())
                         .uid(comment.getUser().getUid())

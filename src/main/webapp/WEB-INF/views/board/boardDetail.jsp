@@ -36,25 +36,33 @@
                 </div>
             </div>
             <!--댓글들-->
-            <div class="comments_wrap">
+            <div>
+                <div class="comment_top">
+                    <h2>댓글</h2>
+                </div>
                 <!--댓글 입력-->
                 <sec:authorize access="isAuthenticated()">
-                    <form action="/comment/sava/${board_detail.board.bid}" method="post">
+                    <form action="/comment/save" method="post">
                         <div class="comment_write_wrap">
+                            <input type="hidden" name="bid" value="${board_detail.board.bid}"/>
+                            <input type="hidden" name="parent_cid" value='' />
                             <textarea name="comment" class="comment_input" placeholder="댓글을 입력하세요"></textarea>
-                            <button>댓글 작성</button>
+                            <button type="submit">댓글 작성</button>
+                            <input type="hidden" name="_csrf" value="${_csrf.token}">
                         </div>
                     </form>
                 </sec:authorize>
                 <!--댓글 조회-->
                 <c:forEach var="comment" items="${board_detail.comments}">
-                    <div>
-                        <div>
-                            <p>${comment.nickname}</p>
-                            <p>${comment.create_date}</p>
+                    <div class="comment_small_wrap">
+                        <div class="comment_nickname">
+                            <span>${comment.nickname}</span>
                         </div>
-                        <div>
-                            <p>comment.comment</p>
+                        <div class="comment_content">
+                            <span>${comment.comment}</span>
+                        </div>
+                        <div class="comment_date">
+                            <span>${comment.create_date}</span>
                         </div>
                     </div>
                 </c:forEach>

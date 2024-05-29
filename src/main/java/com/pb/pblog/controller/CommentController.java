@@ -1,13 +1,12 @@
 package com.pb.pblog.controller;
 
+import com.pb.pblog.dto.CommentRequestDTO;
 import com.pb.pblog.dto.CommentSaveDTO;
 import com.pb.pblog.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
@@ -16,16 +15,22 @@ public class CommentController {
     private final CommentService commentService;
 
     //댓글 쓰기
-    @PostMapping("/save/{bid}/{cid}")
-    public String commentSave(@PathVariable Long bid, @PathVariable(required = false) Long cid, @ModelAttribute String comment ){
+    @PostMapping("/save")
+    public String commentSave(@ModelAttribute CommentRequestDTO commentRequestDTO, RedirectAttributes redirectAttributes){
+        System.out.println(commentRequestDTO);
+        Long bid=commentRequestDTO.getBid();
         int result=commentService.commentInsert(CommentSaveDTO.builder()
                         .bid(bid)
-                        .parent_cid(cid)
-                        .comment(comment)
+                        .parent_cid(commentRequestDTO.getParent_cid()!=null?commentRequestDTO.getParent_cid():null)
+                        .comment(commentRequestDTO.getComment())
                 .build());
         if(result!=1){
             return "Error";
         }
-        return "/";
+
+        //리다이렉트로 변수를 전달하기 위해 사용
+        redirectAttributes.addAttribute("bid", bid);
+
+        return "redirect:/board/detail/{bid}";
     }
 }

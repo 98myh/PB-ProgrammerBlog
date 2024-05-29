@@ -34,7 +34,7 @@ public class BordController {
             String content = board.getContent();
             Document doc = Jsoup.parse(content);
             Elements images = doc.select("img");
-            String firstImgSrc = images.size() > 0 ? images.get(0).attr("src") : "default.jpg";
+            String firstImgSrc = images.size() > 0 ? images.get(0).attr("src") : "/resources/images/pblogo.png";
             board.setContent(firstImgSrc);
         }
         String midTitle="";

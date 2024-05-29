@@ -10,7 +10,9 @@
         <result column="comment" property="comment"/>
         <result column="create_date" property="create_date"/>
         <result column="update_date" property="update_date"/>
-        <result column="bid" property="bid"/>
+        <association property="board" column="com.pb.pblog.entity.Board">
+            <result column="bid" property="bid" />
+        </association>
         <association property="user" column="com.pb.pblog.entity.User">
             <result column="uid" property="uid"/>
             <result column="nickname" property="nickname"/>
@@ -36,9 +38,9 @@
 
     <!--댓글 작성-->
     <insert id="commentInsert" parameterType="com.pb.pblog.entity.Comment">
-        insert into comment values(
-            #{user.uid},
+        insert into comment(bid,uid,parent_cid,comment,create_date,update_date) values(
             #{board.bid},
+            #{user.uid},
             #{parent_cid},
             #{comment},
             #{create_date},

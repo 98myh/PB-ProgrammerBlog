@@ -2,6 +2,7 @@ package com.pb.pblog.service;
 
 import com.pb.pblog.config.auth.CustomUserDetails;
 import com.pb.pblog.dto.CommentSaveDTO;
+import com.pb.pblog.entity.Board;
 import com.pb.pblog.entity.Comment;
 import com.pb.pblog.entity.User;
 import com.pb.pblog.repository.CommentMapper;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 @Service
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService{
-    private CommentMapper commentMapper;
+    private final CommentMapper commentMapper;
 
     //댓글 쓰기
     @Override
@@ -24,7 +25,7 @@ public class CommentServiceImpl implements CommentService{
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 
         Comment comment=Comment.builder()
-                .bid(commentSaveDTO.getBid())
+                .board(Board.builder().bid(commentSaveDTO.getBid()).build())
                 .user(User.builder().uid(userDetails.getUid()).build())
                 .parent_cid(commentSaveDTO.getParent_cid())
                 .comment(commentSaveDTO.getComment())
