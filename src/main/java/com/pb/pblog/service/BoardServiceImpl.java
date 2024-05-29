@@ -186,9 +186,28 @@ public class BoardServiceImpl implements BoardService{
         //댓글 정보
         List<Comment> comments=commentMapper.boardComment(bid);
 
-        //DTO로 형변환
-        List<CommentAndUserDTO> commentAndUserDTOS = comments.stream()
-                .map(comment -> CommentAndUserDTO.builder()
+        //상위 댓글 먼저 분류
+        List<CommentDTO> commentDTOS=comments.stream()
+                .filter(comment -> comment.getParent_cid()==null)
+                .map(comment -> CommentDTO.builder()
+                        .topComment(CommentAndUserDTO.builder()
+                                .bid(comment.getBoard().getBid())
+                                .cid(comment.getCid())
+                                .parent_cid(comment.getParent_cid())
+                                .uid(comment.getUser().getUid())
+                                .nickname(comment.getUser().getNickname())
+                                .comment(comment.getComment())
+                                .create_date(comment.getCreate_date())
+                                .update_date(comment.getUpdate_date())
+                                .build())
+                        .build())
+                .collect(Collectors.toList());
+
+        //대댓글 분류
+        for(CommentDTO commentDTO:commentDTOS){
+            List<CommentAndUserDTO> childComments=comments.stream()
+                    .filter(comment -> commentDTO.getTopComment().getCid().equals(comment.getParent_cid()))
+                    .map(comment -> CommentAndUserDTO.builder()
                         .bid(comment.getBoard().getBid())
                         .cid(comment.getCid())
                         .parent_cid(comment.getParent_cid())
@@ -198,14 +217,17 @@ public class BoardServiceImpl implements BoardService{
                         .create_date(comment.getCreate_date())
                         .update_date(comment.getUpdate_date())
                         .build())
-                .collect(Collectors.toList());
+                    .collect(Collectors.toList());
+            //대댓글 추가
+            commentDTO.setChildComment(childComments);
+        }
+
         BoardResponseDTO boardResponseDTO=BoardResponseDTO.builder()
                 .board(boardAndUserDTO)
-                .comments(commentAndUserDTOS)
+                .comments(commentDTOS)
                 .build();
 
         return boardResponseDTO;
     }
-
 
 }

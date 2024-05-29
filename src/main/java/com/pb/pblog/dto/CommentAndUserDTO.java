@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+//댓글 하나에 대한 DTO
 @Data
 @Builder
 @AllArgsConstructor

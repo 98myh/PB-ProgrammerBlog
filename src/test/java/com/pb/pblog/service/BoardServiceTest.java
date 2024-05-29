@@ -37,6 +37,7 @@ class BoardServiceTest {
     void boardSave() {
     }
 
+    //게시글 조회
     @Test
     void boardSearch() {
         List<BoardAndUserDTO> boards=boardService.boardSearch("recently");
@@ -44,5 +45,11 @@ class BoardServiceTest {
             BoardAndUserDTO board=boards.get(i);
             System.out.println(board.getTitle());
         }
+    }
+
+    //상세조회 테스트
+    @Test
+    void boardDetailTest(){
+        System.out.println("상세조회 테스트 : "+boardService.boardDetails(31l));
     }
 }

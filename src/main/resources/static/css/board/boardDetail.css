@@ -49,6 +49,11 @@
     margin: 20px 0;
 }
 
+.child_comments{
+    border-left: 1px solid #ccc;
+    margin-left: 20px;
+}
+
 .comment_nickname{
     flex-grow: 1;
     font-weight: bold;
@@ -61,8 +66,27 @@
     flex-grow: 3;
 }
 
+.comment_end{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .comment_date{
     font-size: 12px;
     flex-grow: 1;
     text-align: end;
+}
+
+.child_comment_toggle{
+    text-align: end;
+}
+
+.child_comment_toggle_btn{
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.child_comment_toggle_btn:hover{
+    border-bottom: 1px solid black;
 }
