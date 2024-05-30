@@ -40,7 +40,7 @@ class BoardServiceTest {
     //게시글 조회
     @Test
     void boardSearch() {
-        List<BoardAndUserDTO> boards=boardService.boardSearch("recently");
+        List<BoardAndUserDTO> boards=boardService.boardSearch("recently","test");
         for(int i=0;i<boards.toArray().length;i++){
             BoardAndUserDTO board=boards.get(i);
             System.out.println(board.getTitle());

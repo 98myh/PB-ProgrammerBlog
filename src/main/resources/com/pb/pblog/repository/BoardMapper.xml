@@ -104,10 +104,12 @@
             u.nickname
         from
             board b left outer join user u on u.uid=b.uid
+        where
+            b.title like "%${title}%"
         <choose>
-            <!--최근 글이 아닌경우 category별로 조회-->
-            <when test="category!='recently'">
-                where
+            <!--최근 글,모두 조회가 아닌경우 category별로 조회-->
+            <when test="category!='recently' and category!='all'">
+                and
                     category=#{category}
             </when>
         </choose>

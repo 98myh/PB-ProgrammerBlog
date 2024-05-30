@@ -42,7 +42,12 @@ input{
     font-size: 18px;
 }
 
+
 .search_wrap{
+    display: flex;
+}
+
+.search_input_wrap{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,7 +56,7 @@ input{
     border-radius: 10px;
     margin-right: 10px;
 }
-.search_wrap input{
+.search_input_wrap input{
     font-size: 18px;
     padding: 5px 5px;
     min-width: 300px;

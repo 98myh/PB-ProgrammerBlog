@@ -16,7 +16,7 @@ public interface BoardMapper {
     int boardSave(Board board);
 
     //카테고리 별 글 조회
-    List<Board> boardSearch(String category, Integer limit);
+    List<Board> boardSearch(String category,String title ,Integer limit);
 
 
     //게시글 상세 조회

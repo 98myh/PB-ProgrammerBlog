@@ -89,6 +89,7 @@
                                 </div>
                             </div>
                         </c:forEach>
+                        <!--로그인 한 유저 대댓글 작성-->
                         <sec:authorize access="isAuthenticated()">
                             <form action="/comment/save" method="post">
                                 <div class="comment_write_wrap">
@@ -110,6 +111,7 @@
     <jsp:include page="../common/footer.jsp"/>
 </div>
 
+<!--추후 js 파일로 분리-->
 <script>
     function commentToggle(cid) {
         //대댓글 보기 클릭시 토글

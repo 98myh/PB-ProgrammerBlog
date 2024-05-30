@@ -36,7 +36,7 @@
                 <div class="oneline_wrap">
                     <div class="sub_title_wrap">
                         <h2 class="sub_title">최근 게시글</h2>
-                        <button onclick="location.href='/board/recently'">더보기</button>
+                        <button onclick="location.href='/board/recently?title='">더보기</button>
                     </div>
                     <div class="line_inner_wrap">
                         <%--나중에 for문 사용해서 출력되도록 수정해야함--%>
@@ -53,14 +53,13 @@
                     </div>
                 </div>
             </c:if>
-            <%--최근 게시글 끝--%>
 
             <%--개발동향 게시글--%>
             <c:if test="${fn:length(main.listTrend)>0}">
                 <div class="oneline_wrap">
                     <div class="sub_title_wrap">
                         <h2 class="sub_title">개발동향</h2>
-                        <button onclick="location.href='/board/trend'">더보기</button>
+                        <button onclick="location.href='/board/trend?title='">더보기</button>
                     </div>
                     <div class="line_inner_wrap">
                         <c:forEach items="${main.listTrend}" var="trend">
@@ -82,7 +81,7 @@
                 <div class="oneline_wrap">
                     <div class="sub_title_wrap">
                         <h2 class="sub_title">개발스킬</h2>
-                        <button onclick="location.href='/board/skill'">더보기</button>
+                        <button onclick="location.href='/board/skill?title='">더보기</button>
                     </div>
                     <div class="line_inner_wrap">
                         <c:forEach items="${main.listSkill}" var="skill">
@@ -104,7 +103,7 @@
                 <div class="oneline_wrap">
                     <div class="sub_title_wrap">
                         <h2 class="sub_title">알고리즘</h2>
-                        <button onclick="location.href='/board/algorithm'">더보기</button>
+                        <button onclick="location.href='/board/algorithm?title='">더보기</button>
                     </div>
                     <div class="line_inner_wrap">
                         <c:forEach items="${main.listAlgorithm}" var="algorithm">

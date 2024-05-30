@@ -22,7 +22,7 @@ public interface BoardService {
     int boardSave(BoardSaveDTO boardSaveDTO);
 
     //글 조회
-    List<BoardAndUserDTO> boardSearch(String category);
+    List<BoardAndUserDTO> boardSearch(String category,String title);
 
     //게시글 상세 조회
     BoardResponseDTO boardDetails(Long bid);

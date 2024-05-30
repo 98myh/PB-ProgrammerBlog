@@ -10,6 +10,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +29,8 @@ public class BordController {
     //model 넣어서 보내서 거기서 model에 따라 쿼리문 다르게 사용하여 불러와서 조회
     //게시글 페이지
     @GetMapping("/{category}")
-    public String boardList(@PathVariable String category,Model model){
-        List<BoardAndUserDTO> boardList=boardService.boardSearch(category);
+    public String boardList(@PathVariable String category, @RequestParam(required = false) String title, Model model){
+        List<BoardAndUserDTO> boardList=boardService.boardSearch(category,title);
         for (BoardAndUserDTO board : boardList) {
             String content = board.getContent();
             Document doc = Jsoup.parse(content);
@@ -38,7 +39,10 @@ public class BordController {
             board.setContent(firstImgSrc);
         }
         String midTitle="";
-        if(category.equals("recently")){
+        if(category.equals("all")){
+            midTitle="모두";
+        }
+        else if(category.equals("recently")){
             midTitle="최근 게시글";
         }else if(category.equals("trend")){
             midTitle="개발동향";

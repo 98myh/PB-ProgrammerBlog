@@ -164,8 +164,8 @@ public class BoardServiceImpl implements BoardService{
 
     //게시글 조회
     @Override
-    public List<BoardAndUserDTO> boardSearch(String category) {
-        List<Board>boards=boardMapper.boardSearch(category,null);
+    public List<BoardAndUserDTO> boardSearch(String category,String title) {
+        List<Board>boards=boardMapper.boardSearch(category,title,null);
 
         //DTO로 형변환
         List<BoardAndUserDTO> boardAndUserDTOS = boards.stream()

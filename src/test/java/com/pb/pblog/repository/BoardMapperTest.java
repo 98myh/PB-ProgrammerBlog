@@ -44,7 +44,7 @@ class BoardMapperTest {
     //글 조회 테스트
     @Test
     public void boardSearchTest(){
-        System.out.println("글 조회 테스트 : "+boardMapper.boardSearch("recently",null));
+        System.out.println("글 조회 테스트 : "+boardMapper.boardSearch("recently","test",null));
     }
 
     //게시글 상세 조회 테스트
