@@ -8,10 +8,10 @@ input{
 
 button{
     font-size: 18px;
-    padding: 5px;
+    padding: 10px;
     margin: 10px 0;
-    cursor: pointer;
 }
+
 
 .logo_div{
     display: flex;
@@ -22,7 +22,6 @@ button{
 #login_wrap{
     display: flex;
     flex-direction: column;
-    /*border: 0.5px solid #ccc;*/
     padding: 50px 60px;
     border-radius: 15px;
     box-shadow: 8px 8px 8px 8px #ccc;
@@ -46,6 +45,18 @@ button{
     transition-duration: 0.5s;
     border-bottom: 1px solid darkblue !important;
 }
+
+.login_btn{
+    border: 1px solid #002874;
+    outline: none;
+    cursor: pointer;
+}
+
+.login_btn:hover{
+    transition-duration: 300ms;
+}
+
+
 
 #find_wrap{
     display: flex;

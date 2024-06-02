@@ -36,7 +36,7 @@
                 <div class="oneline_wrap">
                     <div class="sub_title_wrap">
                         <h2 class="sub_title">최근 게시글</h2>
-                        <button onclick="location.href='/board/recently?title='">더보기</button>
+                        <button class="more_btn" onclick="location.href='/board/recently?title='"><i class="fa-solid fa-arrow-right"></i></button>
                     </div>
                     <div class="line_inner_wrap">
                         <%--나중에 for문 사용해서 출력되도록 수정해야함--%>
@@ -59,7 +59,7 @@
                 <div class="oneline_wrap">
                     <div class="sub_title_wrap">
                         <h2 class="sub_title">개발동향</h2>
-                        <button onclick="location.href='/board/trend?title='">더보기</button>
+                        <button class="more_btn" onclick="location.href='/board/trend?title='"><i class="fa-solid fa-arrow-right"></i></button>
                     </div>
                     <div class="line_inner_wrap">
                         <c:forEach items="${main.listTrend}" var="trend">
@@ -81,7 +81,7 @@
                 <div class="oneline_wrap">
                     <div class="sub_title_wrap">
                         <h2 class="sub_title">개발스킬</h2>
-                        <button onclick="location.href='/board/skill?title='">더보기</button>
+                        <button class="more_btn" onclick="location.href='/board/skill?title='"><i class="fa-solid fa-arrow-right"></i></button>
                     </div>
                     <div class="line_inner_wrap">
                         <c:forEach items="${main.listSkill}" var="skill">
@@ -103,7 +103,7 @@
                 <div class="oneline_wrap">
                     <div class="sub_title_wrap">
                         <h2 class="sub_title">알고리즘</h2>
-                        <button onclick="location.href='/board/algorithm?title='">더보기</button>
+                        <button class="more_btn" onclick="location.href='/board/algorithm?title='"><i class="fa-solid fa-arrow-right"></i></button>
                     </div>
                     <div class="line_inner_wrap">
                         <c:forEach items="${main.listAlgorithm}" var="algorithm">

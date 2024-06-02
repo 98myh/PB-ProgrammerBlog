@@ -1,9 +1,9 @@
 .board_list_wrap{
-    width: 80%;
+    width: 65%;
 }
 
 .category{
-    margin: 20px;
+    margin: 50px 20px;
 }
 .category h2{
     font-weight: bold;

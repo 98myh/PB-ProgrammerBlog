@@ -1,3 +1,7 @@
+*{
+    color: #102232;
+}
+
 a{
     text-decoration: none;
     color: black;
@@ -6,13 +10,30 @@ input{
     border:none;
     outline: none;
 }
+
+button{
+    outline: none;
+    border: none;
+    border-radius: 12px !important;
+    padding: 10px;
+    background-color: #455969;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+button:hover{
+    transition-duration: 300ms;
+    background-color: #102232;
+    color: white;
+}
+
+
 #wrap{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     min-width: 100vh;
-    min-height: 40vh;
+    min-height: 100vh;
 }
 
 /*헤더 스타일*/
@@ -23,16 +44,21 @@ input{
 }
 
 #header{
-    margin-top: 10px;
     min-width: 100vh;
+    margin-top: 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content:center;
     align-items: center;
 
 }
 
+#header_wrap{
+    display: flex;
+    justify-content: space-between;
+    width: 65%;
+}
+
 .head_inner_wrap{
-    flex-basis: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,7 +78,7 @@ input{
     justify-content: center;
     align-items: center;
     padding: 5px 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #455969;
     border-radius: 10px;
     margin-right: 10px;
 }
@@ -78,5 +104,9 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: gray;
+    background: #102232;
+}
+
+footer p{
+    color: white;
 }

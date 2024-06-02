@@ -27,9 +27,9 @@
                     <input class="form_input" name="password" type="password" placeholder="password"/>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}">
-                <button type="submit" value="login">Login</button>
+                <button class="login_btn" type="submit" value="login">Login</button>
             </form>
-            <button onclick="location.href='/signup'">회원가입</button>
+            <button class="login_btn" onclick="location.href='/signup'">회원가입</button>
             <div id="find_wrap">
                 <p id="find_idpw">아이디/비밀번호 찾기</p>
             </div>
