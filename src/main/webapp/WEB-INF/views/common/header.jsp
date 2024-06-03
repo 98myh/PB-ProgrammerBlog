@@ -59,11 +59,11 @@
             <sec:authorize access="isAuthenticated()">
                 <!-- 사용자가 인증되었을 때 -->
                 <sec:authentication property="principal.nickname" var="nickname"/>
-                <button type="button" onclick="location.href='/board/write'">글 작성</button>
+                <button id="write_btn" type="button" onclick="location.href='/board/write'">글 작성</button>
                 <p id="header_user_name">${nickname}님</p>
                 <form action="/logout" method="post">
                     <input type="hidden" name="_csrf" value="${_csrf.token}">
-                    <button type="submit" class="fa-solid fa-arrow-right-from-bracket" />
+                    <button id="logout_btn" type="submit" class="fa-solid fa-arrow-right-from-bracket" />
                 </form>
             </sec:authorize>
             <sec:authorize access="!isAuthenticated()">

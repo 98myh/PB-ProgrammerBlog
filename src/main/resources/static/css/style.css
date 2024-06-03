@@ -55,7 +55,7 @@ button:hover{
 #header_wrap{
     display: flex;
     justify-content: space-between;
-    width: 65%;
+    width: 70%;
 }
 
 .head_inner_wrap{

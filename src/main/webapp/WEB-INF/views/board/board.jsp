@@ -1,5 +1,6 @@
 <%@ page  language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!doctype html>
 <html lang="ko">
@@ -25,23 +26,30 @@
                 <h2>${category}</h2>
             </div>
             <div class="line_inner_wrap">
-                <c:forEach var="board" items="${board}">
-                    <div class="card" style="width: 18rem;" onclick="location.href='/board/detail/${board.bid}'">
-                        <div class="image-wrap">
-                            <img src="${board.content}" class="card-img-top" alt="...">
-                        </div>
-                        <div class="card-body">
-                            <!--제목-->
-                            <h4 class="card-text">${board.title}</h4>
-                            <div class="card_bottom">
-                                <!--닉네임-->
-                                <p class="card-writer">${board.nickname}</p>
-                                <!--날짜 10자로 잘라서 출력-->
-                                <p class="card-date">${fn:substring(board.create_date, 0, 10)}</p>
+                <c:choose>
+                    <c:when test="${fn:length(board)>0}">
+                        <c:forEach var="board" items="${board}">
+                            <div class="card" style="width: 18rem;" onclick="location.href='/board/detail/${board.bid}'">
+                                <div class="image-wrap">
+                                    <img src="${board.content}" class="card-img-top" alt="...">
+                                </div>
+                                <div class="card-body">
+                                    <!--제목-->
+                                    <h4 class="card-text">${board.title}</h4>
+                                    <div class="card_bottom">
+                                        <!--닉네임-->
+                                        <p class="card-writer">${board.nickname}</p>
+                                        <!--날짜 10자로 잘라서 출력-->
+                                        <p class="card-date">${fn:substring(board.create_date, 0, 10)}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </c:forEach>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <h5>게시글이 없습니다...</h5>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>

@@ -10,7 +10,7 @@
 }
 
 .image-wrap{
-    height: 80%;
+    height: 70%;
 }
 
 .image-wrap img{
@@ -28,8 +28,8 @@
 
 .card_bottom{
     width: 100%;
-    display: flex;
-    justify-content: space-between;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
 }
 
 .card-text{
