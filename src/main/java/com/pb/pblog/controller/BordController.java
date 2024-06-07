@@ -62,13 +62,13 @@ public class BordController {
         return "board/board";
     }
 
-    //게시글 쓰기
+    //게시글 쓰기페이지로 이동
     @GetMapping("/write")
     public String write(){
         return "board/write";
     }
 
-    //이미지 저장 - 추후 로직 분리해야함
+    //이미지 저장
     @PostMapping("/img-upload")
     public ResponseEntity<?> imgUpload(@RequestParam("image") MultipartFile file){
         try {
@@ -92,6 +92,28 @@ public class BordController {
         BoardResponseDTO boardResponseDTO= boardService.boardDetails(bid);
         model.addAttribute("board_detail",boardResponseDTO);
         return "board/boardDetail";
+    }
+
+    //게시글 수정 페이지로 이동
+    @GetMapping("/edit/{bid}")
+    public String boardEdit(@PathVariable Long bid,Model model){
+        BoardResponseDTO boardResponseDTO= boardService.boardDetails(bid);
+        model.addAttribute("board",boardResponseDTO);
+        return "board/write";
+    }
+
+    //게시글 수정
+    @PutMapping("/edit-save")
+    public String boardEditSave(@ModelAttribute BoardSaveDTO boardSaveDTO){
+
+        //
+        return "detail/";
+    }
+
+    //게시글 삭제
+    @DeleteMapping("/delete")
+    public String boardDelete(){
+        return "";
     }
 
 }

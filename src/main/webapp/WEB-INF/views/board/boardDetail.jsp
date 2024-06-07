@@ -25,7 +25,28 @@
             <!--게시글 내용들-->
             <div class="board_content_wrap">
                 <div class="detail_inner_wrap">
-                    <h2>${board_detail.board.title}</h2>
+                    <div class="board_title_wrap">
+                        <h2>${board_detail.board.title}</h2>
+                        <!--로그인 한 경우 ...버튼이 나옴-->
+                        <sec:authorize access="isAuthenticated()">
+                            <sec:authentication property="principal.uid" var="uid"/>
+                            <button id="change_btn" type="button" onclick="changeToggle()" >
+                                <i class="fa-solid fa-ellipsis"></i>
+                                <ul id="show_box" class="noShow">
+                                    <c:choose>
+                                        <c:when test="${uid==board_detail.board.uid}">
+                                            <li onclick="goEdit(${board_detail.board.bid})">수정하기</li>
+                                            <li>삭제하기</li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li>신고하기</li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </ul>
+                            </button>
+                        </sec:authorize>
+
+                    </div>
                     <div class="detail_title">
                         <p>${board_detail.board.nickname}</p>
                         <p>${fn:substring(board_detail.board.create_date, 0, 10)}</p>
@@ -53,7 +74,6 @@
                     </form>
                 </sec:authorize>
                 <!--댓글 조회-->
-<%--                <p>${board_detail.comments[1].childComment}</p>--%>
                 <c:forEach var="comment" items="${board_detail.comments}">
                     <div class="comment_small_wrap" id="top_${comment.topComment.cid}">
                         <!--부모 댓글 조회-->
@@ -113,6 +133,27 @@
 
 <!--추후 js 파일로 분리-->
 <script>
+    //로그인 한 유저 수정/삭제 or 신고 하기 토글 버튼
+    function changeToggle(){
+        const show_box=document.getElementById('show_box')
+        if(show_box.classList.contains('noShow')){
+            show_box.classList.remove('noShow')
+            show_box.classList.add('show')
+        }else{
+            show_box.classList.remove('show')
+            show_box.classList.add('noShow')
+        }
+    }
+
+    //수정하기 페이지로 이동
+    function goEdit(bid){
+        window.location.href='/board/edit/'+bid
+    }
+
+
+    //신고 모달창 띄우기 (보류)
+
+    //대댓글 보기 토글
     function commentToggle(cid) {
         //대댓글 보기 클릭시 토글
         let childCommentsDiv = document.getElementById(cid)

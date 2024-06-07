@@ -162,6 +162,19 @@ public class BoardServiceImpl implements BoardService{
         return 1;
     }
 
+    //글 수정
+    @Override
+    public int boardEdit(BoardSaveDTO boardSaveDTO) {
+        return 0;
+    }
+
+    //글 삭제
+    @Override
+    public int boardDelete(Long bid) {
+        return 0;
+    }
+
+
     //게시글 조회
     @Override
     public List<BoardAndUserDTO> boardSearch(String category,String title) {

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page  language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="ko">
@@ -11,6 +12,9 @@
     <meta name="_csrf" content="${csrf.token}"/>
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
     <title>ProgrammerBlog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
 <div>
@@ -21,27 +25,38 @@
         <div id="write_wrap">
             <form id="boardForm" action="/board/save" method="post">
             <div class="write_title">
-                <select class="category" name="category">
+                <select class="category" name="category" >
                     <option value="etc">카테고리</option>
-                    <option value="trend">개발동향</option>
-                    <option value="skill">개발스킬</option>
-                    <option value="algorithm">알고리즘</option>
-                    <option value="etc">etc</option>
+                    <option ${board.board.category=='trend'?"selected":""} value="trend">개발동향</option>
+                    <option ${board.board.category=='skill'?"selected":""} value="skill">개발스킬</option>
+                    <option ${board.board.category=='algorithm'?"selected":""} value="algorithm">알고리즘</option>
+                    <option ${board.board.category=='etc'?"selected":""} value="etc">etc</option>
                 </select>
                 <div>
-                    <input id="title" name="title" placeholder="제목을 입력하세요" />
+                    <input id="title" name="title" placeholder="제목을 입력하세요" value="${board!=null?board.board.title:''}" />
                 </div>
             </div>
             <%--내용 입력--%>
             <div id="editable" contentEditable="true" >
-
+                <c:if test="${board !=null}">
+                    ${board.board.content}
+                </c:if>
             </div>
-<%--            <textarea name="content" style="display:none;">--%>
-<%--                --%>
-<%--            </textarea>--%>
+            <textarea name="content" style="display:none;">
+
+
+            </textarea>
             <div>
-                <button id="write_save" type="button">저장</button>
-                <button type="reset">취소</button>
+                <!--수정과 글 저장 나눔-->
+                <c:choose>
+                    <c:when test="${board!=null}">
+                        <button id="write_save" type="button">수정</button>
+                    </c:when>
+                    <c:otherwise>
+                        <button id="write_save" type="button">저장</button>
+                    </c:otherwise>
+                </c:choose>
+                <button type="reset" onclick="window.history.back()">취소</button>
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}">
             </form>
@@ -78,8 +93,6 @@
     const csrfToken = document.querySelector('meta[name="_csrf"]').content;
     const csrfHeader = document.querySelector('meta[name="_csrf_header"]').content;
 
-    // console.log("CSRF Token:", csrfToken);
-    // console.log("CSRF Header:", csrfHeader);
     document.getElementById('write_save').addEventListener('click', function() {
     const editableDiv = document.getElementById('editable');
     const images = editableDiv.getElementsByTagName('img');

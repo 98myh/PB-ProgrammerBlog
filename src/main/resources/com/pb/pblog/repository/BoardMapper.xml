@@ -91,6 +91,27 @@
         );
     </insert>
 
+    <!--글 수정-->
+    <update id="boardEdit" parameterType="com.pb.pblog.entity.Board">
+        update
+            board
+        set
+            title=${title},
+            content=${content},
+            update_date=${update_date},
+            category=${category}
+        where
+            bid=${bid}
+    </update>
+
+    <!--글 삭제-->
+    <delete id="boardDelete" parameterType="java.lang.Long">
+        delete from
+            board
+        where
+            bid=${bid}
+    </delete>
+
     <!--게시글 조회 category를 받아서 조회 ,limit이 있으면 해당 개수만 조회-->
     <select id="boardSearch" parameterType="map" resultMap="boardMap">
         select

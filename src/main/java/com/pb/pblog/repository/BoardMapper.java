@@ -15,6 +15,12 @@ public interface BoardMapper {
     //글 저장
     int boardSave(Board board);
 
+    //글 수정
+    int boardEdit(Board board);
+
+    //글 삭제
+    int boardDelete(Long bid);
+
     //카테고리 별 글 조회
     List<Board> boardSearch(String category,String title ,Integer limit);
 

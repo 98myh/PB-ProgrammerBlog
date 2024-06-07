@@ -8,6 +8,55 @@
     margin: 30px 0;
 }
 
+.board_title_wrap{
+    display: flex;
+    justify-content: space-between;
+}
+
+#change_btn{
+    background: none;
+    position: relative;
+}
+
+.noShow{
+    display: none;
+}
+
+.show{
+    background-color: white;
+    margin: 2px;
+    padding:0;
+    display: block;
+    position: absolute;
+    width: 100px;
+    top: -55px;
+    border: 1px solid #cccccc;
+    z-index: 100;
+    border-radius: 5px;
+}
+.show li{
+    font-size: 15px;
+    padding: 3px;
+}
+.show li:nth-child(1){
+    justify-content: center;
+    display: flex;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px ;
+}
+
+.show li:nth-child(2){
+    justify-content: center;
+    display: flex;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px ;
+}
+
+.show li:hover{
+    background: #455969;
+    color: white;
+}
+
 .detail_inner_wrap{
     min-height: 50vh;
 }

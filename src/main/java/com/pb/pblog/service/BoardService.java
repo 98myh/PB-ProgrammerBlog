@@ -21,6 +21,12 @@ public interface BoardService {
     //글 저장
     int boardSave(BoardSaveDTO boardSaveDTO);
 
+    //글 수정
+    int boardEdit(BoardSaveDTO boardSaveDTO);
+
+    //글 삭제
+    int boardDelete(Long bid);
+
     //글 조회
     List<BoardAndUserDTO> boardSearch(String category,String title);
 
