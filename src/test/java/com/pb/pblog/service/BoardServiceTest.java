@@ -1,6 +1,7 @@
 package com.pb.pblog.service;
 
 import com.pb.pblog.dto.BoardAndUserDTO;
+import com.pb.pblog.dto.BoardEditDTO;
 import com.pb.pblog.dto.MainResponseDTO;
 import com.pb.pblog.entity.Board;
 import org.junit.jupiter.api.Test;
@@ -52,4 +53,16 @@ class BoardServiceTest {
     void boardDetailTest(){
         System.out.println("상세조회 테스트 : "+boardService.boardDetails(31l));
     }
+
+    //수정 테스트
+    @Test
+    void boardEditTest() {
+        System.out.println(boardService.boardEdit(BoardEditDTO.builder()
+                        .bid(33l)
+                        .title("dddd")
+                        .category("etc")
+                        .content("zzzzzzz")
+                .build()));
+    }
 }
+

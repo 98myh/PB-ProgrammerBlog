@@ -1,10 +1,7 @@
 package com.pb.pblog.service;
 
 
-import com.pb.pblog.dto.BoardAndUserDTO;
-import com.pb.pblog.dto.BoardResponseDTO;
-import com.pb.pblog.dto.BoardSaveDTO;
-import com.pb.pblog.dto.MainResponseDTO;
+import com.pb.pblog.dto.*;
 import com.pb.pblog.entity.Board;
 import com.pb.pblog.entity.User;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +19,7 @@ public interface BoardService {
     int boardSave(BoardSaveDTO boardSaveDTO);
 
     //글 수정
-    int boardEdit(BoardSaveDTO boardSaveDTO);
+    int boardEdit(BoardEditDTO boardEditDTO);
 
     //글 삭제
     int boardDelete(Long bid);

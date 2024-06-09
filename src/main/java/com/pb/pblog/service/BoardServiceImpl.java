@@ -164,8 +164,26 @@ public class BoardServiceImpl implements BoardService{
 
     //글 수정
     @Override
-    public int boardEdit(BoardSaveDTO boardSaveDTO) {
-        return 0;
+    public int boardEdit(BoardEditDTO boardEditDTO) {
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+
+            Board board=Board.builder()
+                    .user(User.builder()
+                            .uid(userDetails.getUid())
+                            .build())
+                    .title(boardEditDTO.getTitle())
+                    .bid(boardEditDTO.getBid())
+                    .content(boardEditDTO.getContent())
+                    .category(boardEditDTO.getCategory())
+                    .update_date(LocalDateTime.now())
+                    .build();
+            int result= boardMapper.boardEdit(board);
+            return result;
+        }catch (Exception e){
+            return 0;
+        }
     }
 
     //글 삭제

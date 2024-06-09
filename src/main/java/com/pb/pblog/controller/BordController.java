@@ -1,6 +1,7 @@
 package com.pb.pblog.controller;
 
 import com.pb.pblog.dto.BoardAndUserDTO;
+import com.pb.pblog.dto.BoardEditDTO;
 import com.pb.pblog.dto.BoardResponseDTO;
 import com.pb.pblog.dto.BoardSaveDTO;
 import com.pb.pblog.service.BoardService;
@@ -103,11 +104,20 @@ public class BordController {
     }
 
     //게시글 수정
-    @PutMapping("/edit-save")
-    public String boardEditSave(@ModelAttribute BoardSaveDTO boardSaveDTO){
+    @ResponseBody
+    @PutMapping("/edit")
+    public String boardEditSave(@RequestBody BoardEditDTO boardEditDTO){
 
+        int result=boardService.boardEdit(boardEditDTO);
         //
-        return "detail/";
+        System.out.println(result);
+        if (result==1){
+//            return "redirect:/board/detail/"+boardEditDTO.getBid().toString();
+            return "redirect:/board/recently";
+        }
+        else {
+            return "수정 실패";
+        }
     }
 
     //게시글 삭제

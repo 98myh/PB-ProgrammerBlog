@@ -56,6 +56,7 @@
                     </div>
                 </div>
             </div>
+
             <!--댓글들-->
             <div>
                 <div class="comment_top">

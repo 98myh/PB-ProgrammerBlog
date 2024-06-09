@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,6 +46,19 @@ class BoardMapperTest {
     @Test
     public void boardSearchTest(){
         System.out.println("글 조회 테스트 : "+boardMapper.boardSearch("recently","test",null));
+    }
+
+    //글 수정 테스트
+    @Test
+    void boardEditTest(){
+        System.out.println("글 수정 테스트 : "+boardMapper.boardEdit(Board.builder()
+                        .user(User.builder().uid(21l).build())
+                        .update_date(LocalDateTime.now())
+                        .category("etc")
+                        .content("edit")
+                        .title("edit")
+                        .bid(33l)
+                .build()));
     }
 
     //게시글 상세 조회 테스트

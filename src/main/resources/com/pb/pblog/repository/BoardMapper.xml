@@ -96,12 +96,12 @@
         update
             board
         set
-            title=${title},
-            content=${content},
-            update_date=${update_date},
-            category=${category}
+            title=#{title},
+            content=#{content},
+            update_date=#{update_date},
+            category=#{category}
         where
-            bid=${bid}
+            bid=#{bid};
     </update>
 
     <!--글 삭제-->
@@ -109,7 +109,7 @@
         delete from
             board
         where
-            bid=${bid}
+            bid=#{bid}
     </delete>
 
     <!--게시글 조회 category를 받아서 조회 ,limit이 있으면 해당 개수만 조회-->
