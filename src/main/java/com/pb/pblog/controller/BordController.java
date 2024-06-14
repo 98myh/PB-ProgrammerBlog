@@ -106,17 +106,16 @@ public class BordController {
     //게시글 수정
     @ResponseBody
     @PutMapping("/edit")
-    public String boardEditSave(@RequestBody BoardEditDTO boardEditDTO){
+    public ResponseEntity<?> boardEditSave(@RequestBody BoardEditDTO boardEditDTO){
 
         int result=boardService.boardEdit(boardEditDTO);
-        //
-        System.out.println(result);
+        //수정 성공
         if (result==1){
-//            return "redirect:/board/detail/"+boardEditDTO.getBid().toString();
-            return "redirect:/board/recently";
+            return new ResponseEntity<>(boardEditDTO.getBid(),HttpStatus.OK) ;
         }
+        //수정 실패
         else {
-            return "수정 실패";
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 

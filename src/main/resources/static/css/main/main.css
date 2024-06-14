@@ -5,10 +5,11 @@
 }
 
 .card{
+    width: 90% !important;
     cursor: pointer;
     margin: 20px 10px;
-    height: 350px;
-    max-height: 350px;
+    height: 300px;
+    max-height: 300px;
 }
 
 .card:hover{

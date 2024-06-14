@@ -159,13 +159,15 @@
                     [csrfHeader]: csrfToken
                 },
                 body: btn=='저장'?formData:JSON.stringify(jsonObject)
-            }).then(response => {
-                if (response.ok) {
-                    // window.location.href = '/board/recently';
-                    alert('저장 성공');
-                } else {
-                    alert('저장 실패');
+            }).then(response=> {
+                if(response.ok) {
+                    return response.json()
+                }else{
+                    return Promise.reject(alert("저장 실패"));
                 }
+            }).then(response=>{
+                alert("저장성공")
+                window.location.href='/board/detail/'+response
             });
         });
 
