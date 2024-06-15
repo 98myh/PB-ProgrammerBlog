@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/board/boardDetail.css">
-    <meta name="_csrf" content="${csrf.token}"/>
+    <meta name="_csrf" content="${_csrf.token}"/>
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
     <title>ProgrammerBlog</title>
 </head>
@@ -36,7 +36,7 @@
                                     <c:choose>
                                         <c:when test="${uid==board_detail.board.uid}">
                                             <li onclick="goEdit(${board_detail.board.bid})">수정하기</li>
-                                            <li>삭제하기</li>
+                                            <li onclick="boardDelete(${board_detail.board.bid})">삭제하기</li>
                                         </c:when>
                                         <c:otherwise>
                                             <li>신고하기</li>
@@ -134,6 +134,9 @@
 
 <!--추후 js 파일로 분리-->
 <script>
+    const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+    const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
     //로그인 한 유저 수정/삭제 or 신고 하기 토글 버튼
     function changeToggle(){
         const show_box=document.getElementById('show_box')
@@ -151,8 +154,32 @@
         window.location.href='/board/edit/'+bid
     }
 
+    //삭제하기
+    function boardDelete(bid){
+        if(!confirm("삭제하시겠습니까?")){
+            return
+        }
+        fetch('/board/delete',{
+            method:'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                [csrfHeader]: csrfToken
+            },
+            body: JSON.stringify(bid)
+        }).then(response=>{
+            if (response.ok){
+                return response.json()
+            }else{
+                return Promise.reject(alert('삭제실패'))
+            }
+        }).then(response=>{
+            alert('삭제성공')
+            window.location.href='/'
+        })
+    }
 
     //신고 모달창 띄우기 (보류)
+
 
     //대댓글 보기 토글
     function commentToggle(cid) {

@@ -170,11 +170,7 @@
                 window.location.href='/board/detail/'+response
             });
         });
-
-
     });
-
-
 </script>
 </body>
 </html>

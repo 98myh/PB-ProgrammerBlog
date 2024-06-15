@@ -189,7 +189,8 @@ public class BoardServiceImpl implements BoardService{
     //글 삭제
     @Override
     public int boardDelete(Long bid) {
-        return 0;
+        int result=boardMapper.boardDelete(bid);
+        return result;
     }
 
 

@@ -1,9 +1,6 @@
 package com.pb.pblog.controller;
 
-import com.pb.pblog.dto.BoardAndUserDTO;
-import com.pb.pblog.dto.BoardEditDTO;
-import com.pb.pblog.dto.BoardResponseDTO;
-import com.pb.pblog.dto.BoardSaveDTO;
+import com.pb.pblog.dto.*;
 import com.pb.pblog.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
@@ -120,9 +117,16 @@ public class BordController {
     }
 
     //게시글 삭제
+    @ResponseBody
     @DeleteMapping("/delete")
-    public String boardDelete(){
-        return "";
+    public ResponseEntity<?> boardDelete(@RequestBody BidDTO bidDTO){
+
+        int result=boardService.boardDelete(bidDTO.getBid());
+        if (result==1){ //1일경우 => 삭제된 데이터가 하나이다. 즉, 삭제가 완료되었다.
+            return new ResponseEntity<>(true,HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(false,HttpStatus.BAD_REQUEST);
+        }
     }
 
 }

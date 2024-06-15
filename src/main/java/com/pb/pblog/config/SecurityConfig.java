@@ -35,7 +35,7 @@ public class SecurityConfig {
 
 
         http.authorizeHttpRequests((auth)->auth
-                .requestMatchers("/board/write","/board/save","/board/img-upload","/board/edit/**","/comment/**").hasAnyRole("USER", "ADMIN") //유저, 어드민 둘 다 접근 가능
+                .requestMatchers( "/board/delete","/board/write","/board/save","/board/img-upload","/board/edit/**","/comment/**").hasAnyRole("USER", "ADMIN") //유저, 어드민 둘 다 접근 가능
                 .requestMatchers("/admin").hasRole("admin") //어드민만 접근 가능
                 .requestMatchers("/","/WEB-INF/views/**","/login","/loginProc","/logout","/signup","/signupProc","/check-id",
                         "/board/**").permitAll() //모든 사용자 접근가능
