@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -78,10 +80,26 @@ public class BordController {
     }
 
     //글 저장
+//    @PostMapping("/save")
+//    public String boardSave(@ModelAttribute BoardSaveDTO boardSaveDTO){
+//        int bid=boardService.boardSave(boardSaveDTO);
+//        return "/board/recently";
+//    }
+
     @PostMapping("/save")
-    public String boardSave(@ModelAttribute BoardSaveDTO boardSaveDTO){
-        int bid=boardService.boardSave(boardSaveDTO);
-        return "/board/recently";
+//    @ResponseBody  // JSON 데이터를 반환하기 위해 사용
+    public ResponseEntity<Map<String, Object>> boardSave(@ModelAttribute BoardSaveDTO boardSaveDTO){
+        int bid = boardService.boardSave(boardSaveDTO);
+        Map<String, Object> response = new HashMap<>();
+
+        if (bid > 0) {
+            response.put("result", "success");
+            response.put("redirectUrl", "/board/recently");
+        } else {
+            response.put("result", "fail");
+        }
+
+        return ResponseEntity.ok(response);  // JSON 형태로 응답
     }
 
     //게시글 상세보기

@@ -37,6 +37,8 @@ dependencies {
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl'
 
     implementation 'org.jsoup:jsoup:1.13.1'
+    //mysql 갑작스런 오류로 추가
+    implementation 'mysql:mysql-connector-java:8.0.27'
 
     //
 

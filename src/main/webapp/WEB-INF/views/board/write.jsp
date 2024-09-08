@@ -153,21 +153,40 @@
             });
             /*저장*/
             if(btn=='저장'){
+                // fetch('/board/save', {
+                //     method: 'POST',
+                //     headers: {
+                //         [csrfHeader]: csrfToken
+                //     },
+                //     body: formData
+                // }).then(response=> {
+                //     if(response.ok) {
+                //         return alert("저장 성공")
+                //     }else{
+                //         return Promise.reject(alert("저장 실패"));
+                //     }
+                // }).catch(err=>{
+                //     return Promise.reject('오류 발생');
+                // })
                 fetch('/board/save', {
                     method: 'POST',
                     headers: {
                         [csrfHeader]: csrfToken
                     },
                     body: formData
-                }).then(response=> {
-                    if(response.ok) {
-                        return alert("저장 성공")
-                    }else{
-                        return Promise.reject(alert("저장 실패"));
-                    }
-                }).catch(err=>{
-                    return Promise.reject('오류 발생');
-                })
+                }).then(response => response.json())
+                    .then(data => {
+                        if (data.result === "success") {
+                            alert("저장 성공");
+                            console.log(data.redirectUrl)
+                            window.location.href =data.redirectUrl;    // 서버에서 받은 URL로 리다이렉트
+                        } else {
+                            alert("저장 실패");
+                        }
+                    })
+                    .catch(err => {
+                        alert('오류 발생');
+                    });
 
             }else {
                 /*수정*/
