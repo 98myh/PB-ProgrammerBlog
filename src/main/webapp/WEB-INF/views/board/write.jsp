@@ -144,31 +144,53 @@
             const btn=document.getElementById('write_save').innerText
 
 
-            const url= btn=='저장'?'/board/save':'/board/edit'
-            const formMethod= btn=='저장'?'POST':'PUT'
+            // const url= btn=='저장'?'/board/save':'/board/edit'
+            // const formMethod= btn=='저장'?'POST':'PUT'
 
             let jsonObject = {};
             new FormData(form).forEach((value, key) => {
                 jsonObject[key] = value;
             });
+            /*저장*/
+            if(btn=='저장'){
+                fetch('/board/save', {
+                    method: 'POST',
+                    headers: {
+                        [csrfHeader]: csrfToken
+                    },
+                    body: formData
+                }).then(response=> {
+                    if(response.ok) {
+                        return alert("저장 성공")
+                    }else{
+                        return Promise.reject(alert("저장 실패"));
+                    }
+                }).catch(err=>{
+                    return Promise.reject('오류 발생');
+                })
 
-            fetch(url, {
-                method: formMethod,
-                headers: {
-                    'Content-Type': 'application/json',
-                    [csrfHeader]: csrfToken
-                },
-                body: btn=='저장'?formData:JSON.stringify(jsonObject)
-            }).then(response=> {
-                if(response.ok) {
-                    return response.json()
-                }else{
-                    return Promise.reject(alert("저장 실패"));
-                }
-            }).then(response=>{
-                alert("저장성공")
-                window.location.href='/board/detail/'+response
-            });
+            }else {
+                /*수정*/
+                fetch('/board/edit', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type':'application/json',
+                        [csrfHeader]: csrfToken
+                    },
+                    body: JSON.stringify(jsonObject)
+                }).then(response => {
+                    if (response.ok) {
+                        return response.json()
+                    } else {
+                        return Promise.reject(alert("수정 실패"));
+                    }
+                }).then(response => {
+                    alert("수정성공")
+                    window.location.href = '/board/detail/' + response
+                }).catch(err=>{
+                    alert("오류 발생");
+                })
+            }
         });
     });
 </script>

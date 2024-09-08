@@ -76,53 +76,58 @@
                 </sec:authorize>
                 <!--댓글 조회-->
                 <c:forEach var="comment" items="${board_detail.comments}">
-                    <div class="comment_small_wrap" id="top_${comment.topComment.cid}">
-                        <!--부모 댓글 조회-->
-                        <div class="comment_nickname">
-                            <span>${comment.topComment.nickname}</span>
-                        </div>
-                        <div class="comment_content">
-                            <span>${comment.topComment.comment}</span>
-                        </div>
-                        <div class="comment_end">
-                            <div class="comment_date">
-                                <span>${comment.topComment.create_date}</span>
+                    <sec:authorize access="isAuthenticated()">
+                        <sec:authentication property="principal.uid" var="uid"/>
+                        <div class="comment_small_wrap" id="top_${comment.topComment.cid}">
+                            <!--부모 댓글 조회-->
+                            <div class="comment_nickname">
+                                <span>${comment.topComment.nickname}</span>
                             </div>
-                            <c:if test="${fn:length(comment.childComment)>0}">
-                                <div class="child_comment_toggle">
-                                    <span class="child_comment_toggle_btn" id="toggle_${comment.topComment.cid}" onclick="commentToggle(${comment.topComment.cid})">대댓글 보기</span>
-                                </div>
-                            </c:if>
-                        </div>
-                    </div>
-                    <!--대댓글 조회-->
-                    <div id="${comment.topComment.cid}" style="display: none">
-                        <c:forEach var="childComment" items="${comment.childComment}">
-                            <div class="comment_small_wrap child_comments">
-                                <div class="comment_nickname">
-                                    <span>${childComment.nickname}</span>
-                                </div>
-                                <div class="comment_content">
-                                    <span>${childComment.comment}</span>
-                                </div>
+                            <div class="comment_content">
+                                <span>${comment.topComment.comment}</span>
+                            </div>
+                            <div class="comment_end">
                                 <div class="comment_date">
-                                    <span>${childComment.create_date}</span>
+                                    <span>${comment.topComment.create_date}</span>
                                 </div>
+                                <c:if test="${fn:length(comment.childComment)>0}">
+                                    <div class="child_comment_toggle">
+                                        <span class="child_comment_toggle_btn" id="toggle_${comment.topComment.cid}" onclick="commentToggle(${comment.topComment.cid})">대댓글 보기</span>
+                                    </div>
+                                </c:if>
                             </div>
-                        </c:forEach>
-                        <!--로그인 한 유저 대댓글 작성-->
-                        <sec:authorize access="isAuthenticated()">
-                            <form action="/comment/save" method="post">
-                                <div class="comment_write_wrap">
-                                    <input type="hidden" name="bid" value="${board_detail.board.bid}"/>
-                                    <input type="hidden" name="parent_cid" value="${comment.topComment.cid}" />
-                                    <textarea name="comment" class="comment_input" placeholder="댓글을 입력하세요"></textarea>
-                                    <button type="submit">대댓글 작성</button>
-                                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                        </div>
+
+
+                        <!--대댓글 조회-->
+                        <div id="${comment.topComment.cid}" style="display: none">
+                            <c:forEach var="childComment" items="${comment.childComment}">
+                                <div class="comment_small_wrap child_comments">
+                                    <div class="comment_nickname">
+                                        <span>${childComment.nickname}</span>
+                                    </div>
+                                    <div class="comment_content">
+                                        <span>${childComment.comment}</span>
+                                    </div>
+                                    <div class="comment_date">
+                                        <span>${childComment.create_date}</span>
+                                    </div>
                                 </div>
-                            </form>
-                        </sec:authorize>
-                    </div>
+                            </c:forEach>
+                            <!--로그인 한 유저 대댓글 작성-->
+                            <sec:authorize access="isAuthenticated()">
+                                <form action="/comment/save" method="post">
+                                    <div class="comment_write_wrap">
+                                        <input type="hidden" name="bid" value="${board_detail.board.bid}"/>
+                                        <input type="hidden" name="parent_cid" value="${comment.topComment.cid}" />
+                                        <textarea name="comment" class="comment_input" placeholder="댓글을 입력하세요"></textarea>
+                                        <button type="submit">대댓글 작성</button>
+                                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                    </div>
+                                </form>
+                            </sec:authorize>
+                        </div>
+                    </sec:authorize>
                 </c:forEach>
             </div>
         </div>

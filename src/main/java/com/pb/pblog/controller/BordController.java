@@ -57,7 +57,7 @@ public class BordController {
         model.addAttribute("category",midTitle);
 
 
-        return "board/board";
+        return "redirect:/board/board";
     }
 
     //게시글 쓰기페이지로 이동
@@ -80,8 +80,8 @@ public class BordController {
     //글 저장
     @PostMapping("/save")
     public String boardSave(@ModelAttribute BoardSaveDTO boardSaveDTO){
-        boardService.boardSave(boardSaveDTO);
-        return "redirect:/board/recently";
+        int bid=boardService.boardSave(boardSaveDTO);
+        return "/board/recently";
     }
 
     //게시글 상세보기
