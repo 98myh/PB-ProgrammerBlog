@@ -36,7 +36,7 @@
                 <div class="oneline_wrap">
                     <div class="sub_title_wrap">
                         <h2 class="sub_title">최근 게시글</h2>
-                        <button class="more_btn" onclick="location.href='/board/recently?title='"><i class="fa-solid fa-arrow-right"></i></button>
+                        <button class="more_btn" onclick="location.href='/board/category/recently?title='"><i class="fa-solid fa-arrow-right"></i></button>
                     </div>
                     <div class="line_inner_wrap">
                         <%--나중에 for문 사용해서 출력되도록 수정해야함--%>
@@ -59,7 +59,7 @@
                 <div class="oneline_wrap">
                     <div class="sub_title_wrap">
                         <h2 class="sub_title">개발동향</h2>
-                        <button class="more_btn" onclick="location.href='/board/trend?title='"><i class="fa-solid fa-arrow-right"></i></button>
+                        <button class="more_btn" onclick="location.href='/board/category/trend?title='"><i class="fa-solid fa-arrow-right"></i></button>
                     </div>
                     <div class="line_inner_wrap">
                         <c:forEach items="${main.listTrend}" var="trend">
@@ -85,7 +85,7 @@
                     </div>
                     <div class="line_inner_wrap">
                         <c:forEach items="${main.listSkill}" var="skill">
-                            <div class="card" style="width: 18rem;"  onclick="location.href='/board/detail/${skill.bid}'">
+                            <div class="card" style="width: 18rem;"  onclick="location.href='/board/category/detail/${skill.bid}'">
                                 <img src="${skill.content}" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h3>${skill.title}</h3>
@@ -103,7 +103,7 @@
                 <div class="oneline_wrap">
                     <div class="sub_title_wrap">
                         <h2 class="sub_title">알고리즘</h2>
-                        <button class="more_btn" onclick="location.href='/board/algorithm?title='"><i class="fa-solid fa-arrow-right"></i></button>
+                        <button class="more_btn" onclick="location.href='/board/category/algorithm?title='"><i class="fa-solid fa-arrow-right"></i></button>
                     </div>
                     <div class="line_inner_wrap">
                         <c:forEach items="${main.listAlgorithm}" var="algorithm">

@@ -95,17 +95,16 @@ public class BordController {
 
         if (bid > 0) {
             response.put("result", "success");
-            response.put("redirectUrl", "/board/recently");
+            response.put("redirectUrl", "/board/category/recently");
         } else {
             response.put("result", "fail");
         }
-
         return ResponseEntity.ok(response);  // JSON 형태로 응답
     }
 
     //게시글 상세보기
     @GetMapping("/detail/{bid}")
-    public String boardDetail(@PathVariable Long bid,Model model){
+    public String boardDetail(@PathVariable(value = "bid") Long bid,Model model){
         BoardResponseDTO boardResponseDTO= boardService.boardDetails(bid);
         model.addAttribute("board_detail",boardResponseDTO);
         return "board/boardDetail";
@@ -113,7 +112,7 @@ public class BordController {
 
     //게시글 수정 페이지로 이동
     @GetMapping("/edit/{bid}")
-    public String boardEdit(@PathVariable Long bid,Model model){
+    public String boardEdit(@PathVariable(value = "bid") Long bid,Model model){
         BoardResponseDTO boardResponseDTO= boardService.boardDetails(bid);
         model.addAttribute("board",boardResponseDTO);
         return "board/write";

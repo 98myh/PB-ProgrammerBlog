@@ -36,7 +36,8 @@ public class BoardServiceImpl implements BoardService{
     private final CommentMapper commentMapper;
 
     //이미지 저장 경로
-    private static final String BASE_UPLOAD_FOLDER = "D:/image/";
+    private static final String BASE_UPLOAD_FOLDER = "C:/image/";
+//    private static final String BASE_UPLOAD_FOLDER = "D:/image/";
 
     //메인
     @Override
