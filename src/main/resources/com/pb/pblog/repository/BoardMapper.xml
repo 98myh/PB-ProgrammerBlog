@@ -124,14 +124,15 @@
             u.uid,
             u.nickname
         from
-            board b left outer join user u on u.uid=b.uid
+            board b
+            left outer join user u on u.uid=b.uid
         where
-            b.title like "%${title}%"
+            b.title like CONCAT('%', #{title}, '%')
         <choose>
             <!--최근 글,모두 조회가 아닌경우 category별로 조회-->
             <when test="category!='recently' and category!='all'">
                 and
-                    category=#{category}
+                    b.category=#{category}
             </when>
         </choose>
         order by

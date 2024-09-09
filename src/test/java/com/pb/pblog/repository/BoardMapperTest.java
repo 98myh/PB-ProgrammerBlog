@@ -34,7 +34,7 @@ class BoardMapperTest {
     public void saveTest(){
         System.out.println("게시글 저장 테스트 : "+boardMapper.boardSave(Board.builder()
                         .user(User.builder()
-                                .uid(21l)
+                                .uid(23l)
                                 .build())
                         .category("etc")
                         .content("test")

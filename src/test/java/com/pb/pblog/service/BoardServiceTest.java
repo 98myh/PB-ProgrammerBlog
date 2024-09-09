@@ -2,12 +2,16 @@ package com.pb.pblog.service;
 
 import com.pb.pblog.dto.BoardAndUserDTO;
 import com.pb.pblog.dto.BoardEditDTO;
+import com.pb.pblog.dto.BoardSaveDTO;
 import com.pb.pblog.dto.MainResponseDTO;
 import com.pb.pblog.entity.Board;
+import com.pb.pblog.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,7 +39,16 @@ class BoardServiceTest {
     }
 
     @Test
+    @Transactional
     void boardSave() {
+        System.out.println(
+        boardService.boardSave(BoardSaveDTO.builder()
+                        .uid(3l)
+                        .category("etc")
+                        .content("test")
+                        .title("test")
+                .build())
+        );
     }
 
     //게시글 조회
