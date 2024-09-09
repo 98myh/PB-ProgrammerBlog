@@ -8,6 +8,7 @@ import com.pb.pblog.entity.User;
 import com.pb.pblog.repository.BoardMapper;
 import com.pb.pblog.repository.CommentMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -28,6 +29,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class BoardServiceImpl implements BoardService{
     //게시판 mapper
     private final BoardMapper boardMapper;
@@ -136,6 +138,7 @@ public class BoardServiceImpl implements BoardService{
 
             return fileDownloadUri;
         } catch (IOException ex) {
+            log.error(ex);
             return ex.getMessage();
         }
     }
@@ -158,6 +161,7 @@ public class BoardServiceImpl implements BoardService{
 
             boardMapper.boardSave(board);
         }catch (Exception e){
+            log.error(e);
             return 0;
         }
         return 1;
@@ -183,6 +187,7 @@ public class BoardServiceImpl implements BoardService{
             int result= boardMapper.boardEdit(board);
             return result;
         }catch (Exception e){
+            log.error(e);
             return 0;
         }
     }
