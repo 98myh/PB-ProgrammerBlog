@@ -1,9 +1,13 @@
 package com.pb.pblog.controller;
 
+import com.pb.pblog.dto.CidDTO;
 import com.pb.pblog.dto.CommentRequestDTO;
 import com.pb.pblog.dto.CommentSaveDTO;
 import com.pb.pblog.service.CommentService;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Delete;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -33,4 +37,14 @@ public class CommentController {
 
         return "redirect:/board/detail/{bid}";
     }
+
+    //댓글 삭제
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> commentDelete(@RequestBody CidDTO cidDTO){
+
+
+        return  new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+    }
+
+    //댓글 수정
 }

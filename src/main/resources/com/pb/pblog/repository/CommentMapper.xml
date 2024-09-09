@@ -47,4 +47,23 @@
             #{update_date}
         )
     </insert>
+
+    <!--댓글 삭제-->
+    <delete id="commentDelete" parameterType="java.lang.Long">
+        delete from
+            comment
+        where
+            cid=#{cid}
+    </delete>
+
+    <!--댓글수정-->
+    <update id="commentEdit" parameterType="com.pb.pblog.entity.Comment">
+        update
+            comment
+        set
+            comment=#{comment}
+            update_date=#{update_date}
+        where
+            cid=#{cid}
+    </update>
 </mapper>
