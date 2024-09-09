@@ -80,15 +80,9 @@ public class BordController {
         }
     }
 
-    //글 저장
-//    @PostMapping("/save")
-//    public String boardSave(@ModelAttribute BoardSaveDTO boardSaveDTO){
-//        int bid=boardService.boardSave(boardSaveDTO);
-//        return "/board/recently";
-//    }
 
+    //글 저장
     @PostMapping("/save")
-//    @ResponseBody  // JSON 데이터를 반환하기 위해 사용
     public ResponseEntity<Map<String, Object>> boardSave(@ModelAttribute BoardSaveDTO boardSaveDTO){
         int bid = boardService.boardSave(boardSaveDTO);
         Map<String, Object> response = new HashMap<>();
