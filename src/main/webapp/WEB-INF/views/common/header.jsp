@@ -20,13 +20,15 @@
     <script type="text/javascript">
         function searchBoard(){
             //select 값
-            let selectValue=document.getElementById("header_select").value
+            let category=document.getElementById("header_select").value
             //input 값
             let inputValue=document.getElementById("search_value").value
             //form
             let searchForm=document.getElementById("searchForm")
             //url 설정
-            let url="/board/" + selectValue
+            let url="/board/category/" + category
+
+            console.log(url)
 
             searchForm.action=url
         }

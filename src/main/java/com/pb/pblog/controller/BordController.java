@@ -3,6 +3,7 @@ package com.pb.pblog.controller;
 import com.pb.pblog.dto.*;
 import com.pb.pblog.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -28,8 +29,8 @@ public class BordController {
 
     //model 넣어서 보내서 거기서 model에 따라 쿼리문 다르게 사용하여 불러와서 조회
     //게시글 페이지
-    @GetMapping("/{category}")
-    public String boardList(@PathVariable String category, @RequestParam(required = false) String title, Model model){
+    @GetMapping("/category/{category}")
+    public String boardList(@PathVariable(value = "category") String category, @RequestParam(value = "title", required = false) String title, Model model){
         List<BoardAndUserDTO> boardList=boardService.boardSearch(category,title);
         for (BoardAndUserDTO board : boardList) {
             String content = board.getContent();
@@ -39,6 +40,7 @@ public class BordController {
             board.setContent(firstImgSrc);
         }
         String midTitle="";
+
         if(category.equals("all")){
             midTitle="모두";
         }
@@ -58,8 +60,7 @@ public class BordController {
         model.addAttribute("board",boardList);
         model.addAttribute("category",midTitle);
 
-
-        return "redirect:/board/board";
+        return "board/board";
     }
 
     //게시글 쓰기페이지로 이동
