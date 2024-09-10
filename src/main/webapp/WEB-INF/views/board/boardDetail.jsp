@@ -83,7 +83,7 @@
                                 <span>${comment.topComment.nickname}</span>
                             </div>
                             <div class="comment_content_box">
-                                <input name="comment" class="comment_content" readonly value="${comment.topComment.comment}" />
+                                <input name="comment" id="comment_${comment.topComment.cid}" class="comment_content" readonly value="${comment.topComment.comment}" />
                             </div>
                             <div class="comment_end">
                                 <div class="comment_date">
@@ -91,8 +91,8 @@
                                 </div>
                                 <c:if test="${uid==comment.topComment.uid}">
                                     <div class="comment_edit" id="comment_${comment.topComment.uid}">
-                                        <span class="comment_edit_btn">수정하기</span>
-                                        <span class="comment_edit_btn" onclick="commentDelete(${comment.topComment.cid})">삭제하기</span>
+                                        <span id="edit_${comment.topComment.cid}" onclick="commentEditToggle(${comment.topComment.cid})" class="comment_edit_btn">수정</span>
+                                        <span class="comment_edit_btn" onclick="commentDelete(${comment.topComment.cid})">삭제</span>
                                     </div>
                                 </c:if>
                                 <div class="child_comment_toggle">
@@ -221,12 +221,34 @@
             if (response.ok){
                 return response.json()
             }else{
-                return Promise.reject(alert('삭제실패'))
+                return Promise.reject(alert('삭제 실패'))
             }
         }).then(response=>{
             alert('삭제성공')
             location.reload();
         })
+    }
+
+    //댓글 수정 토글
+    function commentEditToggle(cid){
+        const togglebtn=document.getElementById('edit_'+cid)
+        const comment=document.getElementById('comment_'+cid)
+        comment.readOnly=!comment.readOnly
+
+        if (!comment.readOnly){
+            comment.style.border='1px solid black'
+            togglebtn.innerHTML='저장'
+            comment.focus()
+
+        }else{
+            comment.style.border='none'
+            togglebtn.innerHTML='수정'
+        }
+    }
+
+    //댓글 수정
+    function commentEdit(){
+
     }
 
 </script>

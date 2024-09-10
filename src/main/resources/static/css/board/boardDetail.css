@@ -123,7 +123,10 @@
 }
 
 .comment_content{
+    border-radius: 5px;
+    padding: 5px 10px;
     width: 100%;
+
 }
 
 .comment_end{
