@@ -77,6 +77,9 @@
 }
 
 
+
+/*comment*/
+
 .comment_top{
     margin: 30px 0;
     padding: 5px 0;
@@ -113,9 +116,14 @@
     text-align: center;
 }
 
-.comment_content{
+.comment_content_box{
+    display: flex;
     margin: 0 10px;
     flex-grow: 3;
+}
+
+.comment_content{
+    width: 100%;
 }
 
 .comment_end{
@@ -130,15 +138,15 @@
     text-align: end;
 }
 
-.child_comment_toggle{
+.child_comment_toggle, .comment_edit{
     text-align: end;
 }
 
-.child_comment_toggle_btn{
+.child_comment_toggle_btn, .comment_edit_btn{
     font-size: 12px;
     font-weight: bold;
     cursor: pointer;
 }
-.child_comment_toggle_btn:hover{
+.child_comment_toggle_btn:hover, .comment_edit_btn:hover {
     border-bottom: 1px solid black;
 }

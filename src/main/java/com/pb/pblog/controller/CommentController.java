@@ -40,10 +40,15 @@ public class CommentController {
 
     //댓글 삭제
     @DeleteMapping("/delete")
-    public ResponseEntity<?> commentDelete(@RequestBody CidDTO cidDTO){
+    public ResponseEntity<?> commentDelete(@RequestBody CidDTO cidDTO) {
 
+        int result = commentService.commentDelete(cidDTO.getCid());
 
-        return  new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        if (result > 0) {
+            return new ResponseEntity<>(true,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
     }
 
     //댓글 수정

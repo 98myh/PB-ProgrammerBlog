@@ -76,25 +76,28 @@
                 </sec:authorize>
                 <!--댓글 조회-->
                 <c:forEach var="comment" items="${board_detail.comments}">
-                    <sec:authorize access="isAuthenticated()">
                         <sec:authentication property="principal.uid" var="uid"/>
                         <div class="comment_small_wrap" id="top_${comment.topComment.cid}">
                             <!--부모 댓글 조회-->
                             <div class="comment_nickname">
                                 <span>${comment.topComment.nickname}</span>
                             </div>
-                            <div class="comment_content">
-                                <span>${comment.topComment.comment}</span>
+                            <div class="comment_content_box">
+                                <input name="comment" class="comment_content" readonly value="${comment.topComment.comment}" />
                             </div>
                             <div class="comment_end">
                                 <div class="comment_date">
                                     <span>${comment.topComment.create_date}</span>
                                 </div>
-                                <c:if test="${fn:length(comment.childComment)>0}">
-                                    <div class="child_comment_toggle">
-                                        <span class="child_comment_toggle_btn" id="toggle_${comment.topComment.cid}" onclick="commentToggle(${comment.topComment.cid})">대댓글 보기</span>
+                                <c:if test="${uid==comment.topComment.uid}">
+                                    <div class="comment_edit" id="comment_${comment.topComment.uid}">
+                                        <span class="comment_edit_btn">수정하기</span>
+                                        <span class="comment_edit_btn" onclick="commentDelete(${comment.topComment.cid})">삭제하기</span>
                                     </div>
                                 </c:if>
+                                <div class="child_comment_toggle">
+                                    <span class="child_comment_toggle_btn" id="toggle_${comment.topComment.cid}" onclick="commentToggle(${comment.topComment.cid})">대댓글 보기 (${fn:length(comment.childComment)})</span>
+                                </div>
                             </div>
                         </div>
 
@@ -127,7 +130,6 @@
                                 </form>
                             </sec:authorize>
                         </div>
-                    </sec:authorize>
                 </c:forEach>
             </div>
         </div>
@@ -154,12 +156,12 @@
         }
     }
 
-    //수정하기 페이지로 이동
+    //게시글 수정하기 페이지로 이동
     function goEdit(bid){
         window.location.href='/board/edit/'+bid
     }
 
-    //삭제하기
+    //게시글 삭제하기
     function boardDelete(bid){
         if(!confirm("삭제하시겠습니까?")){
             return
@@ -202,6 +204,31 @@
             toggleText.textContent="대댓글 보기"
         }
     }
+
+    //댓글 삭제
+    function commentDelete(cid){
+        if(!confirm("삭제하시겠습니까?")){
+            return
+        }
+        fetch('/comment/delete',{
+            method:'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                [csrfHeader]: csrfToken
+            },
+            body: JSON.stringify(cid)
+        }).then(response=>{
+            if (response.ok){
+                return response.json()
+            }else{
+                return Promise.reject(alert('삭제실패'))
+            }
+        }).then(response=>{
+            alert('삭제성공')
+            location.reload();
+        })
+    }
+
 </script>
 </body>
 </html>
