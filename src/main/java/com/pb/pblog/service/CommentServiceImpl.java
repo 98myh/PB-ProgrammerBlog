@@ -61,7 +61,9 @@ public class CommentServiceImpl implements CommentService{
             Comment comment=Comment.builder()
                     .cid(commentEditDTO.getCid())
                     .comment(commentEditDTO.getComment())
+                    .update_date(LocalDateTime.now())
                     .build();
+
             int result=commentMapper.commentEdit(comment);
             return result;
         }catch (Exception e){

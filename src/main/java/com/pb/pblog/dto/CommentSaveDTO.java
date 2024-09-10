@@ -15,6 +15,4 @@ public class CommentSaveDTO {
     private Long bid;
     private Long parent_cid;
     private String comment;
-
-
 }
