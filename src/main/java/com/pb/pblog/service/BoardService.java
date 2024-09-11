@@ -30,6 +30,10 @@ public interface BoardService {
     //게시글 상세 조회
     BoardResponseDTO boardDetails(Long bid);
 
+
+    //유저가 작성한 글 조회
+    List<BoardAndUserDTO> userWriteBoards(Long uid);
+
     //DTO -> Entity
     default Board boardAndUserDtoToEntity(BoardAndUserDTO boardAndUserDTO){
         return Board.builder()

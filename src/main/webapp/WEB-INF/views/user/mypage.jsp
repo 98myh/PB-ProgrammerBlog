@@ -17,7 +17,18 @@
     <%--헤더--%>
     <jsp:include page="../common/header.jsp"/>
     <div id="wrap">
-
+        <div class="mypage_top">
+            <h3>닉네임 님</h3>
+            <p>가입일자</p>
+        </div>
+        <div class="list_wrap">
+            <div class="list_header">
+                <h3>글 목록</h3>
+            </div>
+            <div>
+                
+            </div>
+        </div>
     </div>
     <%--푸터--%>
     <jsp:include page="../common/footer.jsp"/>

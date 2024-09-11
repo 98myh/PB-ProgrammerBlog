@@ -44,4 +44,10 @@ class UserServiceTest {
             System.out.println("예외 : "+exception);
         }
     }
+
+    //유저 정보 조회(간단) 테스트
+    @Test
+    public void userInfoTest(){
+        System.out.println(userService.userInfo(23l));
+    }
 }

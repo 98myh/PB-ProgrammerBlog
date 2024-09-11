@@ -29,4 +29,11 @@ class UserMapperTest {
                         .nickname("abcd1")
                 .build()));
     }
+
+
+    //유저 정보 조회(간단) 테스트
+    @Test
+    public void userInfoTest(){
+        System.out.println(userMapper.userInfo(23l));
+    }
 }

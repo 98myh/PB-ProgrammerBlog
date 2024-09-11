@@ -1,0 +1,25 @@
+.mypage_top{
+    width: 70%;
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+}
+.mypage_top h3{
+    font-weight: bold;
+}
+
+.list_wrap{
+    width: 70%;
+    margin: 20px 0;
+}
+
+.list_header{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    border-bottom: 3px solid #ccc;
+}
+.list_header h2{
+    font-weight: normal;
+    padding: 5px 0;
+}

@@ -30,4 +30,14 @@
         #{role}
         )
     </insert>
+
+    <!--유저 정보(닉네임 가입일자)-->
+    <select id="userInfo" parameterType="com.pb.pblog.entity.User">
+        select
+            *
+        from
+            user
+        where
+            uid=#{uid}
+    </select>
 </mapper>

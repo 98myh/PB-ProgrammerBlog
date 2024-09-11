@@ -2,15 +2,19 @@ package com.pb.pblog.service;
 
 import com.pb.pblog.dto.SignupRequestDTO;
 import com.pb.pblog.dto.SignupDTO;
+import com.pb.pblog.dto.UserInfoDTO;
 import com.pb.pblog.entity.User;
 import com.pb.pblog.repository.UserMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
+@Log4j2
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
 
@@ -56,6 +60,21 @@ public class UserServiceImpl implements UserService{
         //예외 발생 - ex) id 중복이거나 등등 -1 반환
         catch (Exception e){
             return -1;
+        }
+    }
+
+    //유저 정보 조회(간단)
+    @Override
+    public UserInfoDTO userInfo(Long uid) {
+        try {
+            User user = userMapper.userInfo(uid);
+            return UserInfoDTO.builder()
+                    .nickname(user.getNickname())
+                    .create_date(user.getCreate_date())
+                    .build();
+        }catch (Exception e){
+            log.error(e);
+            return null;
         }
     }
 }

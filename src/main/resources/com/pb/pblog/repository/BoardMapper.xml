@@ -162,4 +162,20 @@
             b.bid=#{bid}
     </select>
 
+    <!--해당 유저가 쓴 글 조회-->
+    <select id="userWriteBoards" parameterType="java.lang.Long" resultMap="boardMap">
+        select
+            b.bid,
+            b.title,
+            b.content,
+            b.create_date,
+            b.update_date,
+            b.category,
+            u.uid,
+            u.nickname
+        from
+            board b left outer join user u on u.uid=b.uid
+        where
+            u.uid=#{uid}
+    </select>
 </mapper>

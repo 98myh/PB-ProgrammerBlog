@@ -29,4 +29,7 @@ public interface BoardMapper {
     //게시글 상세 조회
     Board boardDetail(Long bid);
 
+    //유저가 작성한 글 조회
+    List<Board> userWriteBoards(@Param("uid")Long uid);
+
 }

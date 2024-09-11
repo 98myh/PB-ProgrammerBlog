@@ -268,4 +268,19 @@ public class BoardServiceImpl implements BoardService{
         return boardResponseDTO;
     }
 
+    @Override
+    public List<BoardAndUserDTO> userWriteBoards(Long uid) {
+        try{
+            List<Board>boards=boardMapper.userWriteBoards(uid);
+
+            List<BoardAndUserDTO> boardAndUserDTOS = boards.stream()
+                    .map(board -> boardAndUserEntityToDTO(board))
+                    .collect(Collectors.toList());
+            return boardAndUserDTOS;
+        }catch (Exception e){
+            log.error(e);
+            return null;
+        }
+    }
+
 }

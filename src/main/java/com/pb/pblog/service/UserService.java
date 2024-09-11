@@ -2,6 +2,7 @@ package com.pb.pblog.service;
 
 import com.pb.pblog.dto.SignupRequestDTO;
 import com.pb.pblog.dto.UserDTO;
+import com.pb.pblog.dto.UserInfoDTO;
 import com.pb.pblog.entity.User;
 
 public interface UserService {
@@ -10,6 +11,9 @@ public interface UserService {
 
     //회원가입
     int signupRequest(SignupRequestDTO signupRequestDTO);
+
+    //유저 정보조회(간단)
+    UserInfoDTO userInfo(Long uid);
 
     //DTO -> Entity 변환
     default User userDTOtoEntity(UserDTO userDTO){

@@ -77,5 +77,11 @@ class BoardServiceTest {
                         .content("zzzzzzz")
                 .build()));
     }
+
+    //유저가 작성한 글 테스트
+    @Test
+    void userWriteBoardTest(){
+        System.out.println(boardService.userWriteBoards(23l));
+    }
 }
 

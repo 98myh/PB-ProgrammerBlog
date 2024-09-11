@@ -67,6 +67,10 @@ class BoardMapperTest {
         System.out.println("게시글 상세 조회 테스트 : "+boardMapper.boardDetail(29l));
     }
 
-    //댓글 조회 테스트
+    //유저가 작성한 글 조회 테스트
+    @Test
+    public void userWriteBoardsTest(){
+        System.out.println(boardMapper.userWriteBoards(23l));
+    }
 
 }
