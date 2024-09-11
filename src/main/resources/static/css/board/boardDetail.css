@@ -153,3 +153,7 @@
 .child_comment_toggle_btn:hover, .comment_edit_btn:hover {
     border-bottom: 1px solid black;
 }
+
+.edit_visible{
+    display: none;
+}

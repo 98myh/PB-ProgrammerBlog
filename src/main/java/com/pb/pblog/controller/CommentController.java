@@ -1,6 +1,7 @@
 package com.pb.pblog.controller;
 
 import com.pb.pblog.dto.CidDTO;
+import com.pb.pblog.dto.CommentEditDTO;
 import com.pb.pblog.dto.CommentRequestDTO;
 import com.pb.pblog.dto.CommentSaveDTO;
 import com.pb.pblog.service.CommentService;
@@ -52,4 +53,13 @@ public class CommentController {
     }
 
     //댓글 수정
+    @PutMapping("/edit")
+    public ResponseEntity<?> commentEdit(@RequestBody CommentEditDTO commentEditDTO){
+        int result = commentService.commentEdit(commentEditDTO);
+        if (result > 0) {
+            return new ResponseEntity<>(true,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+    }
 }

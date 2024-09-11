@@ -90,8 +90,10 @@
                                     <span>${comment.topComment.create_date}</span>
                                 </div>
                                 <c:if test="${uid==comment.topComment.uid}">
-                                    <div class="comment_edit" id="comment_${comment.topComment.uid}">
+                                    <div class="comment_edit" id="comment_${comment.topComment.cid}">
                                         <span id="edit_${comment.topComment.cid}" onclick="commentEditToggle(${comment.topComment.cid})" class="comment_edit_btn">수정</span>
+                                        <span id="edit_save_${comment.topComment.cid}" onclick="commentEdit(${comment.topComment.cid})" class="comment_edit_btn edit_visible">저장</span>
+                                        <span id="cancel_${comment.topComment.cid}" onclick="editCancel(${comment.topComment.cid},'${comment.topComment.comment}')" class="comment_edit_btn edit_visible">취소</span>
                                         <span class="comment_edit_btn" onclick="commentDelete(${comment.topComment.cid})">삭제</span>
                                     </div>
                                 </c:if>
@@ -233,22 +235,64 @@
     function commentEditToggle(cid){
         const togglebtn=document.getElementById('edit_'+cid)
         const comment=document.getElementById('comment_'+cid)
-        comment.readOnly=!comment.readOnly
+        const save=document.getElementById('edit_save_'+cid)
+        const cancel=document.getElementById('cancel_'+cid)
 
+        comment.readOnly=!comment.readOnly
         if (!comment.readOnly){
             comment.style.border='1px solid black'
-            togglebtn.innerHTML='저장'
             comment.focus()
+            togglebtn.style.display='none'
+            save.style.display='inline'
+            cancel.style.display='inline'
+
 
         }else{
             comment.style.border='none'
-            togglebtn.innerHTML='수정'
+            togglebtn.style.display='inline'
+            save.style.display='none'
+            cancel.style.display='none'
         }
     }
 
     //댓글 수정
-    function commentEdit(){
+    function commentEdit(cid){
+        const comment=document.getElementById('comment_'+cid)
+        let check=confirm('저장하시겠습니까?')
+        if(check){
+            fetch('/comment/edit',{
+                method:'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    [csrfHeader]: csrfToken
+                },
+                body: JSON.stringify({cid, comment: comment.value})
+            }).then(response=>{
+                if (response.ok){
+                    return response.json()
+                }else{
+                    return Promise.reject(alert('저장 실패'))
+                }
+            }).then(response=>{
+                alert('저장성공')
+                location.reload();
+            })
+        }
+    }
 
+    //댓글 수정 취소
+    function editCancel(cid,commentValue){
+        const togglebtn=document.getElementById('edit_'+cid)
+        const save=document.getElementById('edit_save_'+cid)
+        const cancel=document.getElementById('cancel_'+cid)
+        const comment=document.getElementById('comment_'+cid)
+        comment.readOnly=!comment.readOnly
+
+        comment.value=commentValue
+        comment.style.border='none'
+        togglebtn.style.display='inline'
+        save.style.display='none'
+        cancel.style.display='none'
     }
 
 </script>
