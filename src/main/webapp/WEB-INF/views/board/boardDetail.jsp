@@ -76,7 +76,7 @@
                 </sec:authorize>
                 <!--댓글 조회-->
                 <c:forEach var="comment" items="${board_detail.comments}">
-                        <sec:authentication property="principal.uid" var="uid"/>
+<%--                        <sec:authentication property="principal.uid" var="uid"/>--%>
                         <div class="comment_small_wrap" id="top_${comment.topComment.cid}">
                             <!--부모 댓글 조회-->
                             <div class="comment_nickname">
@@ -98,7 +98,7 @@
                                     </div>
                                 </c:if>
                                 <div class="child_comment_toggle">
-                                    <span class="child_comment_toggle_btn" id="toggle_${comment.topComment.cid}" onclick="commentToggle(${comment.topComment.cid})">대댓글 보기 (${fn:length(comment.childComment)})</span>
+                                    <span class="child_comment_toggle_btn" id="toggle_${comment.topComment.cid}" onclick="commentToggle(${comment.topComment.cid},${fn:length(comment.childComment)})">대댓글 보기 (${fn:length(comment.childComment)})</span>
                                 </div>
                             </div>
                         </div>
@@ -191,7 +191,7 @@
 
 
     //대댓글 보기 토글
-    function commentToggle(cid) {
+    function commentToggle(cid,recomment) {
         //대댓글 보기 클릭시 토글
         let childCommentsDiv = document.getElementById(cid)
 
@@ -203,7 +203,7 @@
             toggleText.textContent="줄이기"
         } else {
             childCommentsDiv.style.display = "none";
-            toggleText.textContent="대댓글 보기"
+            toggleText.textContent="대댓글 보기 ("+recomment+')'
         }
     }
 

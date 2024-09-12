@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserInfoDTO {
+    private Long uid;
     private String nickname;
     private LocalDateTime create_date;
 }

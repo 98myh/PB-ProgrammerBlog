@@ -69,6 +69,7 @@ public class UserServiceImpl implements UserService{
         try {
             User user = userMapper.userInfo(uid);
             return UserInfoDTO.builder()
+                    .uid(user.getUid())
                     .nickname(user.getNickname())
                     .create_date(user.getCreate_date())
                     .build();

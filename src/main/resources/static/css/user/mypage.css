@@ -3,6 +3,8 @@
     margin: 20px 0;
     display: flex;
     justify-content: space-between;
+    text-align: center;
+    align-items: center;
 }
 .mypage_top h3{
     font-weight: bold;
@@ -22,4 +24,57 @@
 .list_header h2{
     font-weight: normal;
     padding: 5px 0;
+}
+
+.list_item_wrap{
+    width: 100%;
+}
+
+
+.list_item_inner_wrap{
+    border: 1px solid #ccc;
+    margin: 15px 0;
+    border-radius: 10px;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 3px 3px 3px 3px #ccc;
+}
+.list_item_inner_wrap:hover{
+
+}
+
+
+.list_item_header{
+    flex-grow: 1;
+    max-width: 200px;
+    max-height: 150px;
+}
+.list_item_header img{
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+}
+
+.list_item_body{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-grow: 4;
+}
+.list_item_body p{
+    margin: 0;
+    padding: 5px;
+}
+
+.item_category{
+    flex-grow: 1;
+    font-weight: 600;
+}
+.item_title{
+    flex-grow: 4;
+    font-weight: 600;
+}
+.item_date{
+    flex-grow: 2;
 }

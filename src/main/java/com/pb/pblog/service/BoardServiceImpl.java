@@ -157,6 +157,7 @@ public class BoardServiceImpl implements BoardService{
                     .title(boardSaveDTO.getTitle())
                     .category(boardSaveDTO.getCategory())
                     .content(boardSaveDTO.getContent())
+                    .update_date(LocalDateTime.now())
                     .build();
 
             boardMapper.boardSave(board);
@@ -220,7 +221,6 @@ public class BoardServiceImpl implements BoardService{
         Board board=boardMapper.boardDetail(bid);
         BoardAndUserDTO boardAndUserDTO=boardAndUserEntityToDTO(board);
 
-
         //댓글 정보
         List<Comment> comments=commentMapper.boardComment(bid);
 
@@ -268,14 +268,36 @@ public class BoardServiceImpl implements BoardService{
         return boardResponseDTO;
     }
 
+    //유저가 쓴 게시글 조회
     @Override
     public List<BoardAndUserDTO> userWriteBoards(Long uid) {
         try{
             List<Board>boards=boardMapper.userWriteBoards(uid);
 
-            List<BoardAndUserDTO> boardAndUserDTOS = boards.stream()
-                    .map(board -> boardAndUserEntityToDTO(board))
-                    .collect(Collectors.toList());
+            //Entity를 DTO로 형변환
+            List<BoardAndUserDTO> boardAndUserDTOS=new ArrayList<>();
+            for(Board board:boards){
+                if(board!=null) {
+                    String content = board.getContent();
+                    Document doc = Jsoup.parse(content);
+                    Elements images = doc.select("img");
+                    String firstImgSrc = images.size() > 0 ? images.get(0).attr("src") : "/resources/images/pblogo.png";
+                    board.setContent(firstImgSrc);
+
+                    if (board.getCategory().equals("trend")){
+                        board.setCategory("개발동향");
+                    } else if (board.getCategory().equals("algorithm")) {
+                        board.setCategory("알고리즘");
+                    }else if(board.getCategory().equals("skill")){
+                        board.setCategory("개발스킬");
+                    }else if(board.getCategory().equals("etc")){
+                        board.setCategory("기타");
+                    }
+                    boardAndUserDTOS.add(boardAndUserEntityToDTO(board));
+                }else{
+                    boardAndUserDTOS.add(BoardAndUserDTO.builder().build());
+                }
+            }
             return boardAndUserDTOS;
         }catch (Exception e){
             log.error(e);
