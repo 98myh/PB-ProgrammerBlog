@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/resources/css/style.css">
     <meta name="_csrf" content="${csrf.token}"/>
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
-    <title>Document</title>
+    <title>ProgrammerBlog</title>
 </head>
 <body>
 <div>

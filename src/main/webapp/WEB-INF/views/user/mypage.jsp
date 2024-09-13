@@ -27,8 +27,10 @@
                 <sec:authorize access="isAuthenticated()">
                     <sec:authentication property="principal.uid" var="uid"/>
                     <c:if test="${uid==userInfo.uid}">
-                        <button>수정</button>
-                        <button>탈퇴</button>
+                        <div>
+                            <p>수정</p>
+                            <p>탈퇴</p>
+                        </div>
                     </c:if>
                 </sec:authorize>
             </div>
@@ -39,8 +41,7 @@
             </div>
             <div class="list_item_wrap">
                 <c:forEach items="${boards}" var="board">
-                <div class="list_item_inner_wrap">
-                    <input type="hidden" value="${board.bid}">
+                <div class="list_item_inner_wrap" onclick="goBoard(${board.bid})">
                     <div class="list_item_header">
                         <img src="${board.content}"/>
                     </div>
@@ -57,5 +58,11 @@
     <%--푸터--%>
     <jsp:include page="../common/footer.jsp"/>
 </div>
+<script>
+    //게시글로 이동
+    function goBoard(bid){
+        window.location.href='/board/detail/'+bid
+    }
+</script>
 </body>
 </html>

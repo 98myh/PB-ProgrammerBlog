@@ -31,10 +31,23 @@
             </form>
             <button class="login_btn" onclick="location.href='/signup'">회원가입</button>
             <div id="find_wrap">
-                <p id="find_idpw">아이디/비밀번호 찾기</p>
+                <p id="find_id" onclick="goFindId()">아이디 찾기</p>
+                <p id="space_area">&nbsp; | &nbsp;</p>
+                <p id="find_pw" onclick="goFindPwd()">비밀번호 찾기</p>
             </div>
         </div>
     </div>
 </div>
+<script>
+    //아이디 찾기
+    function goFindId(){
+        window.location.href='/find-id'
+    }
+
+    //비밀번호 찾기
+    function goFindPwd(){
+        window.location.href='/find-pwd'
+    }
+</script>
 </body>
 </html>

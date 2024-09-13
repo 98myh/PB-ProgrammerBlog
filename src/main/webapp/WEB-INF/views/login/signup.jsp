@@ -85,14 +85,20 @@
         <div id="login_wrap">
             <form id="signupForm" class="form_wrap" action="/signupProc" method="post">
                 <div class="signup_id_wrap">
-                    <input class="form_input" id="id" type="text" name="id" placeholder="id" required />
+                    <input class="form_input" id="id" type="text" name="id" placeholder="ID" required />
                     <button type="button" class="confirm_btn" onclick="checkId()">중복 확인</button>
                 </div>
                 <div>
-                    <input class="form_input" id="password" type="password" name="password" placeholder="password" required/>
+                    <input class="form_input" id="password" type="password" name="password" placeholder="Password" required/>
                 </div>
                 <div>
-                    <input class="form_input" id="repassword" type="password" name="repassword" placeholder="re-password" required/>
+                    <input class="form_input" id="repassword" type="password" name="repassword" placeholder="Re-Password" required/>
+                </div>
+                <div>
+                    <input class="form_input" id="name" type="text" name="name" placeholder="Name" required/>
+                </div>
+                <div>
+                    <input class="form_input" id="email" type="email" name="email" placeholder="E-mail" required/>
                 </div>
                 <div>
                     <input class="form_input" id="nickname" type="text" name="nickname" placeholder="Nickname" required/>

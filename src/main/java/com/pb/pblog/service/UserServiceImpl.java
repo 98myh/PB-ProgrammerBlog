@@ -1,8 +1,6 @@
 package com.pb.pblog.service;
 
-import com.pb.pblog.dto.SignupRequestDTO;
-import com.pb.pblog.dto.SignupDTO;
-import com.pb.pblog.dto.UserInfoDTO;
+import com.pb.pblog.dto.*;
 import com.pb.pblog.entity.User;
 import com.pb.pblog.repository.UserMapper;
 import lombok.RequiredArgsConstructor;
@@ -48,6 +46,8 @@ public class UserServiceImpl implements UserService{
             User user=User.builder()
                     .id(signupRequestDTO.getId())
                     .password(bCryptPasswordEncoder.encode(signupRequestDTO.getPassword()))
+                    .name(signupRequestDTO.getName())
+                    .email(signupRequestDTO.getEmail())
                     .nickname(signupRequestDTO.getNickname())
                     .create_date(LocalDateTime.now())
                     .update_date(LocalDateTime.now())
@@ -61,6 +61,24 @@ public class UserServiceImpl implements UserService{
         catch (Exception e){
             return -1;
         }
+    }
+
+    //아이디 찾기
+    @Override
+    public IdDTO findId(FindIdDTO findIdDTO) {
+        return null;
+    }
+
+    //비밀번호 찾기
+    @Override
+    public IdDTO findPwd(FindPwdDTO findPwdDTO) {
+        return null;
+    }
+
+    //비밀번호 변경
+    @Override
+    public int changePwd(ChangePwdDTO changePwdDTO) {
+        return 0;
     }
 
     //유저 정보 조회(간단)

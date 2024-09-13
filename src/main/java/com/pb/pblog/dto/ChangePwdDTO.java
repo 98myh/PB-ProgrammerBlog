@@ -7,24 +7,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class SignupRequestDTO {
-//    아이디
+@NoArgsConstructor
+public class ChangePwdDTO {
     private String id;
-
-//    비밀번호
     private String password;
-
-//    비밀번호 재입력
     private String repassword;
-
-//    이름
-    private String name;
-
-//    이메일
-    private String email;
-
-//    닉네임
-    private String nickname;
 }

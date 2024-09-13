@@ -15,6 +15,8 @@
     margin: 20px 0;
 }
 
+
+
 .list_header{
     width: 100%;
     display: flex;
@@ -39,11 +41,13 @@
     display: flex;
     flex-direction: row;
     box-shadow: 3px 3px 3px 3px #ccc;
+    cursor: pointer;
 }
+
 .list_item_inner_wrap:hover{
-
+    transform: translateY(5px);
+    transition-duration: 300ms;
 }
-
 
 .list_item_header{
     flex-grow: 1;

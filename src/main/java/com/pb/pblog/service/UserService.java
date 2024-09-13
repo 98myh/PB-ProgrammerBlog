@@ -1,8 +1,6 @@
 package com.pb.pblog.service;
 
-import com.pb.pblog.dto.SignupRequestDTO;
-import com.pb.pblog.dto.UserDTO;
-import com.pb.pblog.dto.UserInfoDTO;
+import com.pb.pblog.dto.*;
 import com.pb.pblog.entity.User;
 
 public interface UserService {
@@ -11,6 +9,14 @@ public interface UserService {
 
     //회원가입
     int signupRequest(SignupRequestDTO signupRequestDTO);
+
+    //아이디 찾기
+    IdDTO findId(FindIdDTO findIdDTO);
+    //비밀번호 찾기
+    IdDTO findPwd(FindPwdDTO findPwdDTO);
+
+    //비밀번호 변경
+    int changePwd(ChangePwdDTO changePwdDTO);
 
     //유저 정보조회(간단)
     UserInfoDTO userInfo(Long uid);

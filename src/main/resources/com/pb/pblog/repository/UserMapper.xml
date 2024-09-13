@@ -20,10 +20,12 @@
 
 <!--    회원가입-->
     <insert id="signup" parameterType="com.pb.pblog.entity.User" >
-        insert into user(id,password,nickname,create_date,update_date,role)
+        insert into user(id,password,name,email,nickname,create_date,update_date,role)
         values(
         #{id},
         #{password},
+        #{name},
+        #{email},
         #{nickname},
         #{create_date},
         #{update_date},
@@ -31,6 +33,35 @@
         )
     </insert>
 
+    <!--아이디 찾기-->
+    <select id="findId" parameterType="com.pb.pblog.entity.User">
+        select
+            *
+        from
+            user
+        where
+            email=#{email} and name=#{name}
+    </select>
+
+    <!--비밀번호 찾기-->
+    <select id="findPwd" parameterType="com.pb.pblog.entity.User">
+        select
+            *
+        from
+            user
+        where
+            id=#{id} and name=#{name} and email=#{email}
+    </select>
+
+    <!--비밀번호 변경-->
+    <update id="changePwd" parameterType="com.pb.pblog.entity.User">
+        update
+            user
+        set
+            password=#{password}
+        where
+            id=#{id}
+    </update>
     <!--유저 정보(닉네임 가입일자)-->
     <select id="userInfo" parameterType="com.pb.pblog.entity.User">
         select

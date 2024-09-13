@@ -1,9 +1,6 @@
 package com.pb.pblog.controller;
 
-import com.pb.pblog.dto.BoardAndUserDTO;
-import com.pb.pblog.dto.IdDTO;
-import com.pb.pblog.dto.SignupRequestDTO;
-import com.pb.pblog.dto.UserInfoDTO;
+import com.pb.pblog.dto.*;
 import com.pb.pblog.service.BoardService;
 import com.pb.pblog.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -13,10 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -48,7 +42,14 @@ public class UserController {
 
     //회원가입 페이지 이동
     @GetMapping("/signup")
-    public String signupPage(){return "login/signup";}
+    public String signupPage(){
+        String id= SecurityContextHolder.getContext().getAuthentication().getName();
+
+        if(id!="anonymousUser"){
+            return "redirect:/";
+        }
+        return "login/signup";
+    }
 
 
     //회원가입 요청
@@ -60,6 +61,50 @@ public class UserController {
         }catch (Exception exception){
             return "login/signup";
         }
+    }
+
+    //아이디 찾기 페이지 이동
+    @GetMapping("/find-id")
+    public String findIdPage(){
+        String id= SecurityContextHolder.getContext().getAuthentication().getName();
+
+        if(id!="anonymousUser"){
+            return "redirect:/";
+        }
+        return "login/findId";
+    }
+
+    //아이디 찾기 요청
+    @GetMapping("/findId-check")
+    public String findIdReqeust(@ModelAttribute FindIdDTO findIdDTO, Model model){
+
+        return "login/findId";
+    }
+
+    //비밀번호 찾기 페이지 이동
+    @GetMapping("/find-pwd")
+    public String findPwdPage(){
+        String id= SecurityContextHolder.getContext().getAuthentication().getName();
+
+        if(id!="anonymousUser"){
+            return "redirect:/";
+        }
+        return "login/findPwd";
+    }
+
+    //비밀번호 찾기 요청
+    @GetMapping("/findPwd-check")
+    public String findPwdRequest(@ModelAttribute FindPwdDTO findPwdDTO,Model model){
+
+        return "/login/findPwd";
+    }
+
+    //비밀번호 변경
+    @PutMapping("change-pwd")
+    public ResponseEntity<?> changePwd(){
+
+
+        return new ResponseEntity<>(false,HttpStatus.BAD_REQUEST);
     }
 
     //마이페이지 이동

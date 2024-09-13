@@ -61,12 +61,17 @@ button{
 #find_wrap{
     display: flex;
     justify-content: end;
+    align-items: center;
 }
 
-#find_idpw{
+#find_id,#find_pw{
     font-size: 12px;
 }
-#find_idpw:hover{
+#find_id:hover,#find_pw:hover{
     cursor: pointer;
     font-weight: bold;
+}
+
+#space_area{
+    font-size: 12px;
 }

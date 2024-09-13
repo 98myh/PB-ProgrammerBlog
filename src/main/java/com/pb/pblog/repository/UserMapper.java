@@ -16,6 +16,15 @@ public interface UserMapper {
 //    회원가입
     int signup(User user);
 
+//    아이디 찾기
+    User findId(User user);
+
+//    비밀번호 찾기
+    User findPwd(User user);
+
+//    비밀번호 변경
+    int changePwd(User user);
+
 //    유저 정보(간단)
     User userInfo(Long uid);
 
