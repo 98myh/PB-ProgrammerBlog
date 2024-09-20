@@ -59,6 +59,7 @@ public class UserServiceImpl implements UserService{
         }
         //예외 발생 - ex) id 중복이거나 등등 -1 반환
         catch (Exception e){
+            log.error(e);
             return -1;
         }
     }
@@ -66,19 +67,54 @@ public class UserServiceImpl implements UserService{
     //아이디 찾기
     @Override
     public IdDTO findId(FindIdDTO findIdDTO) {
-        return null;
+        try {
+            User user = userMapper.findId(User.builder()
+                    .email(findIdDTO.getEmail())
+                    .name(findIdDTO.getName())
+                    .build());
+            IdDTO idDTO = IdDTO.builder()
+                    .id(user.getId())
+                    .build();
+            return idDTO;
+        }
+        catch (Exception e){
+            log.error(e);
+            return null;
+        }
     }
 
     //비밀번호 찾기
     @Override
-    public IdDTO findPwd(FindPwdDTO findPwdDTO) {
-        return null;
+    public int findPwd(FindPwdDTO findPwdDTO) {
+        try{
+            int result=userMapper.findPwd(User.builder()
+                            .id(findPwdDTO.getId())
+                            .name(findPwdDTO.getName())
+                            .email(findPwdDTO.getEmail())
+                    .build());
+            return result;
+        }catch (Exception e){
+            log.error(e);
+            return -1;
+        }
     }
 
     //비밀번호 변경
     @Override
     public int changePwd(ChangePwdDTO changePwdDTO) {
-        return 0;
+        try{
+            if (!changePwdDTO.getPassword().equals(changePwdDTO.getRepassword())){
+                return -2;
+            }
+            int result=userMapper.changePwd(User.builder()
+                            .id(changePwdDTO.getId())
+                            .password(bCryptPasswordEncoder.encode(changePwdDTO.getPassword()))
+                    .build());
+            return result;
+        }catch (Exception e){
+            log.error(e);
+            return -1;
+        }
     }
 
     //유저 정보 조회(간단)

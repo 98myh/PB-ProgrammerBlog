@@ -1,10 +1,10 @@
 package com.pb.pblog.service;
 
-import com.pb.pblog.dto.LoginRequestDTO;
-import com.pb.pblog.dto.SignupRequestDTO;
+import com.pb.pblog.dto.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 import org.yaml.snakeyaml.constructor.DuplicateKeyException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -49,5 +49,35 @@ class UserServiceTest {
     @Test
     public void userInfoTest(){
         System.out.println(userService.userInfo(23l));
+    }
+
+    //아이디 찾기
+    @Test
+    public void findIdTest(){
+        System.out.println(userService.findId(FindIdDTO.builder()
+                        .name("test")
+                        .email("test@naver.com")
+                .build()));
+    }
+
+    //비밀번호 찾기
+    @Test
+    public void findPwdTest(){
+        System.out.println(userService.findPwd(FindPwdDTO.builder()
+                        .id("test")
+                        .name("test")
+                        .email("test@naver.com")
+                .build()));
+    }
+
+    //비밀번호 변경
+    @Test
+    @Transactional
+    public void changePwdTest(){
+        System.out.println(userService.changePwd(ChangePwdDTO.builder()
+                        .id("test")
+                        .password("asdf")
+                        .repassword("asdf")
+                .build()));
     }
 }

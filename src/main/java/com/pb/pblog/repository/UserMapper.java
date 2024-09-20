@@ -20,7 +20,7 @@ public interface UserMapper {
     User findId(User user);
 
 //    비밀번호 찾기
-    User findPwd(User user);
+    int findPwd(User user);
 
 //    비밀번호 변경
     int changePwd(User user);

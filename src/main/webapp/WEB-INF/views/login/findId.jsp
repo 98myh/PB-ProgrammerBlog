@@ -22,7 +22,7 @@
             <img id="login_logo" alt="로고" src="/resources/images/pblogo.png" onclick="location.href='/'"/>
         </div>
         <div id="login_wrap">
-            <form id="signupForm" class="form_wrap" action="/findId-check" method="get">
+            <form id="findIdForm" class="form_wrap" action="/findId-check" method="get">
                 <div>
                     <input class="form_input" id="name" type="text" name="name" placeholder="Name" required/>
                 </div>
@@ -30,7 +30,7 @@
                     <input class="form_input" id="email" type="email" name="email" placeholder="E-mail" required/>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}">
-                <button type="button" value="signup" onclick="findId()">아이디 찾기</button>
+                <button type="submit" value="findId" onclick="findId()">아이디 찾기</button>
             </form>
         </div>
     </div>

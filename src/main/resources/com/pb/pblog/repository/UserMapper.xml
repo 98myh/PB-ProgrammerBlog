@@ -44,7 +44,7 @@
     </select>
 
     <!--비밀번호 찾기-->
-    <select id="findPwd" parameterType="com.pb.pblog.entity.User">
+    <select id="findPwd" parameterType="com.pb.pblog.entity.User" resultType="int">
         select
             *
         from

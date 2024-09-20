@@ -38,7 +38,7 @@ public class SecurityConfig {
                 .requestMatchers( "/board/delete","/board/write","/board/save","/board/img-upload","/board/edit/**","/comment/**").hasAnyRole("USER", "ADMIN") //유저, 어드민 둘 다 접근 가능
                 .requestMatchers("/admin").hasRole("admin") //어드민만 접근 가능
                 .requestMatchers("/","/WEB-INF/views/**","/login","/loginProc","/logout","/signup","/signupProc","/check-id",
-                        "/board/category/**","/board/detail/**","/mypage/**","/find-id","find-pwd").permitAll() //모든 사용자 접근가능
+                        "/board/category/**","/board/detail/**","/mypage/**","/find-id","/findId-check","/find-pwd","/findPwd-check").permitAll() //모든 사용자 접근가능
                 .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                 .dispatcherTypeMatchers(DispatcherType.INCLUDE).permitAll()
                 .anyRequest().authenticated()//나머지 요청은 로그인 한 유저들만 접근 가능

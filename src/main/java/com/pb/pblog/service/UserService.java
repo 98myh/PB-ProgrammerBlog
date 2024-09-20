@@ -12,8 +12,9 @@ public interface UserService {
 
     //아이디 찾기
     IdDTO findId(FindIdDTO findIdDTO);
+
     //비밀번호 찾기
-    IdDTO findPwd(FindPwdDTO findPwdDTO);
+    int findPwd(FindPwdDTO findPwdDTO);
 
     //비밀번호 변경
     int changePwd(ChangePwdDTO changePwdDTO);

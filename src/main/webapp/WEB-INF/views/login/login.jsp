@@ -1,5 +1,6 @@
 <%@ page  language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<!doctype html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %><!doctype html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -18,6 +19,7 @@
         <div class="logo_div">
             <img id="login_logo" alt="로고" src="/resources/images/pblogo.png" onclick="location.href='/'"/>
         </div>
+        <input id="user_id" type="hidden" value="${id.id}">
         <div id="login_wrap">
             <form class="form_wrap" action="/loginProc" method="post">
                 <div>
@@ -39,6 +41,14 @@
     </div>
 </div>
 <script>
+    window.addEventListener('DOMContentLoaded',function(){
+        const userId=document.getElementById('user_id')
+        if(userId.value!=''){
+            alert("아이디 : "+userId.value)
+        }
+    })
+
+
     //아이디 찾기
     function goFindId(){
         window.location.href='/find-id'

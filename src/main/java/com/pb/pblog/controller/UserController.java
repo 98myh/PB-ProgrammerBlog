@@ -77,8 +77,17 @@ public class UserController {
     //아이디 찾기 요청
     @GetMapping("/findId-check")
     public String findIdReqeust(@ModelAttribute FindIdDTO findIdDTO, Model model){
-
-        return "login/findId";
+        IdDTO idDTO=userService.findId(findIdDTO);
+        model.addAttribute("id",idDTO);
+        //해당 아이디가 있으면
+        if(idDTO!=null){
+            model.addAttribute("id",idDTO);
+            return "login/login";
+        }
+        //없으면
+        else {
+            return "login/findId";
+        }
     }
 
     //비밀번호 찾기 페이지 이동
@@ -89,6 +98,7 @@ public class UserController {
         if(id!="anonymousUser"){
             return "redirect:/";
         }
+
         return "login/findPwd";
     }
 
