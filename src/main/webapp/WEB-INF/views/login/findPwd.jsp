@@ -22,7 +22,8 @@
             <img id="login_logo" alt="로고" src="/resources/images/pblogo.png" onclick="location.href='/'"/>
         </div>
         <div id="login_wrap">
-            <form id="signupForm" class="form_wrap" action="/findPwd-check" method="get">
+            <input id="alert_text" type="hidden" value="${text}">
+            <form id="findPwdForm" class="form_wrap" action="/findPwd-check" method="POST">
                 <div>
                     <input class="form_input" id="id" type="text" name="id" placeholder="ID" required />
                 </div>
@@ -33,10 +34,18 @@
                     <input class="form_input" id="email" type="email" name="email" placeholder="E-mail" required/>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}">
-                <button type="button" value="signup" onclick="findPwd()">비밀번호찾기</button>
+                <button type="submit" >비밀번호 찾기</button>
             </form>
         </div>
     </div>
 </div>
+<script>
+    window.addEventListener('DOMContentLoaded',function(){
+        const text=document.getElementById('alert_text')
+        if (text.value!='') {
+            alert(text.value)
+        }
+    })
+</script>
 </body>
 </html>

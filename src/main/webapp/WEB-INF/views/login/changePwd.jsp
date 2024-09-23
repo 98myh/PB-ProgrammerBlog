@@ -21,8 +21,9 @@
         <div class="logo_div">
             <img id="login_logo" alt="로고" src="/resources/images/pblogo.png" onclick="location.href='/'"/>
         </div>
+        <input id="alert_text" type="hidden" value="${text}">
         <div id="login_wrap">
-            <form id="signupForm" class="form_wrap" action="/find-pwd" method="get">
+            <form id="changePwdForm" class="form_wrap" action="/change-pwd" method="post">
                 <div>
                     <input class="form_input" id="password" type="password" name="password" placeholder="Password" required/>
                 </div>
@@ -30,10 +31,20 @@
                     <input class="form_input" id="repassword" type="password" name="repassword" placeholder="Re-Password" required/>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}">
-                <button type="button" value="signup" onclick="findPwd()">비밀번호찾기</button>
+                <button type="submit">비밀번호 변경</button>
             </form>
         </div>
     </div>
 </div>
+<script>
+    window.addEventListener('DOMContentLoaded',function(){
+        const text=document.getElementById('alert_text')
+
+        alert(text.value)
+    })
+
+</script>
 </body>
+
+</script>
 </html>

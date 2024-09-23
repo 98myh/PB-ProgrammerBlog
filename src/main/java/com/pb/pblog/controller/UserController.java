@@ -75,7 +75,7 @@ public class UserController {
     }
 
     //아이디 찾기 요청
-    @GetMapping("/findId-check")
+    @PostMapping("/findId-check")
     public String findIdReqeust(@ModelAttribute FindIdDTO findIdDTO, Model model){
         IdDTO idDTO=userService.findId(findIdDTO);
         model.addAttribute("id",idDTO);
@@ -103,15 +103,27 @@ public class UserController {
     }
 
     //비밀번호 찾기 요청
-    @GetMapping("/findPwd-check")
+    @PostMapping("/findPwd-check")
     public String findPwdRequest(@ModelAttribute FindPwdDTO findPwdDTO,Model model){
+        if(userService.findPwd(findPwdDTO)>0) {
+            model.addAttribute("id", findPwdDTO.getId());
+            model.addAttribute("text","새비밀번호를 설정해주세요.");
+            return "login/changePwd";
+        }else{
+            model.addAttribute("text","정보를 다시 입력해주세요.");
+            return "login/findPwd";
+        }
+    }
 
-        return "/login/findPwd";
+    //비밀번호 변경 페이지
+    @GetMapping("/change-pwd")
+    public String changePwd(){
+        return "login/changePwd";
     }
 
     //비밀번호 변경
-    @PutMapping("change-pwd")
-    public ResponseEntity<?> changePwd(){
+    @PostMapping("/change-pwd-req")
+    public ResponseEntity<?> changePwdReq(){
 
 
         return new ResponseEntity<>(false,HttpStatus.BAD_REQUEST);

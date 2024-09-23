@@ -22,7 +22,7 @@
             <img id="login_logo" alt="로고" src="/resources/images/pblogo.png" onclick="location.href='/'"/>
         </div>
         <div id="login_wrap">
-            <form id="findIdForm" class="form_wrap" action="/findId-check" method="get">
+            <form id="findIdForm" class="form_wrap" action="/findId-check" method="POST">
                 <div>
                     <input class="form_input" id="name" type="text" name="name" placeholder="Name" required/>
                 </div>
