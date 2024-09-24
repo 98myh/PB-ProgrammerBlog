@@ -159,7 +159,6 @@
                     .then(data => {
                         if (data.result === "success") {
                             alert("저장 성공");
-                            console.log(data.redirectUrl)
                             window.location.href =data.redirectUrl;    // 서버에서 받은 URL로 리다이렉트
                         } else {
                             alert("저장 실패");

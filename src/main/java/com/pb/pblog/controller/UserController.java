@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -104,11 +105,11 @@ public class UserController {
 
     //비밀번호 찾기 요청
     @PostMapping("/findPwd-check")
-    public String findPwdRequest(@ModelAttribute FindPwdDTO findPwdDTO,Model model){
+    public String findPwdRequest(@ModelAttribute FindPwdDTO findPwdDTO, RedirectAttributes redirect,Model model){
         if(userService.findPwd(findPwdDTO)>0) {
-            model.addAttribute("id", findPwdDTO.getId());
-            model.addAttribute("text","새비밀번호를 설정해주세요.");
-            return "login/changePwd";
+            redirect.addFlashAttribute("id", findPwdDTO.getId());
+            redirect.addFlashAttribute("text","새비밀번호를 설정해주세요.");
+            return "redirect:/change-pwd";
         }else{
             model.addAttribute("text","정보를 다시 입력해주세요.");
             return "login/findPwd";
@@ -122,10 +123,13 @@ public class UserController {
     }
 
     //비밀번호 변경
-    @PostMapping("/change-pwd-req")
-    public ResponseEntity<?> changePwdReq(){
+    @ResponseBody
+    @PutMapping("/change-pwd-req")
+    public ResponseEntity<?> changePwdReq(@RequestBody ChangePwdDTO changePwdDTO){
 
-
+        if(userService.changePwd(changePwdDTO)>0){
+            return new ResponseEntity<>(true,HttpStatus.OK);
+        }
         return new ResponseEntity<>(false,HttpStatus.BAD_REQUEST);
     }
 

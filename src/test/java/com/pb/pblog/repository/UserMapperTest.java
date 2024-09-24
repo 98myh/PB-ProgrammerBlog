@@ -5,12 +5,19 @@ import com.pb.pblog.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 class UserMapperTest {
     @Autowired
     private UserMapper userMapper;
+
+    //비밀번호 암호화
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+
 
 
     //중복 테스트
@@ -35,5 +42,14 @@ class UserMapperTest {
     @Test
     public void userInfoTest(){
         System.out.println(userMapper.userInfo(23l));
+    }
+
+    //비밀번호 변경 테스트
+    @Test
+    public void changePwdTest(){
+        System.out.println(userMapper.changePwd(User.builder()
+                        .id("test")
+                        .password(bCryptPasswordEncoder.encode("asdf"))
+                .build()));
     }
 }
