@@ -27,9 +27,9 @@
                 <sec:authorize access="isAuthenticated()">
                     <sec:authentication property="principal.uid" var="uid"/>
                     <c:if test="${uid==userInfo.uid}">
-                        <div>
-                            <p>수정</p>
-                            <p>탈퇴</p>
+                        <div class="edit_user_btn_box">
+                            <button onclick="goEditUser()">수정</button>
+                            <button>탈퇴</button>
                         </div>
                     </c:if>
                 </sec:authorize>
@@ -59,6 +59,11 @@
     <jsp:include page="../common/footer.jsp"/>
 </div>
 <script>
+    //수정 페이지로 이동
+    function goEditUser(){
+        window.location.href="/edit-user"
+    }
+
     //게시글로 이동
     function goBoard(bid){
         window.location.href='/board/detail/'+bid

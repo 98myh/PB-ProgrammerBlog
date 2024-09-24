@@ -28,4 +28,9 @@ public interface UserMapper {
 //    유저 정보(간단)
     User userInfo(Long uid);
 
+//    유저 정보 수정
+    int editUser(User user);
+
+//    회원 탈퇴
+    int deleteUser(Long uid);
 }

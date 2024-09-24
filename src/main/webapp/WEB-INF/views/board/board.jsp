@@ -29,9 +29,7 @@
                     <c:when test="${fn:length(board)>0}">
                         <c:forEach var="board" items="${board}">
                             <div class="card" style="width: 18rem;" onclick="location.href='/board/detail/${board.bid}'">
-                                <div class="image-wrap">
-                                    <img src="${board.content}" class="card-img-top" alt="...">
-                                </div>
+                                <img src="${board.content}" class="card-img-top" alt="${board.title} 이미지">
                                 <div class="card-body">
                                     <!--제목-->
                                     <h4 class="card-text">${board.title}</h4>

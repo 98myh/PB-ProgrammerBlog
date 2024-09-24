@@ -10,12 +10,23 @@
     font-weight: bold;
 }
 
+.edit_user_btn_box{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.edit_user_btn_box button{
+    width: 80px;
+    margin-left: 10px;
+}
+
+
+
 .list_wrap{
     width: 70%;
     margin: 20px 0;
 }
-
-
 
 .list_header{
     width: 100%;

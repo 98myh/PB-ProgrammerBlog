@@ -1,4 +1,5 @@
 <%@ page  language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -17,7 +18,9 @@
     <%--헤더--%>
     <jsp:include page="../common/header.jsp"/>
     <div id="wrap">
-
+        <h1>수정페이지</h1>
+        <sec:authentication property="principal.uid" var="uid"/>
+        <h2>${uid}</h2>
     </div>
     <%--푸터--%>
     <jsp:include page="../common/footer.jsp"/>

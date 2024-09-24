@@ -71,4 +71,23 @@
         where
             uid=#{uid}
     </select>
+
+    <!--회원 정보 수정-->
+    <update id="editUser" parameterType="com.pb.pblog.entity.User">
+        update
+            user
+        set
+            password=#{password},
+            nickname=#{nickname}
+        where
+            uid=#{uid}
+    </update>
+
+    <!--회원 탈퇴-->
+    <delete id="deleteUser" parameterType="java.lang.Long">
+        delete from
+            user
+        where
+            uid=${uid}
+    </delete>
 </mapper>

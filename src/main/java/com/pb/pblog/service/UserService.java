@@ -22,6 +22,12 @@ public interface UserService {
     //유저 정보조회(간단)
     UserInfoDTO userInfo(Long uid);
 
+    //회원 정보 수정
+    int editUser(EditUserDTO editUserDTO);
+
+    //회원 탈퇴
+    int deleteUser(UidDTO uidDTO);
+
     //DTO -> Entity 변환
     default User userDTOtoEntity(UserDTO userDTO){
         return User.builder()

@@ -16,7 +16,10 @@
 .image-wrap img{
     height: 100%;
 }
-
+.card{
+    display: flex;
+    flex-direction: row;
+}
 
 .card-body{
     height: 20%;

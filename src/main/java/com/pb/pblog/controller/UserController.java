@@ -144,4 +144,10 @@ public class UserController {
         model.addAttribute("boards",boardAndUserDTOS);
         return "user/mypage";
     }
+
+    //정보수정 페이지로 이동
+    @GetMapping("/edit-user")
+    public String userEditPage(){
+        return "user/editUser";
+    }
 }

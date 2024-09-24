@@ -132,4 +132,32 @@ public class UserServiceImpl implements UserService{
             return null;
         }
     }
+
+    //회원 정보 수정
+    @Override
+    public int editUser(EditUserDTO editUserDTO) {
+        try{
+            User user=User.builder()
+                    .uid(editUserDTO.getUid())
+                    .password(editUserDTO.getPassword())
+                    .nickname(editUserDTO.getNickname())
+                    .build();
+            return userMapper.editUser(user);
+
+        }catch(Exception e){
+            log.error(e);
+            return -1;
+        }
+    }
+
+    //회원 탈퇴
+    @Override
+    public int deleteUser(UidDTO uidDTO) {
+        try{
+         return userMapper.deleteUser(uidDTO.getUid());
+        }catch (Exception e){
+            log.error(e);
+            return -1;
+        }
+    }
 }
