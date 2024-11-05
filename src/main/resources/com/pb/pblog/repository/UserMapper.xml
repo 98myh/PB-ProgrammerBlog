@@ -88,6 +88,16 @@
         delete from
             user
         where
-            uid=${uid}
+            uid=#{uid}
     </delete>
+
+    <!--비밀번호 확인-->
+    <select id="confirmUser" parameterType="java.lang.Long" resultType="java.lang.String">
+        select
+            password
+        from
+            user
+        where
+            uid=#{uid}
+    </select>
 </mapper>

@@ -5,6 +5,7 @@ import com.pb.pblog.service.BoardService;
 import com.pb.pblog.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class UserController {
@@ -59,7 +61,7 @@ public class UserController {
         try {
             userService.signupRequest(signupRequestDTO);
             return "redirect:/login";
-        }catch (Exception exception){
+        }catch (Exception exception) {
             return "login/signup";
         }
     }
@@ -149,5 +151,15 @@ public class UserController {
     @GetMapping("/edit-user")
     public String userEditPage(){
         return "user/editUser";
+    }
+
+    //정보수정
+    @ResponseBody
+    @PutMapping("/edit-user-req")
+    public ResponseEntity<?> editUser(@RequestBody EditUserDTO editUserDTO){
+        if(userService.editUser(editUserDTO)>0){
+            return new ResponseEntity<>(true,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(false,HttpStatus.BAD_REQUEST);
     }
 }

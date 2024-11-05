@@ -80,4 +80,26 @@ class UserServiceTest {
                         .repassword("asdf")
                 .build()));
     }
+
+    //회원 정보 수정 테스트
+    @Test
+    @Transactional
+    public void editUserTest(){
+        System.out.println(userService.editUser(EditUserDTO.builder()
+                        .uid(23l)
+                        .oldPassword("test")
+                        .newPassword("")
+                        .nickname("test")
+                .build()));
+    }
+
+
+    //회원 탈퇴
+    @Test
+    @Transactional
+    public void deleteUserTest(){
+        System.out.println(userService.deleteUser(UidDTO.builder()
+                        .uid(23l)
+                .build()));
+    }
 }

@@ -1,0 +1,23 @@
+.edit_wrap{
+    display: flex;
+    flex-direction: column;
+    padding: 50px 60px;
+    border-radius: 15px;
+    box-shadow: 8px 8px 8px 8px #ccc;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+}
+
+input{
+    min-width: 500px;
+    padding: 15px;
+    margin: 5px 0;
+    border-bottom: 1px solid #ccc !important;
+    font-size: 18px;
+}
+
+.editBtn{
+    margin: 10px 0;
+    width: 100%;
+}

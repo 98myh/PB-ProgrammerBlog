@@ -33,4 +33,7 @@ public interface UserMapper {
 
 //    회원 탈퇴
     int deleteUser(Long uid);
+
+//    회원 확인
+    String confirmUser(Long uid);
 }

@@ -137,13 +137,22 @@ public class UserServiceImpl implements UserService{
     @Override
     public int editUser(EditUserDTO editUserDTO) {
         try{
-            User user=User.builder()
+            String password=userMapper.confirmUser(editUserDTO.getUid());
+            //비밀번호가 맞다면 회원 정보 수정
+            if (bCryptPasswordEncoder.matches(editUserDTO.getOldPassword(), password)){
+                String newPassword=editUserDTO.getNewPassword()==""? editUserDTO.getOldPassword() : editUserDTO.getNewPassword();
+                log.error(newPassword);
+                User user=User.builder()
                     .uid(editUserDTO.getUid())
-                    .password(editUserDTO.getPassword())
+                    .password(bCryptPasswordEncoder.encode(newPassword))
                     .nickname(editUserDTO.getNickname())
                     .build();
-            return userMapper.editUser(user);
 
+            return userMapper.editUser(user);}
+            else{
+                log.error("비밀번호 오류");
+                return -2;
+            }
         }catch(Exception e){
             log.error(e);
             return -1;
