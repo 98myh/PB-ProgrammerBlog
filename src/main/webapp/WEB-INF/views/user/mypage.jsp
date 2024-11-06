@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/resources/css/user/mypage.css">
     <link rel="stylesheet" href="/resources/css/style.css">
-    <meta name="_csrf" content="${csrf.token}"/>
+    <meta name="_csrf" content="${_csrf.token}"/>
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
     <title>ProgrammerBlog</title>
 </head>
@@ -29,7 +29,7 @@
                     <c:if test="${uid==userInfo.uid}">
                         <div class="edit_user_btn_box">
                             <button onclick="goEditUser()">수정</button>
-                            <button>탈퇴</button>
+                            <button onclick="deleteUser()">탈퇴</button>
                         </div>
                     </c:if>
                 </sec:authorize>
@@ -59,6 +59,11 @@
     <jsp:include page="../common/footer.jsp"/>
 </div>
 <script>
+
+    const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+    const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
+
     //수정 페이지로 이동
     function goEditUser(){
         window.location.href="/edit-user"
@@ -67,6 +72,39 @@
     //게시글로 이동
     function goBoard(bid){
         window.location.href='/board/detail/'+bid
+    }
+
+    //회원탈퇴
+    function deleteUser(){
+        const password=prompt("회원탈퇴를 원하실 경우 비밀번호를 입력해주세요.")
+
+        //비밀번호가 맞을 경우
+            fetch('/delete-user',{
+                method:'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    [csrfHeader]: csrfToken
+                },
+                body: JSON.stringify({uid:${uid}, password:password})
+            }).then(response=>{
+                if (response.ok){
+                    return response.json()
+                }else{
+                    return Promise.reject(alert('탈퇴 실패. 비밀번호를 확인해주세요.'))
+                }
+            }).then(response=>{
+                Promise.resolve(alert('탈퇴 성공'))
+                fetch('/logout',{
+                    method:"POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        [csrfHeader]: csrfToken
+                    }
+                }).then(response=>{
+                    window.location.href="/login"
+                })
+            })
+
     }
 </script>
 </body>

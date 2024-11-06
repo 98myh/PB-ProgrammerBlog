@@ -78,8 +78,16 @@
                     return Promise.reject(alert('수정 실패. 비밀번호를 확인해주세요.'))
                 }
             }).then(response=>{
-                Promise.resolve(alert('수정 성공'))
-                window.location.href="/mypage/${uid}"
+                Promise.resolve(alert('수정 성공! 다시 로그인 부탁드립니다.'))
+                fetch('/logout',{
+                    method:"POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        [csrfHeader]: csrfToken
+                    }
+                }).then(response=>{
+                    window.location.href="/login"
+                })
             })
         }
     }

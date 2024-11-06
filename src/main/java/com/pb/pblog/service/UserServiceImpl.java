@@ -161,9 +161,16 @@ public class UserServiceImpl implements UserService{
 
     //회원 탈퇴
     @Override
-    public int deleteUser(UidDTO uidDTO) {
+    public int deleteUser(UserDeleteDTO userDeleteDTO) {
         try{
-         return userMapper.deleteUser(uidDTO.getUid());
+            String password=userMapper.confirmUser(userDeleteDTO.getUid());
+            //비밀번호가 같으면 삭제
+            if (bCryptPasswordEncoder.matches(userDeleteDTO.getPassword(), password)) {
+                return userMapper.deleteUser(userDeleteDTO.getUid());
+            }else{
+                log.error("비밀번호 틀림");
+                return -2;
+            }
         }catch (Exception e){
             log.error(e);
             return -1;

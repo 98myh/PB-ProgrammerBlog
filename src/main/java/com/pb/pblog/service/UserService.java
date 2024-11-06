@@ -26,7 +26,7 @@ public interface UserService {
     int editUser(EditUserDTO editUserDTO);
 
     //회원 탈퇴
-    int deleteUser(UidDTO uidDTO);
+    int deleteUser(UserDeleteDTO userDeleteDTO);
 
     //DTO -> Entity 변환
     default User userDTOtoEntity(UserDTO userDTO){
