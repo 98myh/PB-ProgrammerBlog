@@ -78,7 +78,8 @@
             user
         set
             password=#{password},
-            nickname=#{nickname}
+            nickname=#{nickname},
+            update_date=now()
         where
             uid=#{uid}
     </update>
