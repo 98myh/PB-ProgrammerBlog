@@ -44,7 +44,8 @@
                                 <div class="card-body">
                                     <h3>${recently.title}</h3>
                                     <p class="card-text">${recently.nickname}</p>
-                                    <p class="card-text">${recently.create_date}</p>
+                                    <p class="card-text">${fn:substring(recently.create_date, 0, 10)}</p>
+
                                 </div>
                             </div>
                         </c:forEach>
@@ -66,7 +67,7 @@
                                 <div class="card-body">
                                     <h3>${trend.title}</h3>
                                     <p class="card-text">${trend.nickname}</p>
-                                    <p class="card-text">${trend.create_date}</p>
+                                    <p class="card-text">${fn:substring(trend.create_date, 0, 10)}</p>
                                 </div>
                             </div>
                         </c:forEach>
@@ -88,7 +89,7 @@
                                 <div class="card-body">
                                     <h3>${skill.title}</h3>
                                     <p class="card-text">${skill.nickname}</p>
-                                    <p class="card-text">${skill.create_date}</p>
+                                    <p class="card-text">${fn:substring(skill.create_date, 0, 10)}</p>
                                 </div>
                             </div>
                         </c:forEach>
@@ -110,7 +111,7 @@
                                 <div class="card-body">
                                     <h3>${algorithm.title}</h3>
                                     <p class="card-text">${algorithm.nickname}</p>
-                                    <p class="card-text">${algorithm.create_date}</p>
+                                    <p class="card-text">${fn:substring(algorithm.create_date, 0, 10)}</p>
                                 </div>
                             </div>
                         </c:forEach>

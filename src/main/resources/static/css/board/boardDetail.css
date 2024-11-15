@@ -72,6 +72,15 @@
 
     border-bottom: 2px solid #ccc;
 }
+
+.user_nickname{
+    cursor: pointer;
+}
+
+.user_nickname:hover{
+    font-weight: bold;
+}
+
 .detail_content{
     padding: 30px 0;
 }

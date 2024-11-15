@@ -22,8 +22,8 @@
     <div id="wrap">
         <div class="mypage_top">
             <h3>${userInfo.nickname} 님</h3>
-            <div>
-                <p>가입일 : ${userInfo.create_date}</p>
+            <div class="mypage_top_right">
+                <p>가입일 : ${fn:substring(userInfo.create_date, 0, 10)}</p>
                 <sec:authorize access="isAuthenticated()">
                     <sec:authentication property="principal.uid" var="uid"/>
                     <c:if test="${uid==userInfo.uid}">
@@ -40,18 +40,25 @@
                 <h3>글 목록</h3>
             </div>
             <div class="list_item_wrap">
-                <c:forEach items="${boards}" var="board">
-                <div class="list_item_inner_wrap" onclick="goBoard(${board.bid})">
-                    <div class="list_item_header">
-                        <img src="${board.content}"/>
-                    </div>
-                    <div class="list_item_body">
-                        <p class="item_category">${board.category}</p>
-                        <p class="item_title">${board.title}</p>
-                        <p class="item_date">${board.update_date}</p>
-                    </div>
-                </div>
-                </c:forEach>
+                <c:choose>
+                    <c:when test="${fn:length(boards)>0}">
+                        <c:forEach items="${boards}" var="board">
+                            <div class="list_item_inner_wrap" onclick="goBoard(${board.bid})">
+                                <div class="list_item_header">
+                                    <img src="${board.content}"/>
+                                </div>
+                                <div class="list_item_body">
+                                    <p class="item_category">${board.category}</p>
+                                    <p class="item_title">${board.title}</p>
+                                    <p class="item_date">${fn:substring(board.update_date, 0, 10)}</p>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <h5 class="not_h5">게시글이 없습니다...</h5>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>

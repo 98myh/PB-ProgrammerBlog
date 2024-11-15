@@ -48,7 +48,7 @@
 
                     </div>
                     <div class="detail_title">
-                        <p>${board_detail.board.nickname}</p>
+                        <p class="user_nickname" onclick="location.href='/mypage/${board_detail.board.uid}'">${board_detail.board.nickname}</p>
                         <p>${fn:substring(board_detail.board.create_date, 0, 10)}</p>
                     </div>
                     <div class="detail_content">

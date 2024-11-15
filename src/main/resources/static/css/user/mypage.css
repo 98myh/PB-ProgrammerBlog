@@ -10,6 +10,16 @@
     font-weight: bold;
 }
 
+.mypage_top_right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mypage_top_right p{
+    margin: 0;
+}
+
 .edit_user_btn_box{
     display: flex;
     flex-direction: row;
@@ -92,4 +102,8 @@
 }
 .item_date{
     flex-grow: 2;
+}
+
+.not_h5{
+    margin: 20px 0;
 }
