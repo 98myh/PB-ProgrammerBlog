@@ -26,7 +26,8 @@
                 <p>가입일 : ${fn:substring(userInfo.create_date, 0, 10)}</p>
                 <sec:authorize access="isAuthenticated()">
                     <sec:authentication property="principal.uid" var="uid"/>
-                    <c:if test="${uid==userInfo.uid}">
+                    <sec:authentication property="principal.authorities" var="role"/>
+                    <c:if test="${uid==userInfo.uid || role=='[ROLE_ADMIN]'}">
                         <div class="edit_user_btn_box">
                             <button onclick="goEditUser()">수정</button>
                             <button onclick="deleteUser()">탈퇴</button>

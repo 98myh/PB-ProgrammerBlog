@@ -29,12 +29,14 @@
                         <h2>${board_detail.board.title}</h2>
                         <!--로그인 한 경우 ...버튼이 나옴-->
                         <sec:authorize access="isAuthenticated()">
+                            <sec:authentication property="principal" var="principal"/>
                             <sec:authentication property="principal.uid" var="uid"/>
+                            <sec:authentication property="principal.authorities" var="role"/>
                             <button id="change_btn" type="button" onclick="changeToggle()" >
                                 <i class="fa-solid fa-ellipsis"></i>
                                 <ul id="show_box" class="noShow">
                                     <c:choose>
-                                        <c:when test="${uid==board_detail.board.uid}">
+                                        <c:when test="${uid==board_detail.board.uid || role=='[ROLE_ADMIN]'}">
                                             <li onclick="goEdit(${board_detail.board.bid})">수정하기</li>
                                             <li onclick="boardDelete(${board_detail.board.bid})">삭제하기</li>
                                         </c:when>
@@ -89,7 +91,7 @@
                                 <div class="comment_date">
                                     <span>${comment.topComment.create_date}</span>
                                 </div>
-                                <c:if test="${uid==comment.topComment.uid}">
+                                <c:if test="${uid==comment.topComment.uid || role=='[ROLE_ADMIN]'}">
                                     <div class="comment_edit" id="comment_${comment.topComment.cid}">
                                         <span id="edit_${comment.topComment.cid}" onclick="commentEditToggle(${comment.topComment.cid})" class="comment_edit_btn">수정</span>
                                         <span id="edit_save_${comment.topComment.cid}" onclick="commentEdit(${comment.topComment.cid})" class="comment_edit_btn edit_visible">저장</span>
