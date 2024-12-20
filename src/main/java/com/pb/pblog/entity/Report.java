@@ -12,14 +12,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Report {
-    private Long rid; //신고 고유 아이디
-    private String reason; //이유
-    private Boolean confirm; //확인 여부
+    private String reason;              //이유
+    private Boolean confirm;            //확인 여부
     private LocalDateTime create_date;
     private LocalDateTime update_date;
 
-    private User user;
+    private User reporter;               //원고
+    private User defendant;              //피고
     private Board board;
-    private  Comment comment;
+    private Comment comment;
 }
 

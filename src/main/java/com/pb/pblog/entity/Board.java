@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Board {
-    private Long bid; //게시판 고유 아이디
-    private String title; //제목
-    private String category; //카테고리
-    private String content; //내용
+    private Long bid;                   //게시판 고유 아이디
+    private String title;               //제목
+    private String category;            //카테고리
+    private String content;             //내용
     private LocalDateTime create_date;
     private LocalDateTime update_date;
 
