@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 public class ReportUserDTO {
     private long reporter_uid;  //원고
     private long defendant_uid; //피고
-    private long uid;           //유저
     private long bid;           //게시글
     private long cid;           //댓글
     private String reason;      //이유
