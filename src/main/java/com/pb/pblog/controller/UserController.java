@@ -42,12 +42,6 @@ public class UserController {
         return "login/login";
     }
 
-    //중복확인
-    @PostMapping("/check-id")
-    public ResponseEntity<Integer> checkId(@ModelAttribute IdDTO idDTO){
-        return new ResponseEntity<>(userService.checkId(idDTO.getId()),HttpStatus.OK);
-    }
-
 
     //회원가입 페이지 이동
     @GetMapping("/signup")
@@ -58,6 +52,12 @@ public class UserController {
             return "redirect:/";
         }
         return "login/signup";
+    }
+
+    //중복확인
+    @PostMapping("/check-id")
+    public ResponseEntity<Integer> checkId(@ModelAttribute IdDTO idDTO){
+        return new ResponseEntity<>(userService.checkId(idDTO.getId()),HttpStatus.OK);
     }
 
 

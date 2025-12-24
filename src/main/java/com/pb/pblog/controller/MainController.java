@@ -25,6 +25,7 @@ public class MainController {
     public String main(Model model){
         MainResponseDTO mainResponseDTO=boardService.main();
         model.addAttribute("main",mainResponseDTO);
+
         //서비스 단에 작성해주어야함
         //아이디 조회
 //        String id=SecurityContextHolder.getContext().getAuthentication().getName();
@@ -41,6 +42,7 @@ public class MainController {
 //        model.addAttribute("id",);
 
 //        model.addAttribute("role",);
+
         return "main/main";
     }
 
